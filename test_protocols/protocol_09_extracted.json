@@ -1,0 +1,1463 @@
+{
+  "labware": {
+    "sample_plate": {
+      "type": "plate",
+      "description": "96-well plate containing unpooled prepared NGS library DNA samples (15-30 nM in 15 uL H2O per well)"
+    },
+    "reagent_plate": {
+      "type": "plate",
+      "description": "96-well plate holding Diluted Primer (col 1), PCR mix (col 2), NormBead (col 3), NormElute (col 4)"
+    },
+    "reservoir": {
+      "type": "reservoir",
+      "description": "12-column reservoir holding AMPure (col 1), 80% EtOH (col 3), H2O (col 7), NormWash (col 8)"
+    },
+    "pcr_plate": {
+      "type": "plate",
+      "description": "96-well PCR plate used for the normalization PCR reaction"
+    },
+    "elution_plate": {
+      "type": "plate",
+      "description": "96-well plate used to collect the final normalized, eluted library"
+    }
+  },
+  "reagents": [
+    "Library DNA",
+    "Diluted Normalization PCR Primer",
+    "PCR Master Mix",
+    "NormBead",
+    "NormElute",
+    "AMPure XP Beads",
+    "80% Ethanol",
+    "H2O",
+    "NormWash",
+    "RSB"
+  ],
+  "steps": [
+    {
+      "action": "transfer",
+      "volume_ul": 10,
+      "source": "reagent_plate:A1",
+      "dest": "reagent_plate:A1",
+      "reagent": "Diluted Normalization PCR Primer",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown here for 1 column (8 wells) as the minimum case; repeat pattern per column up to column 6."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 10,
+      "source": "reagent_plate:A1",
+      "dest": "reagent_plate:B1",
+      "reagent": "Diluted Normalization PCR Primer",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown here for 1 column (8 wells) as the minimum case; repeat pattern per column up to column 6."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 10,
+      "source": "reagent_plate:A1",
+      "dest": "reagent_plate:C1",
+      "reagent": "Diluted Normalization PCR Primer",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown here for 1 column (8 wells) as the minimum case; repeat pattern per column up to column 6."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 10,
+      "source": "reagent_plate:A1",
+      "dest": "reagent_plate:D1",
+      "reagent": "Diluted Normalization PCR Primer",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown here for 1 column (8 wells) as the minimum case; repeat pattern per column up to column 6."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 10,
+      "source": "reagent_plate:A1",
+      "dest": "reagent_plate:E1",
+      "reagent": "Diluted Normalization PCR Primer",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown here for 1 column (8 wells) as the minimum case; repeat pattern per column up to column 6."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 10,
+      "source": "reagent_plate:A1",
+      "dest": "reagent_plate:F1",
+      "reagent": "Diluted Normalization PCR Primer",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown here for 1 column (8 wells) as the minimum case; repeat pattern per column up to column 6."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 10,
+      "source": "reagent_plate:A1",
+      "dest": "reagent_plate:G1",
+      "reagent": "Diluted Normalization PCR Primer",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown here for 1 column (8 wells) as the minimum case; repeat pattern per column up to column 6."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 10,
+      "source": "reagent_plate:A1",
+      "dest": "reagent_plate:H1",
+      "reagent": "Diluted Normalization PCR Primer",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown here for 1 column (8 wells) as the minimum case; repeat pattern per column up to column 6."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 25,
+      "source": "reagent_plate:A2",
+      "dest": "reagent_plate:A1",
+      "reagent": "PCR Master Mix",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown for 1 column minimum."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 25,
+      "source": "reagent_plate:A2",
+      "dest": "reagent_plate:B1",
+      "reagent": "PCR Master Mix",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown for 1 column minimum."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 25,
+      "source": "reagent_plate:A2",
+      "dest": "reagent_plate:C1",
+      "reagent": "PCR Master Mix",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown for 1 column minimum."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 25,
+      "source": "reagent_plate:A2",
+      "dest": "reagent_plate:D1",
+      "reagent": "PCR Master Mix",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown for 1 column minimum."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 25,
+      "source": "reagent_plate:A2",
+      "dest": "reagent_plate:E1",
+      "reagent": "PCR Master Mix",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown for 1 column minimum."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 25,
+      "source": "reagent_plate:A2",
+      "dest": "reagent_plate:F1",
+      "reagent": "PCR Master Mix",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown for 1 column minimum."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 25,
+      "source": "reagent_plate:A2",
+      "dest": "reagent_plate:G1",
+      "reagent": "PCR Master Mix",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown for 1 column minimum."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 25,
+      "source": "reagent_plate:A2",
+      "dest": "reagent_plate:H1",
+      "reagent": "PCR Master Mix",
+      "notes": "Wells filled depend on number of sample columns (1-6); shown for 1 column minimum."
+    },
+    {
+      "volume_ul": 15,
+      "reagent": "Library DNA",
+      "notes": "Wells transferred depend on number of sample columns (1-6); shown for 1 column minimum.",
+      "action": "transfer",
+      "source": "sample_plate:A1",
+      "dest": "pcr_plate:A1"
+    },
+    {
+      "volume_ul": 15,
+      "reagent": "Library DNA",
+      "notes": "Wells transferred depend on number of sample columns (1-6); shown for 1 column minimum.",
+      "action": "transfer",
+      "source": "sample_plate:B1",
+      "dest": "pcr_plate:B1"
+    },
+    {
+      "volume_ul": 15,
+      "reagent": "Library DNA",
+      "notes": "Wells transferred depend on number of sample columns (1-6); shown for 1 column minimum.",
+      "action": "transfer",
+      "source": "sample_plate:C1",
+      "dest": "pcr_plate:C1"
+    },
+    {
+      "volume_ul": 15,
+      "reagent": "Library DNA",
+      "notes": "Wells transferred depend on number of sample columns (1-6); shown for 1 column minimum.",
+      "action": "transfer",
+      "source": "sample_plate:D1",
+      "dest": "pcr_plate:D1"
+    },
+    {
+      "volume_ul": 15,
+      "reagent": "Library DNA",
+      "notes": "Wells transferred depend on number of sample columns (1-6); shown for 1 column minimum.",
+      "action": "transfer",
+      "source": "sample_plate:E1",
+      "dest": "pcr_plate:E1"
+    },
+    {
+      "volume_ul": 15,
+      "reagent": "Library DNA",
+      "notes": "Wells transferred depend on number of sample columns (1-6); shown for 1 column minimum.",
+      "action": "transfer",
+      "source": "sample_plate:F1",
+      "dest": "pcr_plate:F1"
+    },
+    {
+      "volume_ul": 15,
+      "reagent": "Library DNA",
+      "notes": "Wells transferred depend on number of sample columns (1-6); shown for 1 column minimum.",
+      "action": "transfer",
+      "source": "sample_plate:G1",
+      "dest": "pcr_plate:G1"
+    },
+    {
+      "volume_ul": 15,
+      "reagent": "Library DNA",
+      "notes": "Wells transferred depend on number of sample columns (1-6); shown for 1 column minimum.",
+      "action": "transfer",
+      "source": "sample_plate:H1",
+      "dest": "pcr_plate:H1"
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:A1",
+      "reagent": null,
+      "notes": "Mix each well after all reagents are combined; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:B1",
+      "reagent": null,
+      "notes": "Mix each well after all reagents are combined; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:C1",
+      "reagent": null,
+      "notes": "Mix each well after all reagents are combined; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:D1",
+      "reagent": null,
+      "notes": "Mix each well after all reagents are combined; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:E1",
+      "reagent": null,
+      "notes": "Mix each well after all reagents are combined; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:F1",
+      "reagent": null,
+      "notes": "Mix each well after all reagents are combined; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:G1",
+      "reagent": null,
+      "notes": "Mix each well after all reagents are combined; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:H1",
+      "reagent": null,
+      "notes": "Mix each well after all reagents are combined; number of wells depends on column count."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "Thermocycler",
+      "instrument_action": "Run normalization PCR on the pcr_plate using the default 4 cycles (user-configurable 1-12) per the Illumina DNA Prep protocol for 100 ng input.",
+      "notes": "Exact thermocycler program temperatures and times are not specified in the protocol text."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 50,
+      "source": "reservoir:A1",
+      "dest": "plate:A1",
+      "reagent": "AMPure XP Beads",
+      "notes": "50 uL AMPure per sample well; destination is pcr_plate for bead-based cleanup; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 50,
+      "source": "reservoir:A1",
+      "dest": "plate:B1",
+      "reagent": "AMPure XP Beads",
+      "notes": "50 uL AMPure per sample well; destination is pcr_plate for bead-based cleanup; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 50,
+      "source": "reservoir:A1",
+      "dest": "plate:C1",
+      "reagent": "AMPure XP Beads",
+      "notes": "50 uL AMPure per sample well; destination is pcr_plate for bead-based cleanup; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 50,
+      "source": "reservoir:A1",
+      "dest": "plate:D1",
+      "reagent": "AMPure XP Beads",
+      "notes": "50 uL AMPure per sample well; destination is pcr_plate for bead-based cleanup; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 50,
+      "source": "reservoir:A1",
+      "dest": "plate:E1",
+      "reagent": "AMPure XP Beads",
+      "notes": "50 uL AMPure per sample well; destination is pcr_plate for bead-based cleanup; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 50,
+      "source": "reservoir:A1",
+      "dest": "plate:F1",
+      "reagent": "AMPure XP Beads",
+      "notes": "50 uL AMPure per sample well; destination is pcr_plate for bead-based cleanup; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 50,
+      "source": "reservoir:A1",
+      "dest": "plate:G1",
+      "reagent": "AMPure XP Beads",
+      "notes": "50 uL AMPure per sample well; destination is pcr_plate for bead-based cleanup; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 50,
+      "source": "reservoir:A1",
+      "dest": "plate:H1",
+      "reagent": "AMPure XP Beads",
+      "notes": "50 uL AMPure per sample well; destination is pcr_plate for bead-based cleanup; wells depend on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 50,
+      "source": "pcr_plate:A1",
+      "dest": "plate:A1",
+      "reagent": null,
+      "notes": "Mix beads with PCR product; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 50,
+      "source": "pcr_plate:A1",
+      "dest": "plate:B1",
+      "reagent": null,
+      "notes": "Mix beads with PCR product; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 50,
+      "source": "pcr_plate:A1",
+      "dest": "plate:C1",
+      "reagent": null,
+      "notes": "Mix beads with PCR product; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 50,
+      "source": "pcr_plate:A1",
+      "dest": "plate:D1",
+      "reagent": null,
+      "notes": "Mix beads with PCR product; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 50,
+      "source": "pcr_plate:A1",
+      "dest": "plate:E1",
+      "reagent": null,
+      "notes": "Mix beads with PCR product; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 50,
+      "source": "pcr_plate:A1",
+      "dest": "plate:F1",
+      "reagent": null,
+      "notes": "Mix beads with PCR product; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 50,
+      "source": "pcr_plate:A1",
+      "dest": "plate:G1",
+      "reagent": null,
+      "notes": "Mix beads with PCR product; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 50,
+      "source": "pcr_plate:A1",
+      "dest": "plate:H1",
+      "reagent": null,
+      "notes": "Mix beads with PCR product; number of wells depends on column count."
+    },
+    {
+      "action": "incubate",
+      "duration_s": 300,
+      "temperature_c": null,
+      "notes": "Incubation time and temperature for bead binding are not explicitly stated; 5 minutes at room temperature is a common assumption but not confirmed by the protocol text."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "Magnetic Module",
+      "instrument_action": "Engage magnet to pellet AMPure beads in the pcr_plate and allow supernatant to clear.",
+      "notes": "Exact engagement time is not specified in the protocol text."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "pcr_plate:A1",
+      "dest": "plate:A1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from each well after magnetic separation; exact volume to aspirate is not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "pcr_plate:A1",
+      "dest": "plate:B1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from each well after magnetic separation; exact volume to aspirate is not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "pcr_plate:A1",
+      "dest": "plate:C1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from each well after magnetic separation; exact volume to aspirate is not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "pcr_plate:A1",
+      "dest": "plate:D1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from each well after magnetic separation; exact volume to aspirate is not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "pcr_plate:A1",
+      "dest": "plate:E1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from each well after magnetic separation; exact volume to aspirate is not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "pcr_plate:A1",
+      "dest": "plate:F1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from each well after magnetic separation; exact volume to aspirate is not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "pcr_plate:A1",
+      "dest": "plate:G1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from each well after magnetic separation; exact volume to aspirate is not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "pcr_plate:A1",
+      "dest": "plate:H1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from each well after magnetic separation; exact volume to aspirate is not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "reservoir:A3",
+      "dest": "pcr_plate:A1",
+      "reagent": "80% Ethanol",
+      "notes": "300 uL EtOH wash per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "reservoir:A3",
+      "dest": "pcr_plate:B1",
+      "reagent": "80% Ethanol",
+      "notes": "300 uL EtOH wash per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "reservoir:A3",
+      "dest": "pcr_plate:C1",
+      "reagent": "80% Ethanol",
+      "notes": "300 uL EtOH wash per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "reservoir:A3",
+      "dest": "pcr_plate:D1",
+      "reagent": "80% Ethanol",
+      "notes": "300 uL EtOH wash per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "reservoir:A3",
+      "dest": "pcr_plate:E1",
+      "reagent": "80% Ethanol",
+      "notes": "300 uL EtOH wash per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "reservoir:A3",
+      "dest": "pcr_plate:F1",
+      "reagent": "80% Ethanol",
+      "notes": "300 uL EtOH wash per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "reservoir:A3",
+      "dest": "pcr_plate:G1",
+      "reagent": "80% Ethanol",
+      "notes": "300 uL EtOH wash per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "reservoir:A3",
+      "dest": "pcr_plate:H1",
+      "reagent": "80% Ethanol",
+      "notes": "300 uL EtOH wash per sample well; wells depend on column count."
+    },
+    {
+      "action": "wait",
+      "duration_s": 30,
+      "notes": "Brief ethanol wash incubation; exact duration not specified, 30 s assumed as a common wash step."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "pcr_plate:A1",
+      "dest": "pcr_plate:A1",
+      "reagent": "80% Ethanol",
+      "notes": "Remove and discard ethanol wash supernatant; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "pcr_plate:A1",
+      "dest": "pcr_plate:B1",
+      "reagent": "80% Ethanol",
+      "notes": "Remove and discard ethanol wash supernatant; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "pcr_plate:A1",
+      "dest": "pcr_plate:C1",
+      "reagent": "80% Ethanol",
+      "notes": "Remove and discard ethanol wash supernatant; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "pcr_plate:A1",
+      "dest": "pcr_plate:D1",
+      "reagent": "80% Ethanol",
+      "notes": "Remove and discard ethanol wash supernatant; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "pcr_plate:A1",
+      "dest": "pcr_plate:E1",
+      "reagent": "80% Ethanol",
+      "notes": "Remove and discard ethanol wash supernatant; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "pcr_plate:A1",
+      "dest": "pcr_plate:F1",
+      "reagent": "80% Ethanol",
+      "notes": "Remove and discard ethanol wash supernatant; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "pcr_plate:A1",
+      "dest": "pcr_plate:G1",
+      "reagent": "80% Ethanol",
+      "notes": "Remove and discard ethanol wash supernatant; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 300,
+      "source": "pcr_plate:A1",
+      "dest": "pcr_plate:H1",
+      "reagent": "80% Ethanol",
+      "notes": "Remove and discard ethanol wash supernatant; wells depend on column count."
+    },
+    {
+      "action": "wait",
+      "duration_s": 120,
+      "notes": "Air-dry beads; exact drying time is not specified in the protocol text."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "Magnetic Module",
+      "instrument_action": "Disengage magnet to allow bead resuspension for elution."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 33,
+      "source": "reservoir:A7",
+      "dest": "plate:A1",
+      "reagent": "H2O",
+      "notes": "33 uL H2O per sample well for elution; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 33,
+      "source": "reservoir:A7",
+      "dest": "plate:B1",
+      "reagent": "H2O",
+      "notes": "33 uL H2O per sample well for elution; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 33,
+      "source": "reservoir:A7",
+      "dest": "plate:C1",
+      "reagent": "H2O",
+      "notes": "33 uL H2O per sample well for elution; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 33,
+      "source": "reservoir:A7",
+      "dest": "plate:D1",
+      "reagent": "H2O",
+      "notes": "33 uL H2O per sample well for elution; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 33,
+      "source": "reservoir:A7",
+      "dest": "plate:E1",
+      "reagent": "H2O",
+      "notes": "33 uL H2O per sample well for elution; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 33,
+      "source": "reservoir:A7",
+      "dest": "plate:F1",
+      "reagent": "H2O",
+      "notes": "33 uL H2O per sample well for elution; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 33,
+      "source": "reservoir:A7",
+      "dest": "plate:G1",
+      "reagent": "H2O",
+      "notes": "33 uL H2O per sample well for elution; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 33,
+      "source": "reservoir:A7",
+      "dest": "plate:H1",
+      "reagent": "H2O",
+      "notes": "33 uL H2O per sample well for elution; wells depend on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:A1",
+      "reagent": null,
+      "notes": "Resuspend beads in H2O; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:B1",
+      "reagent": null,
+      "notes": "Resuspend beads in H2O; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:C1",
+      "reagent": null,
+      "notes": "Resuspend beads in H2O; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:D1",
+      "reagent": null,
+      "notes": "Resuspend beads in H2O; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:E1",
+      "reagent": null,
+      "notes": "Resuspend beads in H2O; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:F1",
+      "reagent": null,
+      "notes": "Resuspend beads in H2O; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:G1",
+      "reagent": null,
+      "notes": "Resuspend beads in H2O; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 25,
+      "source": "pcr_plate:A1",
+      "dest": "plate:H1",
+      "reagent": null,
+      "notes": "Resuspend beads in H2O; number of wells depends on column count."
+    },
+    {
+      "action": "incubate",
+      "duration_s": 120,
+      "temperature_c": null,
+      "notes": "Elution incubation time and temperature are not explicitly stated in the protocol text."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "Magnetic Module",
+      "instrument_action": "Engage magnet to pellet beads and allow eluted supernatant to clear before transfer."
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer eluted library supernatant to elution_plate; exact transfer volume not specified (expected ~30 uL); wells depend on column count.",
+      "action": "transfer",
+      "source": "pcr_plate:A1",
+      "dest": "elution_plate:A1"
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer eluted library supernatant to elution_plate; exact transfer volume not specified (expected ~30 uL); wells depend on column count.",
+      "action": "transfer",
+      "source": "pcr_plate:B1",
+      "dest": "elution_plate:B1"
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer eluted library supernatant to elution_plate; exact transfer volume not specified (expected ~30 uL); wells depend on column count.",
+      "action": "transfer",
+      "source": "pcr_plate:C1",
+      "dest": "elution_plate:C1"
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer eluted library supernatant to elution_plate; exact transfer volume not specified (expected ~30 uL); wells depend on column count.",
+      "action": "transfer",
+      "source": "pcr_plate:D1",
+      "dest": "elution_plate:D1"
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer eluted library supernatant to elution_plate; exact transfer volume not specified (expected ~30 uL); wells depend on column count.",
+      "action": "transfer",
+      "source": "pcr_plate:E1",
+      "dest": "elution_plate:E1"
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer eluted library supernatant to elution_plate; exact transfer volume not specified (expected ~30 uL); wells depend on column count.",
+      "action": "transfer",
+      "source": "pcr_plate:F1",
+      "dest": "elution_plate:F1"
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer eluted library supernatant to elution_plate; exact transfer volume not specified (expected ~30 uL); wells depend on column count.",
+      "action": "transfer",
+      "source": "pcr_plate:G1",
+      "dest": "elution_plate:G1"
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer eluted library supernatant to elution_plate; exact transfer volume not specified (expected ~30 uL); wells depend on column count.",
+      "action": "transfer",
+      "source": "pcr_plate:H1",
+      "dest": "elution_plate:H1"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "reagent_plate:A3",
+      "dest": "reagent_plate:A1",
+      "reagent": "NormBead",
+      "notes": "5 uL NormBead per sample well added to elution_plate; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "reagent_plate:A3",
+      "dest": "reagent_plate:B1",
+      "reagent": "NormBead",
+      "notes": "5 uL NormBead per sample well added to elution_plate; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "reagent_plate:A3",
+      "dest": "reagent_plate:C1",
+      "reagent": "NormBead",
+      "notes": "5 uL NormBead per sample well added to elution_plate; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "reagent_plate:A3",
+      "dest": "reagent_plate:D1",
+      "reagent": "NormBead",
+      "notes": "5 uL NormBead per sample well added to elution_plate; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "reagent_plate:A3",
+      "dest": "reagent_plate:E1",
+      "reagent": "NormBead",
+      "notes": "5 uL NormBead per sample well added to elution_plate; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "reagent_plate:A3",
+      "dest": "reagent_plate:F1",
+      "reagent": "NormBead",
+      "notes": "5 uL NormBead per sample well added to elution_plate; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "reagent_plate:A3",
+      "dest": "reagent_plate:G1",
+      "reagent": "NormBead",
+      "notes": "5 uL NormBead per sample well added to elution_plate; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "reagent_plate:A3",
+      "dest": "reagent_plate:H1",
+      "reagent": "NormBead",
+      "notes": "5 uL NormBead per sample well added to elution_plate; wells depend on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 15,
+      "source": "elution_plate:A1",
+      "dest": "plate:A1",
+      "reagent": null,
+      "notes": "Mix NormBead with eluted library; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 15,
+      "source": "elution_plate:A1",
+      "dest": "plate:B1",
+      "reagent": null,
+      "notes": "Mix NormBead with eluted library; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 15,
+      "source": "elution_plate:A1",
+      "dest": "plate:C1",
+      "reagent": null,
+      "notes": "Mix NormBead with eluted library; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 15,
+      "source": "elution_plate:A1",
+      "dest": "plate:D1",
+      "reagent": null,
+      "notes": "Mix NormBead with eluted library; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 15,
+      "source": "elution_plate:A1",
+      "dest": "plate:E1",
+      "reagent": null,
+      "notes": "Mix NormBead with eluted library; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 15,
+      "source": "elution_plate:A1",
+      "dest": "plate:F1",
+      "reagent": null,
+      "notes": "Mix NormBead with eluted library; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 15,
+      "source": "elution_plate:A1",
+      "dest": "plate:G1",
+      "reagent": null,
+      "notes": "Mix NormBead with eluted library; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 15,
+      "source": "elution_plate:A1",
+      "dest": "plate:H1",
+      "reagent": null,
+      "notes": "Mix NormBead with eluted library; number of wells depends on column count."
+    },
+    {
+      "action": "incubate",
+      "duration_s": null,
+      "temperature_c": null,
+      "notes": "NormBead binding incubation time and temperature are not specified in the protocol text."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "Magnetic Module",
+      "instrument_action": "Engage magnet to pellet NormBeads and allow supernatant to clear."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "elution_plate:A1",
+      "dest": "plate:A1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from NormBead capture; exact volume not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "elution_plate:A1",
+      "dest": "plate:B1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from NormBead capture; exact volume not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "elution_plate:A1",
+      "dest": "plate:C1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from NormBead capture; exact volume not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "elution_plate:A1",
+      "dest": "plate:D1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from NormBead capture; exact volume not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "elution_plate:A1",
+      "dest": "plate:E1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from NormBead capture; exact volume not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "elution_plate:A1",
+      "dest": "plate:F1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from NormBead capture; exact volume not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "elution_plate:A1",
+      "dest": "plate:G1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from NormBead capture; exact volume not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "elution_plate:A1",
+      "dest": "plate:H1",
+      "reagent": null,
+      "notes": "Remove and discard supernatant from NormBead capture; exact volume not specified."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "reservoir:A8",
+      "dest": "elution_plate:A1",
+      "reagent": "NormWash",
+      "notes": "450 uL NormWash per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "reservoir:A8",
+      "dest": "elution_plate:B1",
+      "reagent": "NormWash",
+      "notes": "450 uL NormWash per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "reservoir:A8",
+      "dest": "elution_plate:C1",
+      "reagent": "NormWash",
+      "notes": "450 uL NormWash per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "reservoir:A8",
+      "dest": "elution_plate:D1",
+      "reagent": "NormWash",
+      "notes": "450 uL NormWash per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "reservoir:A8",
+      "dest": "elution_plate:E1",
+      "reagent": "NormWash",
+      "notes": "450 uL NormWash per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "reservoir:A8",
+      "dest": "elution_plate:F1",
+      "reagent": "NormWash",
+      "notes": "450 uL NormWash per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "reservoir:A8",
+      "dest": "elution_plate:G1",
+      "reagent": "NormWash",
+      "notes": "450 uL NormWash per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "reservoir:A8",
+      "dest": "elution_plate:H1",
+      "reagent": "NormWash",
+      "notes": "450 uL NormWash per sample well; wells depend on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 200,
+      "source": "elution_plate:A1",
+      "dest": "plate:A1",
+      "reagent": null,
+      "notes": "Mix NormWash with beads; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 200,
+      "source": "elution_plate:A1",
+      "dest": "plate:B1",
+      "reagent": null,
+      "notes": "Mix NormWash with beads; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 200,
+      "source": "elution_plate:A1",
+      "dest": "plate:C1",
+      "reagent": null,
+      "notes": "Mix NormWash with beads; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 200,
+      "source": "elution_plate:A1",
+      "dest": "plate:D1",
+      "reagent": null,
+      "notes": "Mix NormWash with beads; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 200,
+      "source": "elution_plate:A1",
+      "dest": "plate:E1",
+      "reagent": null,
+      "notes": "Mix NormWash with beads; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 200,
+      "source": "elution_plate:A1",
+      "dest": "plate:F1",
+      "reagent": null,
+      "notes": "Mix NormWash with beads; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 200,
+      "source": "elution_plate:A1",
+      "dest": "plate:G1",
+      "reagent": null,
+      "notes": "Mix NormWash with beads; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 200,
+      "source": "elution_plate:A1",
+      "dest": "plate:H1",
+      "reagent": null,
+      "notes": "Mix NormWash with beads; number of wells depends on column count."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "Magnetic Module",
+      "instrument_action": "Engage magnet to pellet NormBeads after NormWash step."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "elution_plate:A1",
+      "dest": "elution_plate:A1",
+      "reagent": "NormWash",
+      "notes": "Remove and discard NormWash supernatant; exact volume not specified, assumed equal to added volume."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "elution_plate:A1",
+      "dest": "elution_plate:B1",
+      "reagent": "NormWash",
+      "notes": "Remove and discard NormWash supernatant; exact volume not specified, assumed equal to added volume."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "elution_plate:A1",
+      "dest": "elution_plate:C1",
+      "reagent": "NormWash",
+      "notes": "Remove and discard NormWash supernatant; exact volume not specified, assumed equal to added volume."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "elution_plate:A1",
+      "dest": "elution_plate:D1",
+      "reagent": "NormWash",
+      "notes": "Remove and discard NormWash supernatant; exact volume not specified, assumed equal to added volume."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "elution_plate:A1",
+      "dest": "elution_plate:E1",
+      "reagent": "NormWash",
+      "notes": "Remove and discard NormWash supernatant; exact volume not specified, assumed equal to added volume."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "elution_plate:A1",
+      "dest": "elution_plate:F1",
+      "reagent": "NormWash",
+      "notes": "Remove and discard NormWash supernatant; exact volume not specified, assumed equal to added volume."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "elution_plate:A1",
+      "dest": "elution_plate:G1",
+      "reagent": "NormWash",
+      "notes": "Remove and discard NormWash supernatant; exact volume not specified, assumed equal to added volume."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 450,
+      "source": "elution_plate:A1",
+      "dest": "elution_plate:H1",
+      "reagent": "NormWash",
+      "notes": "Remove and discard NormWash supernatant; exact volume not specified, assumed equal to added volume."
+    },
+    {
+      "action": "wait",
+      "duration_s": 120,
+      "notes": "Air-dry NormBeads; exact drying time is not specified in the protocol text."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "Magnetic Module",
+      "instrument_action": "Disengage magnet to allow NormBead resuspension for NormElute step."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 26,
+      "source": "reagent_plate:A4",
+      "dest": "reagent_plate:A1",
+      "reagent": "NormElute",
+      "notes": "26 uL NormElute per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 26,
+      "source": "reagent_plate:A4",
+      "dest": "reagent_plate:B1",
+      "reagent": "NormElute",
+      "notes": "26 uL NormElute per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 26,
+      "source": "reagent_plate:A4",
+      "dest": "reagent_plate:C1",
+      "reagent": "NormElute",
+      "notes": "26 uL NormElute per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 26,
+      "source": "reagent_plate:A4",
+      "dest": "reagent_plate:D1",
+      "reagent": "NormElute",
+      "notes": "26 uL NormElute per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 26,
+      "source": "reagent_plate:A4",
+      "dest": "reagent_plate:E1",
+      "reagent": "NormElute",
+      "notes": "26 uL NormElute per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 26,
+      "source": "reagent_plate:A4",
+      "dest": "reagent_plate:F1",
+      "reagent": "NormElute",
+      "notes": "26 uL NormElute per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 26,
+      "source": "reagent_plate:A4",
+      "dest": "reagent_plate:G1",
+      "reagent": "NormElute",
+      "notes": "26 uL NormElute per sample well; wells depend on column count."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 26,
+      "source": "reagent_plate:A4",
+      "dest": "reagent_plate:H1",
+      "reagent": "NormElute",
+      "notes": "26 uL NormElute per sample well; wells depend on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 20,
+      "source": "elution_plate:A1",
+      "dest": "plate:A1",
+      "reagent": null,
+      "notes": "Resuspend NormBeads in NormElute; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 20,
+      "source": "elution_plate:A1",
+      "dest": "plate:B1",
+      "reagent": null,
+      "notes": "Resuspend NormBeads in NormElute; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 20,
+      "source": "elution_plate:A1",
+      "dest": "plate:C1",
+      "reagent": null,
+      "notes": "Resuspend NormBeads in NormElute; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 20,
+      "source": "elution_plate:A1",
+      "dest": "plate:D1",
+      "reagent": null,
+      "notes": "Resuspend NormBeads in NormElute; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 20,
+      "source": "elution_plate:A1",
+      "dest": "plate:E1",
+      "reagent": null,
+      "notes": "Resuspend NormBeads in NormElute; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 20,
+      "source": "elution_plate:A1",
+      "dest": "plate:F1",
+      "reagent": null,
+      "notes": "Resuspend NormBeads in NormElute; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 20,
+      "source": "elution_plate:A1",
+      "dest": "plate:G1",
+      "reagent": null,
+      "notes": "Resuspend NormBeads in NormElute; number of wells depends on column count."
+    },
+    {
+      "action": "mix",
+      "volume_ul": 20,
+      "source": "elution_plate:A1",
+      "dest": "plate:H1",
+      "reagent": null,
+      "notes": "Resuspend NormBeads in NormElute; number of wells depends on column count."
+    },
+    {
+      "action": "incubate",
+      "duration_s": null,
+      "temperature_c": null,
+      "notes": "NormElute elution incubation time and temperature are not specified in the protocol text."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "Magnetic Module",
+      "instrument_action": "Engage magnet to pellet NormBeads and allow normalized library eluate to clear for final collection."
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer final normalized library eluate to a clean destination plate; exact volume and final destination plate not explicitly specified in the protocol text.",
+      "action": "transfer",
+      "source": "elution_plate:A1",
+      "dest": "sample_plate:A1"
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer final normalized library eluate to a clean destination plate; exact volume and final destination plate not explicitly specified in the protocol text.",
+      "action": "transfer",
+      "source": "elution_plate:B1",
+      "dest": "sample_plate:B1"
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer final normalized library eluate to a clean destination plate; exact volume and final destination plate not explicitly specified in the protocol text.",
+      "action": "transfer",
+      "source": "elution_plate:C1",
+      "dest": "sample_plate:C1"
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer final normalized library eluate to a clean destination plate; exact volume and final destination plate not explicitly specified in the protocol text.",
+      "action": "transfer",
+      "source": "elution_plate:D1",
+      "dest": "sample_plate:D1"
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer final normalized library eluate to a clean destination plate; exact volume and final destination plate not explicitly specified in the protocol text.",
+      "action": "transfer",
+      "source": "elution_plate:E1",
+      "dest": "sample_plate:E1"
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer final normalized library eluate to a clean destination plate; exact volume and final destination plate not explicitly specified in the protocol text.",
+      "action": "transfer",
+      "source": "elution_plate:F1",
+      "dest": "sample_plate:F1"
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer final normalized library eluate to a clean destination plate; exact volume and final destination plate not explicitly specified in the protocol text.",
+      "action": "transfer",
+      "source": "elution_plate:G1",
+      "dest": "sample_plate:G1"
+    },
+    {
+      "volume_ul": null,
+      "reagent": "Library DNA",
+      "notes": "Transfer final normalized library eluate to a clean destination plate; exact volume and final destination plate not explicitly specified in the protocol text.",
+      "action": "transfer",
+      "source": "elution_plate:H1",
+      "dest": "sample_plate:H1"
+    }
+  ]
+}

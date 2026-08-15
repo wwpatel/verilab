@@ -1,0 +1,11 @@
+{
+  "labware": {
+    "plate": {"type": "plate", "description": "96-well plate"},
+    "reservoir": {"type": "reservoir", "description": "liquid reservoir"}
+  },
+  "reagents": ["buffer"],
+  "steps": [
+    {"action": "transfer", "volume_ul": 250, "source": "reservoir:A1", "dest": "plate:A1", "reagent": "buffer"},
+    {"action": "transfer", "volume_ul": 250, "source": "reservoir:A1", "dest": "plate:A1", "reagent": "buffer"}
+  ]
+}

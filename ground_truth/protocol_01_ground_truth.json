@@ -1,0 +1,46 @@
+{
+  "protocol": "protocol_01",
+  "expected_actions": [
+    {
+      "id": 1,
+      "description": "Aliquot 5 uL spore suspension into each of 96 wells",
+      "action": "transfer",
+      "reagent_keyword": "spore",
+      "expected_volume_ul": 5,
+      "expected_well_count": 96,
+      "ambiguous": false
+    },
+    {
+      "id": 2,
+      "description": "Add 195 uL media overlay into each of 96 wells",
+      "action": "transfer",
+      "reagent_keyword": "media",
+      "expected_volume_ul": 195,
+      "expected_well_count": 96,
+      "ambiguous": false
+    },
+    {
+      "id": 3,
+      "description": "Fill inter-well space with media or water to avoid edge effect -- protocol never states which wells or how much, so a correct extraction MUST leave volume/wells ambiguous rather than guess",
+      "action": "transfer",
+      "reagent_keyword": "h2o",
+      "expected_volume_ul": null,
+      "expected_well_count": null,
+      "ambiguous": true
+    },
+    {
+      "id": 4,
+      "description": "Cover the plate with a breathable cover",
+      "action": "non_liquid_handling",
+      "ambiguous": false
+    },
+    {
+      "id": 5,
+      "description": "Run plate reader: OD600 every 10 minutes for 48 hours at 37C",
+      "action": "measure_or_incubate",
+      "expected_duration_s": 172800,
+      "expected_interval_s": 600,
+      "ambiguous": false
+    }
+  ]
+}

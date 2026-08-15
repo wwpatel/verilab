@@ -1,0 +1,9 @@
+Mix reagents
+
+1. In a sterile 10 mL reservoir, add 2534 uL of Platinum Hot Start PCR 2X Master Mix and 3295 uL of PCR Clean Water per set of 384 samples. Mix by pipetting.
+
+Setup epMotion automation platform
+2. Place a box of 1-50 uL epT.I.P.S. w/filters on deck slot A4. Place empty 384 PCR Primer Plates 1-3 on deck slots B1-B3. Place 10 mL reservoir with PCR Master Mix in the first slot of the reservoir rack, then place reservoir rack on deck slot B4.
+
+Execute automated protocol
+3. Remove box lids and execute protocol (protocol must be imported to epBlue software prior to execution; epBlue 4.6 or later). The automated protocol transfers 4.6 uL of PCR Master Mix into three 384-well PCR plates using the multidispense feature of the epBlue software.

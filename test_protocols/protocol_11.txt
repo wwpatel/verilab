@@ -1,0 +1,19 @@
+Phytip Protein A Reagent Plate Preparation (Opentrons OT-2)
+
+This protocol transfers reagents (equilibration buffer, wash buffer 1, wash buffer 2, and elution buffer) from a 12-well reagent stock reservoir to 96-well V-bottom plates on the OT-2. These reagent plates are used for the protein purification protocol of Phytip Protein A, ProPlus, or ProPlus LX Columns. Prepared to process up to 96 samples (a full 96-well plate).
+
+Protocol steps, using an 8-channel pipette:
+1. Equilibration buffer from the reagent stock reservoir (slot 8) is transferred to the "Equilibration" plate (slot 9): 200 uL per well.
+2. Wash buffer 1 from the reagent stock reservoir (slot 8) is transferred to the "1st wash" plate (slot 5): 200 uL per well.
+3. Wash buffer 2 from the reagent stock reservoir (slot 8) is transferred to the "2nd wash" plate (slot 7): 200 uL per well.
+4. Elution buffer from the reagent stock reservoir (slot 8) is transferred to the "Elution" plate (slot 11): 80 uL per well.
+
+Deck Setup:
+- Slot 5: NEST 96-well 2mL deepwell plate, 1st wash
+- Slot 6: Tiprack 1
+- Slot 7: NEST 96-well 2mL deepwell plate, 2nd wash
+- Slot 8: NEST 12-well reagent stock reservoir. Green = equilibration buffer (wells 1-2). Blue = wash buffer 1 (wells 3-4). Red = wash buffer 2 (wells 5-6). Purple = elution buffer (wells 7-8).
+- Slot 9: NEST 96-well 2mL deepwell plate, equilibration
+- Slot 11: NEST 96-well 2mL deepwell plate, elution
+
+Runtime parameters: Number of Samples (12 to 96), Temperature Module Ondeck (On/Off, default On).

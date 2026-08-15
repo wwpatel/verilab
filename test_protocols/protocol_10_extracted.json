@@ -1,0 +1,2013 @@
+{
+  "labware": {
+    "working_plate": {
+      "type": "plate",
+      "description": "Corning 96 Well Plate 360 uL Flat (Slot C2)"
+    },
+    "tube_rack_c1": {
+      "type": "tube_rack",
+      "description": "Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap (Samples, Slot C1)"
+    },
+    "tube_rack_b1": {
+      "type": "tube_rack",
+      "description": "Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap (Samples, Slot B1)"
+    },
+    "reagent_rack": {
+      "type": "tube_rack",
+      "description": "Opentrons 10 Tube Rack with NEST 4x50 mL, 6x15 mL Conical (Reagents, Slot A2)"
+    },
+    "working_reagent_reservoir": {
+      "type": "reservoir",
+      "description": "NEST 12 Well Reservoir 15 mL (Working Reagent, Slot B2)"
+    }
+  },
+  "reagents": [
+    "Reagent A",
+    "Reagent B",
+    "Working Reagent",
+    "Sample solution"
+  ],
+  "steps": [
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "reagent_rack:A4",
+      "dest": "working_plate:A1",
+      "reagent": "Reagent A",
+      "notes": "Volume of Reagent A transferred to reservoir wells A1 and A2 depends on the runtime parameter 'Number of Samples' (columns used); ranges from 2.9 mL for 1 column up to 20.2 mL for 12 columns, split across wells per the working reagent volume table."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "reagent_rack:A4",
+      "dest": "working_plate:A2",
+      "reagent": "Reagent A",
+      "notes": "Volume of Reagent A transferred to reservoir wells A1 and A2 depends on the runtime parameter 'Number of Samples' (columns used); ranges from 2.9 mL for 1 column up to 20.2 mL for 12 columns, split across wells per the working reagent volume table."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "reagent_rack:A1",
+      "dest": "working_plate:A1",
+      "reagent": "Reagent B",
+      "notes": "Volume of Reagent B transferred depends on columns used (59 uL to 404 uL total); split across reservoir wells A1 and A2 per the working reagent volume table."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "reagent_rack:A1",
+      "dest": "working_plate:A2",
+      "reagent": "Reagent B",
+      "notes": "Volume of Reagent B transferred depends on columns used (59 uL to 404 uL total); split across reservoir wells A1 and A2 per the working reagent volume table."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_reagent_reservoir:A1",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume not specified in protocol; Reagent A and B are combined in reservoir well A1 (and A2 if >6 columns) to form working reagent."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": null,
+      "dest": null,
+      "dest_wells": null,
+      "reagent": "Sample solution",
+      "notes": "Optional on-deck dilution step (runtime parameter 'Samples diluted on deck'); if Yes, the robot dilutes samples in 1.5 mL tubes in tube_rack_c1/tube_rack_b1 \u2014 volumes and diluent not fully specified in protocol."
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:A1",
+      "dest": "working_plate:A1"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:B1",
+      "dest": "working_plate:B1"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:C1",
+      "dest": "working_plate:C1"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:D1",
+      "dest": "working_plate:D1"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:E1",
+      "dest": "working_plate:E1"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:F1",
+      "dest": "working_plate:F1"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:G1",
+      "dest": "working_plate:G1"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:H1",
+      "dest": "working_plate:H1"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:A2",
+      "dest": "working_plate:A2"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:B2",
+      "dest": "working_plate:B2"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:C2",
+      "dest": "working_plate:C2"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:D2",
+      "dest": "working_plate:D2"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:E2",
+      "dest": "working_plate:E2"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:F2",
+      "dest": "working_plate:F2"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:G2",
+      "dest": "working_plate:G2"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:H2",
+      "dest": "working_plate:H2"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:A3",
+      "dest": "working_plate:A3"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:B3",
+      "dest": "working_plate:B3"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:C3",
+      "dest": "working_plate:C3"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:D3",
+      "dest": "working_plate:D3"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:E3",
+      "dest": "working_plate:E3"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:F3",
+      "dest": "working_plate:F3"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:G3",
+      "dest": "working_plate:G3"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Default sample volume is 25 uL (runtime parameter); each sample is transferred in duplicate to two consecutive wells in the working plate \u2014 well mapping shown here is illustrative for up to 24 samples from tube_rack_c1; actual well layout depends on number of samples and duplicate pairing logic.",
+      "action": "transfer",
+      "source": "tube_rack_c1:H3",
+      "dest": "working_plate:H3"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:A4",
+      "dest": "working_plate:A4"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:B4",
+      "dest": "working_plate:B4"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:C4",
+      "dest": "working_plate:C4"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:D4",
+      "dest": "working_plate:D4"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:E4",
+      "dest": "working_plate:E4"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:F4",
+      "dest": "working_plate:F4"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:G4",
+      "dest": "working_plate:G4"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:H4",
+      "dest": "working_plate:H4"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:A5",
+      "dest": "working_plate:A5"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:B5",
+      "dest": "working_plate:B5"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:C5",
+      "dest": "working_plate:C5"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:D5",
+      "dest": "working_plate:D5"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:E5",
+      "dest": "working_plate:E5"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:F5",
+      "dest": "working_plate:F5"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:G5",
+      "dest": "working_plate:G5"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:H5",
+      "dest": "working_plate:H5"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:A6",
+      "dest": "working_plate:A6"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:B6",
+      "dest": "working_plate:B6"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:C6",
+      "dest": "working_plate:C6"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:D6",
+      "dest": "working_plate:D6"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:E6",
+      "dest": "working_plate:E6"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:F6",
+      "dest": "working_plate:F6"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:G6",
+      "dest": "working_plate:G6"
+    },
+    {
+      "volume_ul": 25,
+      "reagent": "Sample solution",
+      "notes": "Samples 25\u201348 from tube_rack_b1 transferred to working plate; duplicate pairing and exact well mapping depend on runtime parameter 'Number of Samples'.",
+      "action": "transfer",
+      "source": "tube_rack_b1:H6",
+      "dest": "working_plate:H6"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:A1",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:B1",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:C1",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:D1",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:E1",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:F1",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:G1",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:H1",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:A2",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:B2",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:C2",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:D2",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:E2",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:F2",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:G2",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:H2",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:A3",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:B3",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:C3",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:D3",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:E3",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:F3",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:G3",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:H3",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:A4",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:B4",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:C4",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:D4",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:E4",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:F4",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:G4",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:H4",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:A5",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:B5",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:C5",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:D5",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:E5",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:F5",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:G5",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:H5",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:A6",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:B6",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:C6",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:D6",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:E6",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:F6",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:G6",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:H6",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:A7",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:B7",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:C7",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:D7",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:E7",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:F7",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:G7",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:H7",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:A8",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:B8",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:C8",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:D8",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:E8",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:F8",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:G8",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:H8",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:A9",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:B9",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:C9",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:D9",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:E9",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:F9",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:G9",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:H9",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:A10",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:B10",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:C10",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:D10",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:E10",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:F10",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:G10",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:H10",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:A11",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:B11",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:C11",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:D11",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:E11",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:F11",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:G11",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:H11",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:A12",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:B12",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:C12",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:D12",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:E12",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:F12",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:G12",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "working_reagent_reservoir:A1",
+      "dest": "working_plate:H12",
+      "reagent": "Working Reagent",
+      "notes": "200 uL per well is the standard BCA assay volume; protocol does not explicitly state this volume so it is flagged \u2014 actual dest_wells subset depends on number of columns used at runtime."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:A1",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:B1",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:C1",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:D1",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:E1",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:F1",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:G1",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:H1",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:A2",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:B2",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:C2",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:D2",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:E2",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:F2",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:G2",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:H2",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:A3",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:B3",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:C3",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:D3",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:E3",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:F3",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:G3",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:H3",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:A4",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:B4",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:C4",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:D4",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:E4",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:F4",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:G4",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:H4",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:A5",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:B5",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:C5",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:D5",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:E5",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:F5",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:G5",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:H5",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:A6",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:B6",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:C6",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:D6",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:E6",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:F6",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:G6",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:H6",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:A7",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:B7",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:C7",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:D7",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:E7",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:F7",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:G7",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:H7",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:A8",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:B8",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:C8",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:D8",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:E8",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:F8",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:G8",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:H8",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:A9",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:B9",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:C9",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:D9",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:E9",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:F9",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:G9",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:H9",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:A10",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:B10",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:C10",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:D10",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:E10",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:F10",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:G10",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:H10",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:A11",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:B11",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:C11",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:D11",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:E11",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:F11",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:G11",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:H11",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:A12",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:B12",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:C12",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:D12",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:E12",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:F12",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:G12",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "mix",
+      "volume_ul": null,
+      "source": null,
+      "dest": "working_plate:H12",
+      "reagent": "Working Reagent",
+      "notes": "Mix volume and cycles not specified in protocol; mixing of sample and working reagent in working plate wells is assumed after addition."
+    },
+    {
+      "action": "incubate",
+      "duration_s": 1800,
+      "temperature_c": 37,
+      "notes": "Default incubation time is 30 minutes (runtime parameter, 0\u2013120 min range); temperature of 37\u00b0C is standard for BCA but not explicitly stated in this protocol text."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "Plate Reader",
+      "instrument_action": "Read absorbance at 562 nm for all occupied wells of the working plate to quantify protein concentration.",
+      "notes": "Plate reader step is implied by BCA assay workflow but not explicitly described in the provided protocol text."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+QIAseq Normalizer Workflow A, 48x (Opentrons Flex)
+
+Number of Columns: 1 to 6. PCR Cycles default is 4, based on Illumina DNA Prep protocol suggestions for 100ng input.
+
+Input samples contain prepared Library DNA in 15 uL. The Normalization PCR Primer is diluted from 1.5 uL to 10 uL with RSB so the Flex can reliably handle volumes above 1.5 uL.
+
+Sample Plate Setup: input samples are unpooled prepared NGS samples containing 15-30nM DNA in 15 uL H2O. Aliquot per well: 15 uL.
+
+Reagent Plate Setup (volumes in uL, minimum based on calculations, add 10% for dead volume):
+- Column 1, Diluted Primer: 10 uL per 1x, aliquot per well 10-60 uL depending on throughput (8x-48x)
+- Column 2, PCR: 25 uL per 1x, aliquot per well 25-150 uL depending on throughput
+- Column 3, NormBead: 5 uL per 1x, aliquot per well 5-30 uL depending on throughput
+- Column 4, NormElute: 26 uL per 1x, aliquot per well 26-156 uL depending on throughput
+
+Reservoir Setup (volumes in uL, minimum 3ml to cover reservoir bottom):
+- Column 1, AMPure: total 50 uL per 1x, aliquot per well up to 2400 uL at 48x
+- Column 3, 80% EtOH: total 300 uL per 1x, aliquot per well up to 14400 uL at 48x
+- Column 7, H2O: total 33 uL per 1x, aliquot per well up to 1584 uL at 48x
+- Column 8, NormWash: total 450 uL per 1x, aliquot per well up to 21600 uL at 48x
+
+Tips for success: after uploading the protocol, check the Run Preview to see how many pauses are needed for tip resetting and how many tips are used.
+
+Runtime parameters: Dry Run (On/Off, default Off), Sample Column count (1-6, default 3), PCR Cycles (1-12, default 4).

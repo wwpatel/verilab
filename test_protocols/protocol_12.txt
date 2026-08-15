@@ -1,0 +1,30 @@
+ZymoBIOMICS 96 MagBead DNA Extraction (Opentrons Flex)
+
+Starting with 200 uL of lysed sample in a deep-well block on the Heater-Shaker with deepwell adapter.
+
+1. Resuspend beads in source labware with pipette (aspirate/dispense).
+2. Add 625 uL ZymoBIOMICS MagBinding Buffer (already containing the MagBinding Beads).
+3. Mix well on heater-shaker for 10 minutes.
+4. Transfer the 96-deepwell plate to a magnetic block until beads pellet.
+5. Aspirate and discard the supernatant.
+6. Remove the plate from the magnetic block.
+7. Dispense 500 uL of ZymoBIOMICS MagBinding Buffer and mix well by pipette or shaker plate for 1 minute.
+8. Transfer the plate to the magnetic block until beads pellet.
+9. Aspirate and discard the supernatant.
+10. Remove the plate from the magnetic block.
+11. Dispense 500 uL of ZymoBIOMICS MagWash 1 and mix well by pipette or shaker plate for 1 minute.
+12. Transfer the plate to the magnetic block until beads pellet.
+13. Aspirate and discard the supernatant.
+14. Remove the plate from the magnetic block.
+15. Dispense 900 uL ZymoBIOMICS MagWash 2 and mix well by pipette or shaker plate for 1 minute.
+16. Transfer the plate to a magnetic block until beads pellet.
+17. Aspirate and discard the supernatant.
+18. Remove the plate from the magnetic block.
+19. Repeat the MagWash 2 wash step (option to repeat twice for a total of 3 washes, from a 2 mL NEST deepwell on deck slot B3).
+20. Transfer the plate onto a heating element at 55C until beads dry, approximately 10 minutes.
+21. Dispense 50 uL of ZymoBIOMICS DNase/RNase Free Water to each well and resuspend beads (elution volume adjustable 10-100 uL).
+22. Mix the beads well for 10 minutes.
+23. Transfer the plate onto the magnetic block for 2-3 minutes until beads pellet.
+24. Transfer the supernatant, containing the eluted DNA, to a clean elution plate.
+
+Runtime parameters: Dry Run (On/Off, default Off), Elution Volume (10-100 uL, default 50), Additional wash (On/Off, default Off).

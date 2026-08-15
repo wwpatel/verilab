@@ -1,0 +1,13 @@
+Plate preparation
+
+1. Harvest and dilute spores in PBS+0.01% Tween to 4*10^5 spores/mL.
+
+1.1 Aliquot 5 uL of this spore stock per well of a CytoOne 96-well plate (Starlab) non-coated, this will be overlayed with 195 uL of liquid media to a total volume of 200 uL.
+Note: This equals 2000 spores (absolute) per well. 1000 or 500 spores are possible to use, but result in more variance within replicates.
+
+2. Fill the space between the wells with either media or H2O. This will avoid an "edge effect", where the wells around the edge of the plate show increased growth compared to other wells.
+
+3. Cover the 96 well plate with a breathable cover to allow gas exchange.
+
+Machine setup
+4. Set up the plate reader (Powerwave X-2 with KC software or BioTek platereader) to run for 48:00:00 at 37 °C, measuring OD600 every 10 minutes. Take a blank reading before running the plate and preheat the machine. Run the experiment. This will result in a "growth curve".

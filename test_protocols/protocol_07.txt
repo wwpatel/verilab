@@ -1,0 +1,11 @@
+Blood clot preparation, red blood cell lysis, white blood cell lysis, protein precipitation, DNA precipitation, DNA washing, DNA hydration
+
+22. The supernatant was carefully discarded. The tube was drained on a clean piece of absorbent paper, taking care that the pellet remained in the tube.
+
+23. 5 mL of 70% (v/v) ethanol were added immediately and the tubes were inverted until the pellet was detached.
+
+24. After centrifugation at 2000 x g for 3 min, the supernatant was carefully discarded, and the DNA pellet was air dried at room temperature for 10 min or until the pellet got glassy.
+
+25. Addition of 0.5 mL DNA Hydration Solution (Qiagen) for a large pellet or 0.3 mL for a smaller pellet was followed by incubation at 65 °C in a warming cabinet for 1 hour. To fully dissolve the DNA, the sample was put on a shaker overnight at room temperature.
+
+26. Samples were centrifuged briefly and the dissolved DNA was transferred to a 2 mL tube and stored at -20 °C.

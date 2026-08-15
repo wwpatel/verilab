@@ -1,0 +1,8 @@
+Serial Dilution Protocol (placeholder for pipeline testing)
+
+1. Add 100 uL of PBS buffer to wells A1 through A12 of a 96-well flat-bottom plate.
+2. Add 100 uL of stock sample to well A1 and mix by pipetting up and down 3 times.
+3. Transfer 100 uL from well A1 to well A2 and mix by pipetting up and down 3 times.
+4. Repeat the transfer and mix step serially from A2 to A3, A3 to A4, continuing through A11 to A12.
+5. Discard 100 uL from well A12 after mixing so all wells contain equal final volume.
+6. Incubate the plate at room temperature for 10 minutes before reading.

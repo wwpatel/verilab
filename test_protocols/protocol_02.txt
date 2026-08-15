@@ -1,0 +1,15 @@
+Make PCR Master Mix for 100 samples in 15 mL Falcon tube.
+
+2. Add 850 uL PCR Water (nuclease free)
+3. Dilute SYBR G 1:100 by adding 3 uL SYBR G and 297 uL PCR water to a new small tube. Vortex and spin down.
+4. Add 250 uL of SYBR 1:100 dilution to Falcon tube
+5. Add 100 uL of Primer 1: GOH-279-M13 10uM to Falcon tube
+6. Add 100 uL of Primer 2: GOH-280-M13 10uM to Falcon tube
+7. Add 1000 uL of 5' mix to Falcon tube
+8. Quick vortex and spin down Falcon tube
+9. Label new green 96 microplate
+10. Add 23 uL of Master Mix to each well of green 96 microplate
+11. Thaw and spin down plate with extracted DNA samples.
+12. Add 2 uL of each extracted DNA sample to corresponding well of new plate with master mix.
+13. Seal PCR plate with plastic film, spin down
+14. Run plate on BioRad CFX with hsp60 qPCR 25 uL 40 cycle program.

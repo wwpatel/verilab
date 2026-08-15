@@ -1,0 +1,1558 @@
+{
+  "labware": {
+    "falcon_tube": {
+      "type": "tube_rack",
+      "description": "15 mL Falcon tube for PCR Master Mix"
+    },
+    "dilution_tube": {
+      "type": "tube_rack",
+      "description": "Small tube for 1:100 SYBR G dilution"
+    },
+    "master_mix_plate": {
+      "type": "plate",
+      "description": "Green 96-well microplate for master mix and samples (PCR plate)"
+    },
+    "dna_sample_plate": {
+      "type": "plate",
+      "description": "96-well plate containing extracted DNA samples"
+    }
+  },
+  "reagents": [
+    "PCR Water (nuclease free)",
+    "SYBR G",
+    "SYBR G 1:100 dilution",
+    "Primer 1: GOH-279-M13 10uM",
+    "Primer 2: GOH-280-M13 10uM",
+    "5x mix"
+  ],
+  "steps": [
+    {
+      "action": "transfer",
+      "volume_ul": 850,
+      "source": "falcon_tube:A1",
+      "dest": null,
+      "dest_wells": null,
+      "reagent": "PCR Water (nuclease free)",
+      "notes": "Water is added to the Falcon tube; source well notation is nominal as this is a tube rack with a single vessel."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 297,
+      "source": "dilution_tube:A1",
+      "dest": "dilution_tube:A1",
+      "reagent": "PCR Water (nuclease free)",
+      "notes": "297 uL PCR Water added to the small dilution tube first, before SYBR G, to prepare 1:100 dilution."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 3,
+      "source": "dilution_tube:A1",
+      "dest": "dilution_tube:A1",
+      "reagent": "SYBR G",
+      "notes": "3 uL SYBR G added to the dilution tube containing PCR water to achieve 1:100 dilution."
+    },
+    {
+      "action": "mix",
+      "source": "dilution_tube:A1",
+      "dest": "dilution_tube:A1",
+      "reagent": "SYBR G 1:100 dilution",
+      "notes": "Vortex and spin down the dilution tube to homogenize the SYBR G 1:100 dilution."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 250,
+      "source": "dilution_tube:A1",
+      "dest": "falcon_tube:A1",
+      "reagent": "SYBR G 1:100 dilution"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 100,
+      "source": "falcon_tube:A1",
+      "dest": "falcon_tube:A1",
+      "reagent": "Primer 1: GOH-279-M13 10uM",
+      "notes": "Primer 1 added to the Falcon tube; source notation is nominal for a tube rack."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 100,
+      "source": "falcon_tube:A1",
+      "dest": "falcon_tube:A1",
+      "reagent": "Primer 2: GOH-280-M13 10uM",
+      "notes": "Primer 2 added to the Falcon tube; source notation is nominal for a tube rack."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 1000,
+      "source": "falcon_tube:A1",
+      "dest": "falcon_tube:A1",
+      "reagent": "5x mix",
+      "notes": "Protocol says '5\\' mix' which is interpreted as 5x master mix; confirm correct reagent name."
+    },
+    {
+      "action": "mix",
+      "source": "falcon_tube:A1",
+      "dest": "falcon_tube:A1",
+      "reagent": null,
+      "notes": "Quick vortex and spin down the Falcon tube to homogenize the complete master mix."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:A1",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:A2",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:A3",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:A4",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:A5",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:A6",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:A7",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:A8",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:A9",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:A10",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:A11",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:A12",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:B1",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:B2",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:B3",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:B4",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:B5",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:B6",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:B7",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:B8",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:B9",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:B10",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:B11",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:B12",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:C1",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:C2",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:C3",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:C4",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:C5",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:C6",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:C7",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:C8",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:C9",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:C10",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:C11",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:C12",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:D1",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:D2",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:D3",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:D4",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:D5",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:D6",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:D7",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:D8",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:D9",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:D10",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:D11",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:D12",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:E1",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:E2",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:E3",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:E4",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:E5",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:E6",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:E7",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:E8",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:E9",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:E10",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:E11",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:E12",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:F1",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:F2",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:F3",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:F4",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:F5",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:F6",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:F7",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:F8",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:F9",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:F10",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:F11",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:F12",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:G1",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:G2",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:G3",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:G4",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:G5",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:G6",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:G7",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:G8",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:G9",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:G10",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:G11",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:G12",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:H1",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:H2",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:H3",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:H4",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:H5",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:H6",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:H7",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:H8",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:H9",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:H10",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:H11",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 23,
+      "source": "falcon_tube:A1",
+      "dest": "master_mix_plate:H12",
+      "reagent": "PCR Master Mix",
+      "notes": "All 96 wells filled; protocol is for 100 samples but a standard 96-well plate has 96 wells \u2014 confirm whether additional plates or strip tubes are needed."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "Centrifuge / Vortex",
+      "instrument_action": "Thaw and spin down the extracted DNA sample plate to ensure samples are fully dissolved and collected at the bottom of wells.",
+      "notes": "Thawing is a manual/offline step; centrifuge speed and duration were not specified."
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:A1",
+      "dest": "master_mix_plate:A1"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:A2",
+      "dest": "master_mix_plate:A2"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:A3",
+      "dest": "master_mix_plate:A3"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:A4",
+      "dest": "master_mix_plate:A4"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:A5",
+      "dest": "master_mix_plate:A5"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:A6",
+      "dest": "master_mix_plate:A6"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:A7",
+      "dest": "master_mix_plate:A7"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:A8",
+      "dest": "master_mix_plate:A8"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:A9",
+      "dest": "master_mix_plate:A9"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:A10",
+      "dest": "master_mix_plate:A10"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:A11",
+      "dest": "master_mix_plate:A11"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:A12",
+      "dest": "master_mix_plate:A12"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:B1",
+      "dest": "master_mix_plate:B1"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:B2",
+      "dest": "master_mix_plate:B2"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:B3",
+      "dest": "master_mix_plate:B3"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:B4",
+      "dest": "master_mix_plate:B4"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:B5",
+      "dest": "master_mix_plate:B5"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:B6",
+      "dest": "master_mix_plate:B6"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:B7",
+      "dest": "master_mix_plate:B7"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:B8",
+      "dest": "master_mix_plate:B8"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:B9",
+      "dest": "master_mix_plate:B9"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:B10",
+      "dest": "master_mix_plate:B10"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:B11",
+      "dest": "master_mix_plate:B11"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:B12",
+      "dest": "master_mix_plate:B12"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:C1",
+      "dest": "master_mix_plate:C1"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:C2",
+      "dest": "master_mix_plate:C2"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:C3",
+      "dest": "master_mix_plate:C3"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:C4",
+      "dest": "master_mix_plate:C4"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:C5",
+      "dest": "master_mix_plate:C5"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:C6",
+      "dest": "master_mix_plate:C6"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:C7",
+      "dest": "master_mix_plate:C7"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:C8",
+      "dest": "master_mix_plate:C8"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:C9",
+      "dest": "master_mix_plate:C9"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:C10",
+      "dest": "master_mix_plate:C10"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:C11",
+      "dest": "master_mix_plate:C11"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:C12",
+      "dest": "master_mix_plate:C12"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:D1",
+      "dest": "master_mix_plate:D1"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:D2",
+      "dest": "master_mix_plate:D2"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:D3",
+      "dest": "master_mix_plate:D3"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:D4",
+      "dest": "master_mix_plate:D4"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:D5",
+      "dest": "master_mix_plate:D5"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:D6",
+      "dest": "master_mix_plate:D6"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:D7",
+      "dest": "master_mix_plate:D7"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:D8",
+      "dest": "master_mix_plate:D8"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:D9",
+      "dest": "master_mix_plate:D9"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:D10",
+      "dest": "master_mix_plate:D10"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:D11",
+      "dest": "master_mix_plate:D11"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:D12",
+      "dest": "master_mix_plate:D12"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:E1",
+      "dest": "master_mix_plate:E1"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:E2",
+      "dest": "master_mix_plate:E2"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:E3",
+      "dest": "master_mix_plate:E3"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:E4",
+      "dest": "master_mix_plate:E4"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:E5",
+      "dest": "master_mix_plate:E5"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:E6",
+      "dest": "master_mix_plate:E6"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:E7",
+      "dest": "master_mix_plate:E7"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:E8",
+      "dest": "master_mix_plate:E8"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:E9",
+      "dest": "master_mix_plate:E9"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:E10",
+      "dest": "master_mix_plate:E10"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:E11",
+      "dest": "master_mix_plate:E11"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:E12",
+      "dest": "master_mix_plate:E12"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:F1",
+      "dest": "master_mix_plate:F1"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:F2",
+      "dest": "master_mix_plate:F2"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:F3",
+      "dest": "master_mix_plate:F3"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:F4",
+      "dest": "master_mix_plate:F4"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:F5",
+      "dest": "master_mix_plate:F5"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:F6",
+      "dest": "master_mix_plate:F6"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:F7",
+      "dest": "master_mix_plate:F7"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:F8",
+      "dest": "master_mix_plate:F8"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:F9",
+      "dest": "master_mix_plate:F9"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:F10",
+      "dest": "master_mix_plate:F10"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:F11",
+      "dest": "master_mix_plate:F11"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:F12",
+      "dest": "master_mix_plate:F12"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:G1",
+      "dest": "master_mix_plate:G1"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:G2",
+      "dest": "master_mix_plate:G2"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:G3",
+      "dest": "master_mix_plate:G3"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:G4",
+      "dest": "master_mix_plate:G4"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:G5",
+      "dest": "master_mix_plate:G5"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:G6",
+      "dest": "master_mix_plate:G6"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:G7",
+      "dest": "master_mix_plate:G7"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:G8",
+      "dest": "master_mix_plate:G8"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:G9",
+      "dest": "master_mix_plate:G9"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:G10",
+      "dest": "master_mix_plate:G10"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:G11",
+      "dest": "master_mix_plate:G11"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:G12",
+      "dest": "master_mix_plate:G12"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:H1",
+      "dest": "master_mix_plate:H1"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:H2",
+      "dest": "master_mix_plate:H2"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:H3",
+      "dest": "master_mix_plate:H3"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:H4",
+      "dest": "master_mix_plate:H4"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:H5",
+      "dest": "master_mix_plate:H5"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:H6",
+      "dest": "master_mix_plate:H6"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:H7",
+      "dest": "master_mix_plate:H7"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:H8",
+      "dest": "master_mix_plate:H8"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:H9",
+      "dest": "master_mix_plate:H9"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:H10",
+      "dest": "master_mix_plate:H10"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:H11",
+      "dest": "master_mix_plate:H11"
+    },
+    {
+      "volume_ul": 2,
+      "reagent": null,
+      "action": "transfer",
+      "source": "dna_sample_plate:H12",
+      "dest": "master_mix_plate:H12"
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "Centrifuge",
+      "instrument_action": "Seal PCR plate with plastic film and spin down to eliminate bubbles and ensure liquid is at the bottom of each well.",
+      "notes": "Centrifuge speed and duration for plate spin-down were not specified."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "BioRad CFX",
+      "instrument_action": "Run qPCR using the hsp60 qPCR 25 uL 40-cycle program on the sealed PCR plate.",
+      "notes": "Exact thermocycler program parameters (temperatures, ramp rates, annealing temps) were not provided in the protocol."
+    }
+  ]
+}

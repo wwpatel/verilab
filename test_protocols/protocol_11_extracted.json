@@ -1,0 +1,420 @@
+{
+  "labware": {
+    "reservoir_slot8": {
+      "type": "reservoir",
+      "description": "NEST 12-well reagent stock reservoir (slot 8): equilibration buffer in wells 1-2, wash buffer 1 in wells 3-4, wash buffer 2 in wells 5-6, elution buffer in wells 7-8"
+    },
+    "plate_slot5": {
+      "type": "plate",
+      "description": "NEST 96-well 2 mL deepwell plate, 1st wash (slot 5)"
+    },
+    "plate_slot7": {
+      "type": "plate",
+      "description": "NEST 96-well 2 mL deepwell plate, 2nd wash (slot 7)"
+    },
+    "plate_slot9": {
+      "type": "plate",
+      "description": "NEST 96-well 2 mL deepwell plate, equilibration (slot 9)"
+    },
+    "plate_slot11": {
+      "type": "plate",
+      "description": "NEST 96-well 2 mL deepwell plate, elution (slot 11)"
+    },
+    "tiprack_slot6": {
+      "type": "tube_rack",
+      "description": "Tip rack 1 (slot 6); tip type not specified in protocol"
+    }
+  },
+  "reagents": [
+    "Equilibration buffer",
+    "Wash buffer 1",
+    "Wash buffer 2",
+    "Elution buffer"
+  ],
+  "steps": [
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A1",
+      "dest": "plate_slot9:A1",
+      "reagent": "Equilibration buffer",
+      "notes": "8-channel pipette used column by column; reservoir wells 1-2 supply equilibration buffer \u2014 exact source well switching logic depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A1",
+      "dest": "plate_slot9:A2",
+      "reagent": "Equilibration buffer",
+      "notes": "8-channel pipette used column by column; reservoir wells 1-2 supply equilibration buffer \u2014 exact source well switching logic depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A1",
+      "dest": "plate_slot9:A3",
+      "reagent": "Equilibration buffer",
+      "notes": "8-channel pipette used column by column; reservoir wells 1-2 supply equilibration buffer \u2014 exact source well switching logic depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A1",
+      "dest": "plate_slot9:A4",
+      "reagent": "Equilibration buffer",
+      "notes": "8-channel pipette used column by column; reservoir wells 1-2 supply equilibration buffer \u2014 exact source well switching logic depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A1",
+      "dest": "plate_slot9:A5",
+      "reagent": "Equilibration buffer",
+      "notes": "8-channel pipette used column by column; reservoir wells 1-2 supply equilibration buffer \u2014 exact source well switching logic depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A1",
+      "dest": "plate_slot9:A6",
+      "reagent": "Equilibration buffer",
+      "notes": "8-channel pipette used column by column; reservoir wells 1-2 supply equilibration buffer \u2014 exact source well switching logic depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A1",
+      "dest": "plate_slot9:A7",
+      "reagent": "Equilibration buffer",
+      "notes": "8-channel pipette used column by column; reservoir wells 1-2 supply equilibration buffer \u2014 exact source well switching logic depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A1",
+      "dest": "plate_slot9:A8",
+      "reagent": "Equilibration buffer",
+      "notes": "8-channel pipette used column by column; reservoir wells 1-2 supply equilibration buffer \u2014 exact source well switching logic depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A1",
+      "dest": "plate_slot9:A9",
+      "reagent": "Equilibration buffer",
+      "notes": "8-channel pipette used column by column; reservoir wells 1-2 supply equilibration buffer \u2014 exact source well switching logic depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A1",
+      "dest": "plate_slot9:A10",
+      "reagent": "Equilibration buffer",
+      "notes": "8-channel pipette used column by column; reservoir wells 1-2 supply equilibration buffer \u2014 exact source well switching logic depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A1",
+      "dest": "plate_slot9:A11",
+      "reagent": "Equilibration buffer",
+      "notes": "8-channel pipette used column by column; reservoir wells 1-2 supply equilibration buffer \u2014 exact source well switching logic depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A1",
+      "dest": "plate_slot9:A12",
+      "reagent": "Equilibration buffer",
+      "notes": "8-channel pipette used column by column; reservoir wells 1-2 supply equilibration buffer \u2014 exact source well switching logic depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A3",
+      "dest": "plate_slot5:A1",
+      "reagent": "Wash buffer 1",
+      "notes": "Reservoir wells 3-4 supply wash buffer 1; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A3",
+      "dest": "plate_slot5:A2",
+      "reagent": "Wash buffer 1",
+      "notes": "Reservoir wells 3-4 supply wash buffer 1; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A3",
+      "dest": "plate_slot5:A3",
+      "reagent": "Wash buffer 1",
+      "notes": "Reservoir wells 3-4 supply wash buffer 1; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A3",
+      "dest": "plate_slot5:A4",
+      "reagent": "Wash buffer 1",
+      "notes": "Reservoir wells 3-4 supply wash buffer 1; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A3",
+      "dest": "plate_slot5:A5",
+      "reagent": "Wash buffer 1",
+      "notes": "Reservoir wells 3-4 supply wash buffer 1; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A3",
+      "dest": "plate_slot5:A6",
+      "reagent": "Wash buffer 1",
+      "notes": "Reservoir wells 3-4 supply wash buffer 1; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A3",
+      "dest": "plate_slot5:A7",
+      "reagent": "Wash buffer 1",
+      "notes": "Reservoir wells 3-4 supply wash buffer 1; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A3",
+      "dest": "plate_slot5:A8",
+      "reagent": "Wash buffer 1",
+      "notes": "Reservoir wells 3-4 supply wash buffer 1; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A3",
+      "dest": "plate_slot5:A9",
+      "reagent": "Wash buffer 1",
+      "notes": "Reservoir wells 3-4 supply wash buffer 1; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A3",
+      "dest": "plate_slot5:A10",
+      "reagent": "Wash buffer 1",
+      "notes": "Reservoir wells 3-4 supply wash buffer 1; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A3",
+      "dest": "plate_slot5:A11",
+      "reagent": "Wash buffer 1",
+      "notes": "Reservoir wells 3-4 supply wash buffer 1; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A3",
+      "dest": "plate_slot5:A12",
+      "reagent": "Wash buffer 1",
+      "notes": "Reservoir wells 3-4 supply wash buffer 1; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A5",
+      "dest": "plate_slot7:A1",
+      "reagent": "Wash buffer 2",
+      "notes": "Reservoir wells 5-6 supply wash buffer 2; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A5",
+      "dest": "plate_slot7:A2",
+      "reagent": "Wash buffer 2",
+      "notes": "Reservoir wells 5-6 supply wash buffer 2; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A5",
+      "dest": "plate_slot7:A3",
+      "reagent": "Wash buffer 2",
+      "notes": "Reservoir wells 5-6 supply wash buffer 2; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A5",
+      "dest": "plate_slot7:A4",
+      "reagent": "Wash buffer 2",
+      "notes": "Reservoir wells 5-6 supply wash buffer 2; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A5",
+      "dest": "plate_slot7:A5",
+      "reagent": "Wash buffer 2",
+      "notes": "Reservoir wells 5-6 supply wash buffer 2; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A5",
+      "dest": "plate_slot7:A6",
+      "reagent": "Wash buffer 2",
+      "notes": "Reservoir wells 5-6 supply wash buffer 2; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A5",
+      "dest": "plate_slot7:A7",
+      "reagent": "Wash buffer 2",
+      "notes": "Reservoir wells 5-6 supply wash buffer 2; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A5",
+      "dest": "plate_slot7:A8",
+      "reagent": "Wash buffer 2",
+      "notes": "Reservoir wells 5-6 supply wash buffer 2; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A5",
+      "dest": "plate_slot7:A9",
+      "reagent": "Wash buffer 2",
+      "notes": "Reservoir wells 5-6 supply wash buffer 2; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A5",
+      "dest": "plate_slot7:A10",
+      "reagent": "Wash buffer 2",
+      "notes": "Reservoir wells 5-6 supply wash buffer 2; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A5",
+      "dest": "plate_slot7:A11",
+      "reagent": "Wash buffer 2",
+      "notes": "Reservoir wells 5-6 supply wash buffer 2; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 200,
+      "source": "reservoir_slot8:A5",
+      "dest": "plate_slot7:A12",
+      "reagent": "Wash buffer 2",
+      "notes": "Reservoir wells 5-6 supply wash buffer 2; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 80,
+      "source": "reservoir_slot8:A7",
+      "dest": "plate_slot11:A1",
+      "reagent": "Elution buffer",
+      "notes": "Reservoir wells 7-8 supply elution buffer; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 80,
+      "source": "reservoir_slot8:A7",
+      "dest": "plate_slot11:A2",
+      "reagent": "Elution buffer",
+      "notes": "Reservoir wells 7-8 supply elution buffer; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 80,
+      "source": "reservoir_slot8:A7",
+      "dest": "plate_slot11:A3",
+      "reagent": "Elution buffer",
+      "notes": "Reservoir wells 7-8 supply elution buffer; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 80,
+      "source": "reservoir_slot8:A7",
+      "dest": "plate_slot11:A4",
+      "reagent": "Elution buffer",
+      "notes": "Reservoir wells 7-8 supply elution buffer; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 80,
+      "source": "reservoir_slot8:A7",
+      "dest": "plate_slot11:A5",
+      "reagent": "Elution buffer",
+      "notes": "Reservoir wells 7-8 supply elution buffer; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 80,
+      "source": "reservoir_slot8:A7",
+      "dest": "plate_slot11:A6",
+      "reagent": "Elution buffer",
+      "notes": "Reservoir wells 7-8 supply elution buffer; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 80,
+      "source": "reservoir_slot8:A7",
+      "dest": "plate_slot11:A7",
+      "reagent": "Elution buffer",
+      "notes": "Reservoir wells 7-8 supply elution buffer; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 80,
+      "source": "reservoir_slot8:A7",
+      "dest": "plate_slot11:A8",
+      "reagent": "Elution buffer",
+      "notes": "Reservoir wells 7-8 supply elution buffer; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 80,
+      "source": "reservoir_slot8:A7",
+      "dest": "plate_slot11:A9",
+      "reagent": "Elution buffer",
+      "notes": "Reservoir wells 7-8 supply elution buffer; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 80,
+      "source": "reservoir_slot8:A7",
+      "dest": "plate_slot11:A10",
+      "reagent": "Elution buffer",
+      "notes": "Reservoir wells 7-8 supply elution buffer; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 80,
+      "source": "reservoir_slot8:A7",
+      "dest": "plate_slot11:A11",
+      "reagent": "Elution buffer",
+      "notes": "Reservoir wells 7-8 supply elution buffer; exact source well switching depends on runtime sample count and robot script."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 80,
+      "source": "reservoir_slot8:A7",
+      "dest": "plate_slot11:A12",
+      "reagent": "Elution buffer",
+      "notes": "Reservoir wells 7-8 supply elution buffer; exact source well switching depends on runtime sample count and robot script."
+    }
+  ]
+}

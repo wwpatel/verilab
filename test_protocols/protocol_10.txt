@@ -1,0 +1,23 @@
+BCA Protein Assay (Opentrons Flex)
+
+Deck setup: Slot C2, Corning 96 Well Plate 360 uL Flat (Working Plate). Slot C1 and Slot B1, Opentrons 24 Tube Rack with NEST 1.5 mL Snapcap (Samples). Slot A2, Opentrons 10 Tube Rack with NEST 4x50 mL, 6x15 mL Conical (Reagents). Slot B2, NEST 12 Well Reservoir 15 mL (Working Reagent).
+
+The assay tests each sample in duplicate. To use a sample volume of 25 uL, add 25 uL x2 + 10 uL = 60 uL of sample solution into 1.5 mL tubes. If sample stock is limited, 10 uL can be used: add 10 uL x2 + 10 uL = 30 uL into 1.5 mL tubes.
+
+If working reagent is prepared on deck, fill Reagent A in a 50 mL tube (Slot A2, position A4) and Reagent B in a 15 mL tube (Slot A2, position A1).
+
+Reagent preparation table (volumes needed by number of columns used in Working Plate):
+- 1 column: Reagent A 2.9 mL, Reagent B 59 uL
+- 4 columns: Reagent A 7.6 mL, Reagent B 153 uL
+- 8 columns: Reagent A 13.9 mL, Reagent B 278 uL
+- 12 columns: Reagent A 20.2 mL, Reagent B 404 uL
+
+The robot transfers Reagent A and Reagent B from Reagents to Working Reagent (Slot B2, Well 1 and Well 2) to prepare sufficient working reagent for up to 96 reactions.
+
+Working reagent volume table (by number of columns used):
+- 1 column: Well 1 = 2.0 mL
+- 6 columns: Well 1 = 10.0 mL
+- 7 columns: Well 1 = 10.0 mL, Well 2 = 2.0 mL
+- 12 columns: Well 1 = 10.0 mL, Well 2 = 10.0 mL
+
+Runtime parameters: Working reagent prep on deck (Yes/No, default Yes), Samples diluted on deck (Yes/No, default No), Incubation Time (0-120 minutes, default 30), Sample volume (default 25 uL), Number of Samples (1-48, default 48).

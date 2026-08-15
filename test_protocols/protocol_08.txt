@@ -1,0 +1,24 @@
+Twist BioScience Enzymatic Fragmentation and Library Preparation (Opentrons Flex)
+
+With this protocol, the Flex performs enzymatic fragmentation and library preparation for up to 24 samples in under 3 hours. If not using an Opentrons thermocycler, preprogram the external thermocycler before beginning.
+
+Fill each well of the Sample Plate with the desired mass of genomic DNA suspended in 40 uL of Molecular Biology Grade Water, 10 mM Tris-HCl pH 8.0, or Buffer EB.
+
+When preparing the enzymatic fragmentation mix, make 20% excess and add the volumes listed below. When preparing the room temperature reservoir on slot D2, 800 uL of 80% ethanol is required for each sample column processed.
+
+When preparing the Twist UDI Primer plate, do not remove the aluminum seal. The Flex will pierce holes into the required wells using clean pipette tips. Before the primers are aspirated, the tips used to pierce holes into the seals will be discarded and clean tips will be attached.
+
+Table 1. Cold Reagents located on Temperature Block on C1 (volumes in uL, for 8x/16x/24x throughput)
+- Enzymatic Fragmentation Master Mix, Column 1: 11 uL (8x), 22 uL (16x), 33 uL (24x)
+- Twist Universal Adapters, Column 2: 5.7 uL (8x), 11.4 uL (16x), 17.1 uL (24x)
+- Ligation Master Mix, Column 3: 22 uL (8x), 44 uL (16x), 66 uL (24x)
+- Equinox Library Amp Mix (2X), Column 4: 27.5 uL (8x), 55 uL (16x), 82.5 uL (24x)
+
+Table 2. Room Temperature Reagents located on Deck Slot D2 (volumes in uL)
+- DNA Purification Beads, Column 1: 130 uL (8x), 260 uL (16x), 390 uL (24x)
+- Buffer EB, Column 2: 43 uL (8x), 86 uL (16x), 129 uL (24x)
+- 80% Ethanol, Columns 3/4/5: 800 uL per well per sample column processed
+
+Tips for success: equilibrate DNA Purification Beads at room temperature for at least 30 minutes. Thoroughly homogenize the beads before aliquoting into the deep well plate. Prepare fresh 80% ethanol immediately before use.
+
+Runtime parameters: Samples (1-24, default 8), PCR Cycles (3-12, default 7), Fragmentation Temperature (30-37C, default 37), Fragmentation Time (5-40 minutes, default 20), Adapter Volume (1-5 uL, default 5).

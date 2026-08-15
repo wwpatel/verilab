@@ -1,0 +1,53 @@
+{
+  "labware": {
+    "reservoir_10mL": {
+      "type": "reservoir",
+      "description": "sterile 10 mL reservoir"
+    },
+    "pcr_plate_1": {
+      "type": "plate",
+      "description": "384-well PCR plate"
+    },
+    "pcr_plate_2": {
+      "type": "plate",
+      "description": "384-well PCR plate"
+    },
+    "pcr_plate_3": {
+      "type": "plate",
+      "description": "384-well PCR plate"
+    }
+  },
+  "reagents": [
+    "Platinum Hot Start PCR 2X Master Mix",
+    "PCR Clean Water"
+  ],
+  "steps": [
+    {
+      "action": "transfer",
+      "volume_ul": 2534,
+      "source": null,
+      "dest": "reservoir_10mL:A1",
+      "reagent": "Platinum Hot Start PCR 2X Master Mix",
+      "notes": "Source not specified; assumes reagent supplied separately and added to reservoir."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 3295,
+      "source": null,
+      "dest": "reservoir_10mL:A1",
+      "reagent": "PCR Clean Water",
+      "notes": "Source not specified; assumes reagent supplied separately and added to reservoir."
+    },
+    {
+      "action": "mix",
+      "source": "reservoir_10mL:A1",
+      "dest": "reservoir_10mL:A1",
+      "notes": "Mix by pipetting; exact number of cycles and volume per cycle not specified."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "epMotion",
+      "instrument_action": "Dispenses 4.6 \u00b5L of PCR Master Mix from the 10 mL reservoir into all wells of three 384-well PCR plates using multidispense feature."
+    }
+  ]
+}

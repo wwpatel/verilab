@@ -1,0 +1,24 @@
+{
+  "labware": {},
+  "steps": [
+    {
+      "action": "transfer",
+      "volume_ul": 50,
+      "source": "plate:B1",
+      "dest": "plate:A1",
+      "reagent": "diluted sample from B1"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 100,
+      "source": "reservoir:A1",
+      "dest": "plate:B1",
+      "reagent": "buffer"
+    },
+    {
+      "action": "incubate",
+      "dest": "plate:A1",
+      "duration_s": 600
+    }
+  ]
+}

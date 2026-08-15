@@ -1,0 +1,100 @@
+{
+  "labware": {
+    "tube_1": {
+      "type": "tube_rack",
+      "description": "centrifuge tube containing DNA pellet"
+    },
+    "absorbent_paper": {
+      "type": "tube_rack",
+      "description": "clean absorbent paper for draining"
+    },
+    "tube_2": {
+      "type": "tube_rack",
+      "description": "2 mL storage tube for dissolved DNA"
+    }
+  },
+  "reagents": [
+    "70% ethanol",
+    "DNA Hydration Solution (Qiagen)"
+  ],
+  "steps": [
+    {
+      "action": "external_instrument",
+      "instrument_name": "centrifuge",
+      "instrument_action": "Centrifuge tube at 2000 x g for 3 minutes to pellet DNA."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "tube_1:pellet",
+      "dest": null,
+      "reagent": null,
+      "notes": "Supernatant carefully discarded; pellet remains in tube and tube drained on absorbent paper."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5000,
+      "source": null,
+      "dest": "tube_1:pellet",
+      "reagent": "70% ethanol",
+      "notes": "5 mL of 70% ethanol added immediately; tubes inverted until pellet detached."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "centrifuge",
+      "instrument_action": "Centrifuge tube at 2000 x g for 3 minutes."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "tube_1:pellet",
+      "dest": null,
+      "reagent": null,
+      "notes": "Supernatant carefully discarded."
+    },
+    {
+      "action": "incubate",
+      "duration_s": 600,
+      "temperature_c": 25,
+      "notes": "DNA pellet air dried at room temperature for 10 minutes or until glassy."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": null,
+      "dest": "tube_1:pellet",
+      "reagent": "DNA Hydration Solution (Qiagen)",
+      "notes": "0.5 mL for large pellet or 0.3 mL for smaller pellet; exact volume not specified in protocol."
+    },
+    {
+      "action": "incubate",
+      "duration_s": 3600,
+      "temperature_c": 65,
+      "notes": "Incubation in warming cabinet for 1 hour at 65\u00b0C to dissolve DNA."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "shaker",
+      "instrument_action": "Shake sample overnight at room temperature to fully dissolve DNA."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "centrifuge",
+      "instrument_action": "Centrifuge tube briefly."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "tube_1:pellet",
+      "dest": "tube_2:A1",
+      "reagent": "dissolved DNA",
+      "notes": "Dissolved DNA transferred to 2 mL tube; exact volume not specified."
+    },
+    {
+      "action": "incubate",
+      "duration_s": null,
+      "temperature_c": -20,
+      "notes": "Sample stored at -20\u00b0C; no duration specified as this is long-term storage."
+    }
+  ]
+}

@@ -1,0 +1,1664 @@
+{
+  "labware": {
+    "spore_stock": {
+      "type": "tube_rack",
+      "description": "tube or reservoir containing spore suspension at 4\u00d710^5 spores/mL in PBS+0.01% Tween"
+    },
+    "cytoone_plate": {
+      "type": "plate",
+      "description": "CytoOne 96-well non-coated plate (Starlab)"
+    },
+    "media_reservoir": {
+      "type": "reservoir",
+      "description": "reservoir containing liquid media for overlay"
+    },
+    "water_reservoir": {
+      "type": "reservoir",
+      "description": "reservoir containing H2O or media for edge-well fill"
+    }
+  },
+  "reagents": [
+    "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)",
+    "liquid media",
+    "H2O or media"
+  ],
+  "steps": [
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:A1",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:A2",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:A3",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:A4",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:A5",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:A6",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:A7",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:A8",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:A9",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:A10",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:A11",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:A12",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:B1",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:B2",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:B3",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:B4",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:B5",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:B6",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:B7",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:B8",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:B9",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:B10",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:B11",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:B12",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:C1",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:C2",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:C3",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:C4",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:C5",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:C6",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:C7",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:C8",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:C9",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:C10",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:C11",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:C12",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:D1",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:D2",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:D3",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:D4",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:D5",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:D6",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:D7",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:D8",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:D9",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:D10",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:D11",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:D12",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:E1",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:E2",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:E3",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:E4",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:E5",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:E6",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:E7",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:E8",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:E9",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:E10",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:E11",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:E12",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:F1",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:F2",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:F3",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:F4",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:F5",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:F6",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:F7",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:F8",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:F9",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:F10",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:F11",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:F12",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:G1",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:G2",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:G3",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:G4",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:G5",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:G6",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:G7",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:G8",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:G9",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:G10",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:G11",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:G12",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:H1",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:H2",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:H3",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:H4",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:H5",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:H6",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:H7",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:H8",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:H9",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:H10",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:H11",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 5,
+      "source": "spore_stock:A1",
+      "dest": "cytoone_plate:H12",
+      "reagent": "spore suspension (4\u00d710^5 spores/mL in PBS+0.01% Tween)"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:A1",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:A2",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:A3",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:A4",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:A5",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:A6",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:A7",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:A8",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:A9",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:A10",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:A11",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:A12",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:B1",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:B2",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:B3",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:B4",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:B5",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:B6",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:B7",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:B8",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:B9",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:B10",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:B11",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:B12",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:C1",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:C2",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:C3",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:C4",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:C5",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:C6",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:C7",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:C8",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:C9",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:C10",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:C11",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:C12",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:D1",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:D2",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:D3",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:D4",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:D5",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:D6",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:D7",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:D8",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:D9",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:D10",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:D11",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:D12",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:E1",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:E2",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:E3",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:E4",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:E5",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:E6",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:E7",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:E8",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:E9",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:E10",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:E11",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:E12",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:F1",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:F2",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:F3",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:F4",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:F5",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:F6",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:F7",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:F8",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:F9",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:F10",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:F11",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:F12",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:G1",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:G2",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:G3",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:G4",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:G5",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:G6",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:G7",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:G8",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:G9",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:G10",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:G11",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:G12",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:H1",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:H2",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:H3",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:H4",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:H5",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:H6",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:H7",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:H8",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:H9",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:H10",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:H11",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": 195,
+      "source": "media_reservoir:A1",
+      "dest": "cytoone_plate:H12",
+      "reagent": "liquid media"
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:A1",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:A2",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:A3",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:A4",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:A5",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:A6",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:A7",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:A8",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:A9",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:A10",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:A11",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:A12",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:H1",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:H2",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:H3",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:H4",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:H5",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:H6",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:H7",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:H8",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:H9",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:H10",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:H11",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:H12",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:B1",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:C1",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:D1",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:E1",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:F1",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:G1",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:B12",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:C12",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:D12",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:E12",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:F12",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "transfer",
+      "volume_ul": null,
+      "source": "water_reservoir:A1",
+      "dest": "cytoone_plate:G12",
+      "reagent": "H2O or media",
+      "notes": "Volume per well to fill edge wells was not specified; protocol states to fill the space between wells to avoid edge effect."
+    },
+    {
+      "action": "external_instrument",
+      "instrument_name": "Powerwave X-2 plate reader (with KC software) or BioTek platereader",
+      "instrument_action": "Incubate plate at 37 \u00b0C for 48 hours while measuring OD600 every 10 minutes, starting with a blank reading and preheating before experiment start."
+    }
+  ]
+}
