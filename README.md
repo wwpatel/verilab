@@ -214,6 +214,12 @@ The verify endpoints are rate limited per IP (8 requests / 60s on the
 unauthenticated `/api/verify*` routes used by the local console) since
 those are the only ones that call the live LLM on the server's own key.
 
+`site/index.html` includes a Plausible analytics tag (page views only, no
+cookies, no personal data) with a placeholder `data-domain`. Replace it
+with this deployment's real domain to activate it; Plausible no-ops
+against an unregistered domain, so it reports nothing until then. It is
+deliberately absent from every authenticated app page.
+
 ## Project layout
 
 ```

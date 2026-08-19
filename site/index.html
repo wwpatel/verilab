@@ -261,6 +261,21 @@
   .sticky-mobile-cta .btn { width: 100%; }
   body.has-sticky-cta { padding-bottom: 68px; }
 </style>
+
+<!--
+  Privacy-respecting page-view analytics (Plausible: no cookies, no
+  personal data, no cross-site tracking), on this marketing page only.
+  It is deliberately absent from every page under site/app/ and from
+  sign in/sign up, so a signed-in user's activity is never part of this
+  data (see the Privacy policy's Analytics section).
+
+  Plausible requires a real registered site to send data to. Replace
+  data-domain below with this deployment's real domain before it will
+  report anything; Plausible silently no-ops against an unregistered
+  domain, so this placeholder sends nothing to anyone's account until
+  it's set.
+-->
+<script defer data-domain="REPLACE_WITH_YOUR_DOMAIN" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
