@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Welcome, Verilab</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .welcome-wrap { min-height: 100vh; display: flex; flex-direction: column; }
+  .welcome-nav { padding: 20px 0; }
+  .welcome-nav .wordmark { font-family: Georgia, serif; font-weight: bold; font-size: 21px; color: var(--navy); text-decoration: none; }
+  .welcome-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .welcome-card { width: 100%; max-width: 460px; padding: 36px 34px; text-align: center; }
+  .welcome-icon { width: 52px; height: 52px; color: var(--teal); margin: 0 auto 18px; }
+  .welcome-card h1 { font-family: Georgia, serif; color: var(--navy); font-size: 23px; margin: 0 0 10px; }
+  .welcome-card p { color: var(--charcoal); font-size: 15px; margin: 0 0 26px; }
+  .welcome-actions { display: flex; flex-direction: column; gap: 10px; }
+  .welcome-skip { font-size: 13.5px; color: var(--gray); text-decoration: none; margin-top: 4px; }
+  .welcome-skip:hover { color: var(--navy); }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<div class="welcome-wrap">
+  <div class="wrap welcome-nav">
+    <a href="/site/index.html" class="wordmark">VERILAB</a>
+  </div>
+  <main id="main" class="welcome-main">
+    <div class="card welcome-card">
+      <svg class="welcome-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>
+      <h1 id="welcomeHeading">Welcome to Verilab.</h1>
+      <p>One thing to do before the Dashboard can run anything live: add your Anthropic API key in Settings. It's encrypted at rest and only ever used to power your own verification requests.</p>
+      <div class="welcome-actions">
+        <a href="/site/app/settings.html" class="btn btn-primary">Add my API key</a>
+        <a href="/site/app/dashboard.html" class="welcome-skip">Skip for now, go to Dashboard</a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+fetch('/api/auth/me', { credentials: 'include' }).then(res => {
+  if (!res.ok) { window.location.href = '/site/signin.html'; return; }
+  return res.json();
+}).then(user => {
+  if (!user) return;
+  const first = (user.display_name || user.email || '').split(' ')[0];
+  if (first) document.getElementById('welcomeHeading').textContent = 'Welcome to Verilab, ' + first + '.';
+}).catch(() => { window.location.href = '/site/signin.html'; });
+</script>
+</body>
+</html>
