@@ -1,0 +1,145 @@
+{
+  "generated_at": "2026-08-19T02:24:13.393714+00:00",
+  "baseline_comparison": {
+    "description": "Same protocols, two approaches: one naive single-prompt call straight to generated robot code, versus the full Verilab pipeline (extract, resolve real labware, check, then generate).",
+    "protocols_tested": 4,
+    "naive_simulated_successfully": 0,
+    "naive_failures": [
+      {
+        "protocol": "protocol_01",
+        "reason": "opentrons.protocols.types.MalformedPythonProtocolError: You may only put apiLevel in the metadata dict or the requirements dict, not both."
+      },
+      {
+        "protocol": "protocol_02",
+        "reason": "NoTrashDefinedError [line 92]: Error 4000 GENERAL_ERROR (NoTrashDefinedError): No trash container has been defined in this protocol."
+      },
+      {
+        "protocol": "protocol_04",
+        "reason": "RuntimeError: This protocol is designed for an OT-2 robot. To utilize this protocol, please download the most recent version of the Opentrons-OT2 app from https://github.com/Opentrons/opentrons-ot2/releases"
+      },
+      {
+        "protocol": "protocol_07",
+        "reason": "NoTrashDefinedError [line 141]: Error 4000 GENERAL_ERROR (NoTrashDefinedError): No trash container has been defined in this protocol."
+      }
+    ],
+    "pipeline_cleared_count": 1,
+    "pipeline_cleared_protocols": [
+      "protocol_04"
+    ],
+    "pipeline_blocked_count": 3,
+    "pipeline_blocked_protocols": [
+      {
+        "protocol": "protocol_01",
+        "finding_count": 56
+      },
+      {
+        "protocol": "protocol_02",
+        "finding_count": 3
+      },
+      {
+        "protocol": "protocol_07",
+        "finding_count": 5
+      }
+    ]
+  },
+  "test_suite": {
+    "description": "Every real, published wet-lab protocol run through the full deterministic checker (volume capacity, source depletion, and step ordering) using its already-extracted step data, no live model call required to reproduce this.",
+    "total_protocols": 9,
+    "clean_count": 1,
+    "clean_with_warnings_count": 1,
+    "findings_count": 7,
+    "protocols": [
+      {
+        "name": "protocol_01",
+        "step_count": 229,
+        "unresolved_labware_count": 1,
+        "error_count": 56,
+        "warning_count": 0,
+        "status": "findings"
+      },
+      {
+        "name": "protocol_02",
+        "step_count": 204,
+        "unresolved_labware_count": 1,
+        "error_count": 3,
+        "warning_count": 0,
+        "status": "findings"
+      },
+      {
+        "name": "protocol_04",
+        "step_count": 4,
+        "unresolved_labware_count": 0,
+        "error_count": 0,
+        "warning_count": 2,
+        "status": "clean_with_warnings"
+      },
+      {
+        "name": "protocol_07",
+        "step_count": 12,
+        "unresolved_labware_count": 1,
+        "error_count": 5,
+        "warning_count": 1,
+        "status": "findings"
+      },
+      {
+        "name": "protocol_08",
+        "step_count": 739,
+        "unresolved_labware_count": 6,
+        "error_count": 516,
+        "warning_count": 0,
+        "status": "findings"
+      },
+      {
+        "name": "protocol_09",
+        "step_count": 183,
+        "unresolved_labware_count": 2,
+        "error_count": 72,
+        "warning_count": 0,
+        "status": "findings"
+      },
+      {
+        "name": "protocol_10",
+        "step_count": 248,
+        "unresolved_labware_count": 1,
+        "error_count": 26,
+        "warning_count": 0,
+        "status": "findings"
+      },
+      {
+        "name": "protocol_11",
+        "step_count": 48,
+        "unresolved_labware_count": 1,
+        "error_count": 0,
+        "warning_count": 0,
+        "status": "clean"
+      },
+      {
+        "name": "protocol_12",
+        "step_count": 1266,
+        "unresolved_labware_count": 1,
+        "error_count": 504,
+        "warning_count": 0,
+        "status": "findings"
+      }
+    ]
+  },
+  "false_alarms": [
+    {
+      "case": "The generator's normal fresh-tip pattern",
+      "description": "protocol_01's real generated code makes 208 separate transfer() calls, alternating between two different source reservoirs (spore stock, then media). Each transfer() call picks up its own fresh tip and drops it before the next one starts, which is the generator's default, unmodified behavior.",
+      "source_file": "test_protocols/protocol_01_generated.py",
+      "execution_error": null,
+      "violations_found": 0,
+      "result": "PASS: no tip contamination risk found."
+    },
+    {
+      "case": "Legitimate same-source-twice transfer",
+      "description": "One tip is picked up once and used to aspirate from the SAME reservoir well three separate times, dispensing into three different plate wells, before that one tip is dropped. This is normal bench practice (one reservoir feeding several wells of the same reagent) and must not be flagged as contamination.",
+      "source_file": "demo/legit_same_source_demo.py",
+      "execution_error": null,
+      "violations_found": 0,
+      "result": "PASS: no tip contamination risk found."
+    }
+  ],
+  "scope_note": "Currently validated on the Opentrons Flex only. Support for other robot platforms is a planned next step, not a current claim."
+}
