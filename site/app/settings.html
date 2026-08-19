@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings, Verilab</title>
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="shell.css">
+<style>
+  .settings-section { padding: 26px 28px; margin-bottom: 24px; max-width: 620px; }
+  .settings-section h2 { font-family: Georgia, serif; color: var(--navy); font-size: 18px; margin: 0 0 6px; }
+  .settings-section .section-sub { color: var(--gray); font-size: 14px; margin: 0 0 20px; }
+  .settings-row { display: flex; align-items: flex-end; gap: 12px; }
+  .settings-row .field { flex: 1; margin-bottom: 0; }
+  .readonly-value { padding: 11px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--gray); font-size: 15px; }
+  .masked-key { font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 14px; color: var(--charcoal); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 11px 14px; margin-bottom: 14px; }
+  .inline-msg { font-size: 13.5px; margin-top: 10px; display: none; }
+  .inline-msg.show { display: block; }
+  .danger-zone { border-color: var(--red); }
+  .danger-zone h2 { color: var(--red); }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<div class="app-shell">
+  <nav id="appSidebar" class="app-sidebar" aria-label="App"></nav>
+  <div class="app-main">
+    <div id="appTopbar" class="app-topbar"></div>
+    <main id="main" class="app-content">
+
+      <section class="card settings-section" aria-labelledby="account-heading">
+        <h2 id="account-heading">Account</h2>
+        <p class="section-sub">Your email and display name.</p>
+
+        <div class="field">
+          <label for="emailField">Email</label>
+          <div class="readonly-value" id="emailField">...</div>
+        </div>
+
+        <div class="settings-row">
+          <div class="field">
+            <label for="displayNameField">Display name</label>
+            <input type="text" id="displayNameField">
+          </div>
+          <button type="button" class="btn btn-secondary" id="saveNameBtn">Save</button>
+        </div>
+        <div class="inline-msg success-box" id="nameMsg"></div>
+
+        <div style="margin-top:22px;">
+          <button type="button" class="btn btn-plain" id="signOutBtn">Sign out</button>
+        </div>
+      </section>
+
+      <section class="card settings-section" aria-labelledby="key-heading">
+        <h2 id="key-heading">Anthropic API key</h2>
+        <p class="section-sub">Used only to power your own verification requests. Encrypted at rest, never shown again in plain text after saving.</p>
+
+        <div id="currentKeyBox"></div>
+
+        <div class="settings-row">
+          <div class="field">
+            <label for="apiKeyField">New API key</label>
+            <input type="password" id="apiKeyField" placeholder="sk-ant-..." autocomplete="off">
+          </div>
+          <button type="button" class="btn btn-primary" id="saveKeyBtn">Save key</button>
+        </div>
+        <div class="inline-msg success-box" id="keyMsg"></div>
+        <div class="inline-msg error-box" id="keyErr"></div>
+      </section>
+
+      <section class="card settings-section danger-zone" aria-labelledby="danger-heading">
+        <h2 id="danger-heading">Delete account</h2>
+        <p class="section-sub">Permanently removes your account, your stored API key, and every protocol you've verified. This cannot be undone.</p>
+        <button type="button" class="btn btn-danger" id="deleteBtn">Delete account</button>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="../shared-result-view.js"></script>
+<script src="shell.js"></script>
+<script>
+const VL = window.VerilabResultView;
+
+function flash(el, text) {
+  el.textContent = text;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3500);
+}
+
+async function loadSettings() {
+  const res = await fetch('/api/app/settings', { credentials: 'include' });
+  const data = await res.json();
+  document.getElementById('emailField').textContent = data.email;
+  document.getElementById('displayNameField').value = data.display_name;
+  renderKeyBox(data.masked_api_key);
+}
+
+function renderKeyBox(masked) {
+  const box = document.getElementById('currentKeyBox');
+  box.innerHTML = '';
+  if (masked) {
+    box.appendChild(VL.el('div', { class: 'masked-key' }, ['Current key: ' + masked]));
+  } else {
+    box.appendChild(VL.el('div', { class: 'masked-key' }, ['No API key stored yet.']));
+  }
+}
+
+document.getElementById('saveNameBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('saveNameBtn');
+  const display_name = document.getElementById('displayNameField').value.trim();
+  if (!display_name) { alert('Display name cannot be empty.'); return; }
+  btn.disabled = true;
+  try {
+    const res = await fetch('/api/app/settings/profile', {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' }, credentials: 'include',
+      body: JSON.stringify({ display_name }),
+    });
+    const data = await res.json();
+    if (!res.ok) { alert(data.error || 'Could not save.'); return; }
+    flash(document.getElementById('nameMsg'), 'Display name updated.');
+    window.VerilabShell.init('settings', 'Settings');
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+document.getElementById('saveKeyBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('saveKeyBtn');
+  const keyErr = document.getElementById('keyErr');
+  const keyMsg = document.getElementById('keyMsg');
+  keyErr.classList.remove('show');
+  const api_key = document.getElementById('apiKeyField').value.trim();
+  if (!api_key) { alert('Enter an API key first.'); return; }
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+  try {
+    const res = await fetch('/api/app/settings/api-key', {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' }, credentials: 'include',
+      body: JSON.stringify({ api_key }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      flash(keyErr, data.error || 'Could not save the key.');
+      return;
+    }
+    document.getElementById('apiKeyField').value = '';
+    renderKeyBox(data.masked_api_key);
+    flash(keyMsg, 'API key saved.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Save key';
+  }
+});
+
+let deleteArmed = false;
+document.getElementById('deleteBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('deleteBtn');
+  if (!deleteArmed) {
+    deleteArmed = true;
+    btn.textContent = 'Click again to permanently delete';
+    setTimeout(() => { deleteArmed = false; btn.textContent = 'Delete account'; }, 4000);
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Deleting...';
+  await fetch('/api/app/account', { method: 'DELETE', credentials: 'include' });
+  window.location.href = '/site/index.html';
+});
+
+document.getElementById('signOutBtn').addEventListener('click', () => window.VerilabShell.signOut());
+
+async function main() {
+  const user = await window.VerilabShell.init('settings', 'Settings');
+  if (!user) return;
+  loadSettings();
+}
+
+main();
+</script>
+</body>
+</html>
