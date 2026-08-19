@@ -2,43 +2,43 @@
   "entries": [
     {
       "date": "2026-08-19",
-      "subject": "Add auth and authenticated product API routes"
+      "subject": "Remove stale cross-origin deploy configs, update README for the new product"
     },
     {
       "date": "2026-08-19",
-      "subject": "Add persistence and auth foundations for the authenticated product"
+      "subject": "Add Settings page"
     },
     {
       "date": "2026-08-19",
-      "subject": "Accessibility polish: respect reduced motion, fix status-color reuse"
+      "subject": "Add Stored Protocols page"
     },
     {
       "date": "2026-08-19",
-      "subject": "Add deployment configs for backend and frontend"
+      "subject": "Add Dashboard: the actual live product"
     },
     {
       "date": "2026-08-19",
-      "subject": "Add run-it-yourself quickstart and footer"
+      "subject": "Add authenticated app shell (sidebar + top bar)"
     },
     {
       "date": "2026-08-19",
-      "subject": "Add MIT LICENSE"
+      "subject": "Add sign in and sign up pages"
     },
     {
       "date": "2026-08-19",
-      "subject": "Add how-it-works pipeline diagram"
+      "subject": "Rebuild public marketing page in the Attio-derived structure"
     },
     {
       "date": "2026-08-19",
-      "subject": "Add evidence section to public site"
+      "subject": "Add shared three-layer disclosure result-view module"
     },
     {
-      "date": "2026-08-18",
-      "subject": "Wire Try it live section to the real backend"
+      "date": "2026-08-19",
+      "subject": "Add shared brand CSS for the redesigned product"
     },
     {
-      "date": "2026-08-18",
-      "subject": "Add feature grid section to public site"
+      "date": "2026-08-19",
+      "subject": "Precompute marketing page mockup and changelog data"
     }
   ]
 }
