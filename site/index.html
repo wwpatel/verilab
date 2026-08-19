@@ -197,6 +197,66 @@
   .footer-col a { display: block; color: var(--navy); text-decoration: none; font-size: 14.5px; margin-bottom: 9px; }
   .footer-col a:hover { color: var(--teal); }
   .footer-bottom { border-top: 1px solid var(--border); padding-top: 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 13.5px; color: var(--gray); }
+
+  /* ---------- Case studies ---------- */
+  .case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 20px; margin-top: 10px; }
+  .case-card { padding: 22px 24px; }
+  .case-card h3 { font-family: Georgia, serif; color: var(--navy); font-size: 17px; margin: 0 0 4px; }
+  .case-card .case-source { font-size: 12px; color: var(--gray); font-family: "SF Mono", Consolas, Menlo, monospace; margin-bottom: 14px; }
+  .case-before, .case-after { border-radius: 8px; padding: 12px 14px; font-size: 13.5px; margin-bottom: 10px; }
+  .case-before { background: var(--bg); border: 1px solid var(--border); }
+  .case-after.blocked { background: var(--red-bg); border: 1px solid var(--red); }
+  .case-after.cleared { background: var(--green-bg); border: 1px solid var(--green); }
+  .case-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; display: block; }
+  .case-before .case-label { color: var(--gray); }
+  .case-after.blocked .case-label { color: var(--red); }
+  .case-after.cleared .case-label { color: var(--green); }
+  .case-fix { font-size: 12.5px; color: var(--charcoal); margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border); }
+
+  /* ---------- Performance note ---------- */
+  .perf-note { display: flex; gap: 12px; align-items: flex-start; background: #F4F6FA; border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-top: 20px; max-width: 760px; }
+  .perf-note svg { width: 20px; height: 20px; color: var(--teal); flex-shrink: 0; margin-top: 2px; }
+  .perf-note p { margin: 0; font-size: 14px; color: var(--charcoal); }
+
+  /* ---------- FAQ ---------- */
+  .faq-list { max-width: 760px; margin-top: 8px; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-question {
+    width: 100%; text-align: left; background: none; border: none; padding: 18px 4px; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px; font: inherit;
+  }
+  .faq-question h3 { font-size: 16px; color: var(--navy); margin: 0; font-weight: 700; }
+  .faq-question .chev { width: 18px; height: 18px; color: var(--gray); flex-shrink: 0; transition: transform 0.2s ease; }
+  .faq-question[aria-expanded="true"] .chev { transform: rotate(180deg); }
+  .faq-answer { padding: 0 4px 18px; font-size: 14.5px; color: var(--charcoal); max-width: 680px; }
+  .faq-answer[hidden] { display: none; }
+
+  /* ---------- Reviews ---------- */
+  .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 20px; margin-top: 10px; }
+  .review-card { padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; }
+  .review-quote { font-size: 14.5px; color: var(--charcoal); font-style: italic; flex: 1; }
+  .review-quote::before { content: open-quote; }
+  .review-quote::after { content: close-quote; }
+  .review-person { display: flex; align-items: center; gap: 10px; }
+  .review-person .name { font-weight: 700; color: var(--navy); font-size: 14px; }
+  .review-person .role { font-size: 12.5px; color: var(--gray); }
+  .review-note { grid-column: 1 / -1; font-size: 13.5px; color: var(--gray); margin-top: 4px; }
+
+  /* ---------- Creator ---------- */
+  .creator-card { display: flex; gap: 20px; align-items: center; padding: 26px 28px; max-width: 680px; }
+  .creator-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-family: Georgia, serif; font-weight: bold; font-size: 22px; flex-shrink: 0; }
+  .creator-card h3 { font-family: Georgia, serif; color: var(--navy); font-size: 17px; margin: 0 0 4px; }
+  .creator-card p { font-size: 14.5px; color: var(--charcoal); margin: 0; }
+
+  /* ---------- Sticky mobile CTA ---------- */
+  .sticky-mobile-cta {
+    display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    background: var(--panel); border-top: 1px solid var(--border); padding: 12px 16px;
+    box-shadow: 0 -4px 14px rgba(27,42,74,0.12);
+  }
+  .sticky-mobile-cta.show { display: block; }
+  .sticky-mobile-cta .btn { width: 100%; }
+  body.has-sticky-cta { padding-bottom: 68px; }
 </style>
 </head>
 <body>
@@ -319,6 +379,19 @@
   </div>
 </section>
 
+<section id="case-studies" aria-labelledby="case-studies-heading">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="kicker">Case studies</span>
+      <h2 class="section-title" id="case-studies-heading">Four real protocols, before and after</h2>
+      <p class="section-lede">Built from the four demo fixtures already in this repo, run through the real pipeline. No invented client stories.</p>
+    </div>
+    <div class="case-grid reveal" id="caseStudyGrid">
+      <p class="loading-line">Loading real case studies...</p>
+    </div>
+  </div>
+</section>
+
 <section id="evidence" class="evidence" aria-labelledby="evidence-heading">
   <div class="wrap">
     <div class="reveal">
@@ -328,6 +401,10 @@
     </div>
     <div id="evidencePanel" class="reveal">
       <p class="loading-line">Loading evidence data...</p>
+    </div>
+    <div class="perf-note reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <p><strong>Measured, not estimated.</strong> The deterministic checks (volume, ordering, tip contamination) ran in about 1 millisecond against our largest real protocol (1,266 steps). The only part that takes real time is the one LLM call that reads the protocol text, measured at under 13 seconds for a real published protocol in our own testing.</p>
     </div>
   </div>
 </section>
@@ -389,6 +466,66 @@
           <div class="stage-caption">Only runs on a plan that already passed every check above, and turns it into real Opentrons Flex Python.</div>
           <span class="stage-tag deterministic">Deterministic</span>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" aria-labelledby="faq-heading">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="kicker">FAQ</span>
+      <h2 class="section-title" id="faq-heading">Questions a technical visitor would actually ask</h2>
+    </div>
+    <div class="faq-list reveal" id="faqList"></div>
+  </div>
+</section>
+
+<section id="reviews" class="evidence" aria-labelledby="reviews-heading">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="kicker">Reviews</span>
+      <h2 class="section-title" id="reviews-heading">What three reviewers actually said</h2>
+      <p class="section-lede">All three work in biomedical engineering, biotech, or chemical engineering; none are teammates on this project. Quoted directly, unedited, including the critical lines.</p>
+    </div>
+    <div class="review-grid reveal">
+      <div class="card review-card">
+        <p class="review-quote">I think it's a little simple for a 2 week hackathon, you'll definitely need some more visualization features and maybe add support for custom definitions of stuff.</p>
+        <div class="review-person">
+          <div class="avatar" aria-hidden="true">BW</div>
+          <div><div class="name">Borui Wang</div><div class="role">Biotech Engineer</div></div>
+        </div>
+      </div>
+      <div class="card review-card">
+        <p class="review-quote">Instead of simply saying that a command may be unsafe, VeriLab should identify the exact line, explain what could go wrong, and recommend a corrected instruction that the researcher can review before approving it.</p>
+        <div class="review-person">
+          <div class="avatar" aria-hidden="true">RH</div>
+          <div><div class="name">Rafan Hasan</div><div class="role">Biomedical Engineering Student</div></div>
+        </div>
+      </div>
+      <div class="card review-card">
+        <p class="review-quote">I want more info about the protocol itself, in order to make this fully good I think being able to pull the amount of reagents or tips needed would be helpful.</p>
+        <div class="review-person">
+          <div class="avatar" aria-hidden="true">NA</div>
+          <div><div class="name">Neeor Alam</div><div class="role">Chemical Engineer</div></div>
+        </div>
+      </div>
+      <p class="review-note">All three quotes shipped real changes: the per-violation suggested fix, the plain-language statement of what is and isn't checked, and the resource summary on every run, in that order.</p>
+    </div>
+  </div>
+</section>
+
+<section id="creator" aria-labelledby="creator-heading">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="kicker">Creator</span>
+      <h2 class="sr-only" id="creator-heading">Who built this</h2>
+    </div>
+    <div class="card creator-card reveal">
+      <div class="creator-avatar" aria-hidden="true">AP</div>
+      <div>
+        <h3>Amelia Patel</h3>
+        <p>Built Verilab solo, as a high school student, because AI is increasingly the thing writing the instructions lab robots follow, and nothing was checking whether those instructions actually made sense before anything moved.</p>
       </div>
     </div>
   </div>
@@ -504,6 +641,48 @@ async function loadMarketingExamples() {
   VL.renderResult(document.getElementById('mockCodegen'), ex.clean.result);
 
   runHeroTrace(ex.overflow);
+  renderCaseStudies(ex);
+}
+
+const CASE_STUDY_BEFORE = {
+  overflow: 'The official Opentrons simulator ran this exact code and reported success (exit code 0, no error). It confirms the code runs, not that the amounts make sense.',
+  ordering: 'The official simulator has no concept of step order at all. It only confirms each individual API call is syntactically valid, not that earlier steps make later ones possible.',
+  tip_contamination: 'The official simulator has no way to know which reagent a tip last touched. It confirms the pipetting calls are valid, not what they carried between them.',
+  clean: 'A real published protocol (protocol_11.txt), run through the full pipeline for the first time, including the real extractor call.',
+};
+
+function renderCaseStudies(ex) {
+  const grid = document.getElementById('caseStudyGrid');
+  grid.innerHTML = '';
+  const order = ['overflow', 'ordering', 'tip_contamination', 'clean'];
+  for (const key of order) {
+    const item = ex[key];
+    const r = item.result;
+    const cleared = r.overall_status === 'CLEARED';
+    const card = VL.el('div', { class: 'card case-card' }, [
+      VL.el('h3', {}, [item.label]),
+      VL.el('div', { class: 'case-source' }, [item.source_path]),
+      VL.el('div', { class: 'case-before' }, [
+        VL.el('span', { class: 'case-label' }, ['Before, simulator only']),
+        CASE_STUDY_BEFORE[key],
+      ]),
+    ]);
+    if (cleared) {
+      card.appendChild(VL.el('div', { class: 'case-after cleared' }, [
+        VL.el('span', { class: 'case-label' }, ['After, Verilab']),
+        'Cleared. All 3 checks passed, and real Opentrons Python was generated.',
+      ]));
+    } else {
+      const v = r.checks.violations[0];
+      const after = VL.el('div', { class: 'case-after blocked' }, [
+        VL.el('span', { class: 'case-label' }, ['After, Verilab']),
+        v.layer1_summary,
+      ]);
+      after.appendChild(VL.el('div', { class: 'case-fix' }, [v.layer2.recommended_fix]));
+      card.appendChild(after);
+    }
+    grid.appendChild(card);
+  }
 }
 
 function runHeroTrace(overflowExample) {
@@ -567,10 +746,60 @@ async function loadEvidence() {
       return;
     }
     renderEvidence(panel, data);
+    renderFAQ(data.test_suite.total_protocols);
   } catch (e) {
     panel.innerHTML = '';
     panel.appendChild(VL.el('div', { class: 'error-box' }, ['Could not load evidence: ' + e.message]));
+    renderFAQ(null);
   }
+}
+
+function renderFAQ(protocolCount) {
+  const list = document.getElementById('faqList');
+  const countPhrase = protocolCount != null
+    ? protocolCount + ' real published protocols, run through the full deterministic checker (see the Evidence section above).'
+    : 'shown in the Evidence section above.';
+  const faqs = [
+    {
+      q: 'Does Verilab support robots besides the Opentrons Flex?',
+      a: 'Not yet. Verilab is built and validated specifically for the Opentrons Flex right now, on purpose: claiming broader support before it is actually tested would mean shallow checks everywhere instead of trustworthy ones somewhere. A second robot brand is a named next step, not a current claim.',
+    },
+    {
+      q: 'Is an entered API key stored safely?',
+      a: 'Yes. It is encrypted at rest before it ever touches the database and, once saved, is never shown again in plain text, only a masked version like sk-ant**********XwAA. It is never logged, and it is only ever used to power that account\'s own verification requests, never anyone else\'s.',
+    },
+    {
+      q: 'Does this replace the official Opentrons simulator?',
+      a: 'No, it runs in addition to it. The simulator confirms that generated code is syntactically valid and will run without crashing. It does not check whether the liquid handling amounts make sense. Verilab is the check for that gap, not a replacement for the simulator.',
+    },
+    {
+      q: 'How many real protocols has it been tested against?',
+      a: countPhrase,
+    },
+    {
+      q: 'What happens if a protocol has no problems?',
+      a: 'It still shows exactly what was checked, not silence: which real checks ran (from CHECKS_AGAINST), plus the total volume needed per reagent and tips required for the run. A clean pass reads as "checks passed," not nothing happening.',
+    },
+  ];
+
+  list.innerHTML = '';
+  faqs.forEach((item, i) => {
+    const answerId = 'faq-answer-' + i;
+    const btn = VL.el('button', {
+      type: 'button', class: 'faq-question', 'aria-expanded': 'false', 'aria-controls': answerId,
+    }, [
+      VL.el('h3', {}, [item.q]),
+      VL.el('span', { class: 'chev', 'aria-hidden': 'true', html: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>' }, []),
+    ]);
+    const answer = VL.el('div', { id: answerId, class: 'faq-answer', hidden: 'hidden' }, [item.a]);
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if (expanded) answer.setAttribute('hidden', 'hidden');
+      else answer.removeAttribute('hidden');
+    });
+    list.appendChild(VL.el('div', { class: 'faq-item' }, [btn, answer]));
+  });
 }
 
 function renderEvidence(panel, data) {
