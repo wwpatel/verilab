@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard, Verilab</title>
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="shell.css">
+<style>
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 16px; margin-bottom: 32px; }
+  .stat-card { padding: 20px 22px; }
+  .stat-card .stat-label { font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: var(--gray); margin-bottom: 8px; }
+  .stat-card .stat-number { font-size: 32px; font-weight: 800; color: var(--navy); line-height: 1.1; }
+
+  .key-banner {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    background: var(--gold-bg); border: 1px solid var(--gold); border-radius: 10px; padding: 14px 18px; margin-bottom: 24px;
+  }
+  .key-banner p { margin: 0; font-size: 14.5px; color: var(--charcoal); }
+
+  .verify-panel { padding: 26px 28px; margin-bottom: 28px; }
+  .verify-panel h2 { font-family: Georgia, serif; color: var(--navy); font-size: 19px; margin: 0 0 16px; }
+  #protocolText { min-height: 220px; font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 13.5px; }
+  .actions-row { display: flex; align-items: center; gap: 16px; margin-top: 16px; flex-wrap: wrap; }
+
+  #results { margin-top: 24px; }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<div class="app-shell">
+  <nav id="appSidebar" class="app-sidebar" aria-label="App"></nav>
+  <div class="app-main">
+    <div id="appTopbar" class="app-topbar"></div>
+    <main id="main" class="app-content">
+
+      <div class="key-banner" id="keyBanner" hidden>
+        <p>Add your Anthropic API key in Settings before verifying raw protocol text. Already-structured steps or already-generated code don't need one.</p>
+        <a href="/site/app/settings.html" class="btn btn-secondary">Go to Settings</a>
+      </div>
+
+      <div class="stat-grid" id="statGrid">
+        <div class="card stat-card"><div class="stat-label">Protocols verified</div><div class="stat-number">...</div></div>
+        <div class="card stat-card"><div class="stat-label">Issues caught</div><div class="stat-number">...</div></div>
+        <div class="card stat-card"><div class="stat-label">Clean pass rate</div><div class="stat-number">...</div></div>
+      </div>
+
+      <div class="card verify-panel">
+        <h2>Verify a protocol</h2>
+
+        <label for="protocolName" class="sr-only">Protocol name</label>
+        <div class="field">
+          <input type="text" id="protocolName" placeholder="Protocol name (optional)">
+        </div>
+
+        <label for="protocolText" class="sr-only">Protocol text</label>
+        <div class="field" style="margin-bottom:0;">
+          <textarea id="protocolText" placeholder="Paste a wet-lab protocol here (English text, structured step JSON, or already-generated Opentrons Python)."></textarea>
+        </div>
+
+        <div class="actions-row">
+          <button class="btn btn-primary" id="runBtn" type="button">Verify Protocol</button>
+          <div class="vl-stage-tracker" id="stageTracker" aria-live="polite"></div>
+        </div>
+
+        <div id="results"></div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="../shared-result-view.js"></script>
+<script src="shell.js"></script>
+<script>
+const VL = window.VerilabResultView;
+let currentUser = null;
+
+async function loadStats() {
+  const res = await fetch('/api/app/stats', { credentials: 'include' });
+  const stats = await res.json();
+  const grid = document.getElementById('statGrid');
+  grid.innerHTML = '';
+  const cards = [
+    { label: 'Protocols verified', value: stats.protocols_verified },
+    { label: 'Issues caught', value: stats.issues_caught },
+    { label: 'Clean pass rate', value: stats.clean_pass_rate + '%' },
+  ];
+  for (const c of cards) {
+    grid.appendChild(VL.el('div', { class: 'card stat-card' }, [
+      VL.el('div', { class: 'stat-label' }, [c.label]),
+      VL.el('div', { class: 'stat-number' }, [String(c.value)]),
+    ]));
+  }
+}
+
+async function runVerify() {
+  const btn = document.getElementById('runBtn');
+  const text = document.getElementById('protocolText').value;
+  const name = document.getElementById('protocolName').value || 'Untitled Protocol';
+  const results = document.getElementById('results');
+  const tracker = document.getElementById('stageTracker');
+
+  if (!text.trim()) { alert('Paste a protocol first.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Verifying...';
+  results.innerHTML = '';
+  VL.renderStageTracker(tracker, 'reading');
+
+  try {
+    const res = await fetch('/api/app/verify/stream', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ protocol_text: text, protocol_name: name, input_kind: 'auto' }),
+    });
+
+    if (res.status === 401) {
+      window.location.href = '/site/signin.html';
+      return;
+    }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let finalResult = null;
+    let errorPayload = null;
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      let lines = buffer.split('\n');
+      buffer = lines.pop();
+      for (const line of lines) {
+        if (!line.trim()) continue;
+        const evt = JSON.parse(line);
+        if (evt.type === 'stage') {
+          VL.renderStageTracker(tracker, evt.stage);
+        } else if (evt.type === 'final') {
+          finalResult = evt.result;
+        } else if (evt.type === 'error') {
+          errorPayload = evt;
+        }
+      }
+    }
+
+    tracker.innerHTML = '';
+    if (errorPayload) {
+      results.appendChild(VL.el('div', { class: 'error-box' }, [errorPayload.error]));
+    } else if (finalResult) {
+      VL.renderResult(results, finalResult);
+      loadStats();
+    } else {
+      results.appendChild(VL.el('div', { class: 'error-box' }, ['No result was returned.']));
+    }
+  } catch (e) {
+    results.innerHTML = '';
+    results.appendChild(VL.el('div', { class: 'error-box' }, ['Request failed: ' + e.message]));
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Verify Protocol';
+  }
+}
+
+async function main() {
+  currentUser = await window.VerilabShell.init('dashboard', 'Dashboard');
+  if (!currentUser) return;
+  document.getElementById('keyBanner').hidden = currentUser.has_api_key;
+  loadStats();
+  document.getElementById('runBtn').addEventListener('click', runVerify);
+}
+
+main();
+</script>
+</body>
+</html>
