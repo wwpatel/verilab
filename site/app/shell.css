@@ -1,0 +1,45 @@
+/* Layout for the authenticated app shell: a persistent left sidebar with
+   exactly three items (Dashboard, Stored Protocols, Settings) and a slim
+   top bar, present on every app page. */
+
+.app-shell { display: flex; min-height: 100vh; align-items: stretch; }
+
+.app-sidebar {
+  width: 232px; flex-shrink: 0; background: var(--navy); color: #fff;
+  display: flex; flex-direction: column; padding: 22px 0;
+}
+.app-sidebar .sidebar-wordmark {
+  font-family: Georgia, serif; font-weight: bold; font-size: 19px; color: #fff;
+  text-decoration: none; padding: 0 22px 24px; display: block;
+}
+.sidebar-nav { display: flex; flex-direction: column; gap: 2px; padding: 0 12px; }
+.sidebar-link {
+  display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 8px;
+  color: #C7D0E3; text-decoration: none; font-size: 14.5px; font-weight: 600;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.sidebar-link svg { width: 18px; height: 18px; flex-shrink: 0; }
+.sidebar-link:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.sidebar-link[aria-current="page"] { background: var(--teal); color: #fff; }
+
+.app-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.app-topbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 16px 28px; border-bottom: 1px solid var(--border); background: var(--panel);
+}
+.app-topbar h1 { font-family: Georgia, serif; color: var(--navy); font-size: 20px; margin: 0; }
+.topbar-account { display: flex; align-items: center; gap: 12px; }
+.topbar-account .who { font-size: 14px; font-weight: 600; color: var(--charcoal); }
+.topbar-account .who .email { display: block; font-size: 12px; font-weight: 400; color: var(--gray); }
+
+.app-content { padding: 32px 28px; flex: 1; max-width: 1100px; width: 100%; }
+
+@media (max-width: 780px) {
+  .app-shell { flex-direction: column; }
+  .app-sidebar { width: 100%; flex-direction: row; align-items: center; padding: 10px 14px; gap: 10px; }
+  .app-sidebar .sidebar-wordmark { padding: 0 10px 0 0; }
+  .sidebar-nav { flex-direction: row; padding: 0; overflow-x: auto; }
+  .sidebar-link span.label-text { display: none; }
+  .topbar-account .who .email { display: none; }
+  .app-content { padding: 20px 16px; }
+}
