@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get started, Verilab</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .auth-wrap { min-height: 100vh; display: flex; flex-direction: column; }
+  .auth-nav { padding: 20px 0; }
+  .auth-nav .wordmark { font-family: Georgia, serif; font-weight: bold; font-size: 21px; color: var(--navy); text-decoration: none; }
+  .auth-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .auth-card { width: 100%; max-width: 420px; padding: 34px 32px; }
+  .auth-card h1 { font-family: Georgia, serif; color: var(--navy); font-size: 24px; margin: 0 0 6px; }
+  .auth-card .sub { color: var(--gray); font-size: 14.5px; margin: 0 0 26px; }
+  .auth-switch { text-align: center; margin-top: 20px; font-size: 14px; color: var(--gray); }
+  .auth-switch a { color: var(--teal); font-weight: 600; text-decoration: none; }
+  .auth-switch a:hover { text-decoration: underline; }
+  #formError { margin-bottom: 18px; display: none; }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<div class="auth-wrap">
+  <div class="wrap auth-nav">
+    <a href="/site/" class="wordmark">VERILAB</a>
+  </div>
+  <main id="main" class="auth-main">
+    <form class="card auth-card" id="signupForm" novalidate>
+      <h1>Get started</h1>
+      <p class="sub">Create an account, then add your own Anthropic API key in Settings to verify real protocols.</p>
+
+      <div class="error-box" id="formError" role="alert"></div>
+
+      <div class="field">
+        <label for="displayName">Display name</label>
+        <input type="text" id="displayName" name="displayName" autocomplete="name" placeholder="Optional">
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" autocomplete="new-password" required minlength="8">
+        <div class="hint">At least 8 characters.</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Create account</button>
+
+      <p class="auth-switch">Already have an account? <a href="/site/signin.html">Sign in</a></p>
+    </form>
+  </main>
+</div>
+
+<script>
+document.getElementById('signupForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const errorBox = document.getElementById('formError');
+  errorBox.style.display = 'none';
+
+  const display_name = document.getElementById('displayName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+
+  if (password.length < 8) {
+    errorBox.textContent = 'Password must be at least 8 characters.';
+    errorBox.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Creating account...';
+  try {
+    const res = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ email, password, display_name }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      errorBox.textContent = data.error || 'Could not create account.';
+      errorBox.style.display = 'block';
+      return;
+    }
+    window.location.href = '/site/app/dashboard.html';
+  } catch (err) {
+    errorBox.textContent = 'Request failed: ' + err.message;
+    errorBox.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Create account';
+  }
+});
+</script>
+</body>
+</html>
