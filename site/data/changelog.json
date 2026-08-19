@@ -1,0 +1,44 @@
+{
+  "entries": [
+    {
+      "date": "2026-08-19",
+      "subject": "Add auth and authenticated product API routes"
+    },
+    {
+      "date": "2026-08-19",
+      "subject": "Add persistence and auth foundations for the authenticated product"
+    },
+    {
+      "date": "2026-08-19",
+      "subject": "Accessibility polish: respect reduced motion, fix status-color reuse"
+    },
+    {
+      "date": "2026-08-19",
+      "subject": "Add deployment configs for backend and frontend"
+    },
+    {
+      "date": "2026-08-19",
+      "subject": "Add run-it-yourself quickstart and footer"
+    },
+    {
+      "date": "2026-08-19",
+      "subject": "Add MIT LICENSE"
+    },
+    {
+      "date": "2026-08-19",
+      "subject": "Add how-it-works pipeline diagram"
+    },
+    {
+      "date": "2026-08-19",
+      "subject": "Add evidence section to public site"
+    },
+    {
+      "date": "2026-08-18",
+      "subject": "Wire Try it live section to the real backend"
+    },
+    {
+      "date": "2026-08-18",
+      "subject": "Add feature grid section to public site"
+    }
+  ]
+}
