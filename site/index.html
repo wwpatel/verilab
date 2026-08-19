@@ -112,6 +112,22 @@
     .hero-compare { grid-template-columns: 1fr; }
     .nav-links span.nav-text { display: none; }
   }
+
+  /* ---------- Feature grid ---------- */
+  .features { background: var(--panel); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 20px; }
+  .feature-card { border: 1px solid var(--border); border-radius: 12px; padding: 22px 20px; background: var(--bg); }
+  .feature-icon {
+    width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px;
+  }
+  .feature-icon svg { width: 22px; height: 22px; }
+  .feature-icon.f-volume { background: #E4F1F1; color: var(--teal); }
+  .feature-icon.f-order { background: #EBE7F3; color: var(--violet); }
+  .feature-icon.f-tip { background: #E7EAF1; color: var(--navy); }
+  .feature-icon.f-gen { background: var(--green-bg); color: var(--green); }
+  .feature-card h3 { font-family: Georgia, serif; color: var(--navy); font-size: 17.5px; margin: 0 0 8px; }
+  .feature-card p { margin: 0; font-size: 14.5px; color: var(--charcoal); }
 </style>
 </head>
 <body>
@@ -180,6 +196,43 @@ Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of C
     The simulator only checks that the code runs, not that the liquid handling makes sense.
     <strong>Two 250 microliter transfers into a 360 microliter well, 500 total: the simulator exits clean, Verilab flags it with the exact numbers.</strong>
   </p>
+</section>
+
+<section class="features" aria-labelledby="features-heading">
+  <div class="wrap">
+    <h2 class="section-title" id="features-heading">What it checks</h2>
+    <p class="section-lede">Four checks, each deterministic, each with a real reason it exists.</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon f-volume" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 4 6 8.5 6 12a6 6 0 0 1-12 0c0-3.5 3-8 6-12z"/></svg>
+        </div>
+        <h3>Volume overflow</h3>
+        <p>Checks cumulative liquid added to a well, across every step, against that well's real container capacity.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon f-order" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M8 7l8 4M8 17l8-4"/></svg>
+        </div>
+        <h3>Step ordering</h3>
+        <p>Checks that nothing is drawn from, incubated, or measured before an earlier step has actually filled it.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon f-tip" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6l1 6-4 13-4-13 1-6z"/><path d="M9 8h6"/></svg>
+        </div>
+        <h3>Tip contamination</h3>
+        <p>Runs the generated code for real, with aspirate and drop_tip instrumented, and flags a tip that touches two reagents before being replaced.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon f-gen" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3.5v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9v-5L12 3z"/><path d="M9 12.5l2 2 4-4.5"/></svg>
+        </div>
+        <h3>Verified code generation</h3>
+        <p>Only generates real Opentrons Python for a plan that has already passed every check above, nothing is generated first and checked after.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 </main>
