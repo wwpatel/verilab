@@ -145,6 +145,33 @@ whenever the underlying fixtures in `test_protocols/`, `demo/`, or
 python3 build_evidence.py
 ```
 
+## Public deployment
+
+`site/` is a separate, public-facing marketing and live-demo page (hero,
+feature grid, "Try it live", evidence, pipeline diagram, quickstart). It is
+additive: it does not replace or change `static/index.html`, the local
+Verification Console described above, which keeps working exactly as it
+does today.
+
+Deploying the public site takes two pieces:
+
+- **Backend** (this repo's `app.py`): deploy on a small persistent server,
+  for example [Render](https://render.com) (`render.yaml` is included),
+  Railway, or Fly.io. Not a serverless function: the tip contamination
+  check and the real Opentrons simulator both run subprocess calls and
+  execute generated code, which is not compatible with a typical stateless
+  serverless platform. Set `ANTHROPIC_API_KEY` on the host; it is never
+  sent to or exposed in the frontend. The verify endpoints are rate
+  limited per IP (8 requests / 60s) since they are the only ones that call
+  the live LLM and run subprocess-based simulation.
+- **Frontend** (`site/`): a static build with no build step, deployable on
+  Vercel or Netlify (`site/vercel.json` and `site/netlify.toml` are
+  included). Before deploying, edit `site/config.js` to point
+  `VERILAB_API_BASE` at the deployed backend's URL. If left blank, the
+  page assumes it is served from the same origin as the backend (this is
+  also how `app.py` mounts it locally at `/site` for preview, same-origin,
+  no CORS needed).
+
 ## Project layout
 
 ```
@@ -155,8 +182,11 @@ tip_contamination.py    tip reuse check (deterministic)
 generator.py            Opentrons Python code generation (deterministic)
 app.py                  FastAPI app: pipeline orchestration + API
 static/index.html       the Verification Console (single page, no build step)
+site/                   the public marketing/demo site (separate deploy target)
+render.yaml             Render blueprint for the backend
 build_evidence.py       computes evidence_results.json from real fixtures
 evidence_results.json   the evidence panel's data
+build_hero_capture.py   computes site/data/hero_capture.json from a real run
 demo/                   hand-built violation fixtures + false-alarm fixtures
 test_protocols/         real published protocols, extracted/generated/baseline output
 ground_truth/           hand-labeled expected extractions

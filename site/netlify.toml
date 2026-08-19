@@ -1,0 +1,15 @@
+# Netlify config for the public site (this directory). It's a static
+# single-page site with no build step, so this just points Netlify at it.
+#
+# Deploy: connect the repo in the Netlify dashboard with this file's
+# directory (site/) as the base, or run `netlify deploy --dir=site`.
+# Before deploying, edit config.js in this directory to point
+# VERILAB_API_BASE at the deployed backend's URL (see render.yaml).
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

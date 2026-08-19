@@ -1,0 +1,24 @@
+# Render Blueprint for the Verilab backend (app.py).
+#
+# This is a persistent web service on purpose, not a serverless function:
+# the tip contamination check and the real Opentrons simulator both run
+# real subprocess calls and execute generated code, which a typical
+# stateless serverless platform (e.g. Lambda-style functions) does not
+# support well. Render's plain "web" service type keeps one long-running
+# process, which this needs.
+#
+# Deploy: connect this repo in the Render dashboard (or `render blueprint
+# launch`), then set ANTHROPIC_API_KEY in the service's environment
+# variables (marked sync: false below so it is never committed).
+services:
+  - type: web
+    name: verilab-api
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.11.9
