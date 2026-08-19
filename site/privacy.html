@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy policy, Verilab</title>
+<meta name="description" content="What Verilab collects, what's encrypted, what's never done with your data, and how to delete your account.">
+<link rel="canonical" href="/site/privacy.html">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .policy-nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .policy-nav .wordmark { font-family: Georgia, serif; font-weight: bold; font-size: 21px; color: var(--navy); text-decoration: none; }
+  .policy-main { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+  .policy-main h1 { font-family: Georgia, serif; color: var(--navy); font-size: 30px; margin: 0 0 8px; }
+  .policy-updated { color: var(--gray); font-size: 13.5px; margin: 0 0 32px; }
+  .policy-main h2 { font-family: Georgia, serif; color: var(--navy); font-size: 19px; margin: 34px 0 12px; }
+  .policy-main p, .policy-main li { font-size: 15px; line-height: 1.65; color: var(--charcoal); }
+  .policy-main ul { padding-left: 22px; }
+  .policy-main li { margin-bottom: 8px; }
+  .policy-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 14px; }
+  .policy-table th, .policy-table td { text-align: left; padding: 9px 12px; border: 1px solid var(--border); vertical-align: top; }
+  .policy-table th { background: var(--bg); color: var(--navy); font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .policy-callout { background: var(--green-bg); border: 1px solid var(--green); border-radius: 8px; padding: 14px 18px; margin: 16px 0; font-size: 14.5px; }
+  .policy-callout strong { color: var(--green); }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<header class="policy-nav">
+  <div class="wrap">
+    <a href="/site/index.html" class="wordmark">VERILAB</a>
+  </div>
+</header>
+
+<main id="main" class="policy-main">
+  <h1>Privacy policy</h1>
+  <p class="policy-updated">Plain language, no legal boilerplate padding. Describes exactly what this codebase does, not a generic template.</p>
+
+  <h2>What is collected</h2>
+  <p>Creating an account collects your email address, a password (never stored in plain text, see below), and an optional display name. Using the product creates verification history: the protocol text you paste or upload, and the full result Verilab computed for it (status, every violation found, the numbers involved, and any generated robot code). A session cookie identifies you as signed in between requests.</p>
+
+  <table class="policy-table">
+    <thead><tr><th>Data</th><th>Where it comes from</th><th>Stored as</th></tr></thead>
+    <tbody>
+      <tr><td>Email, display name</td><td>Sign up form</td><td>Plain text in the database</td></tr>
+      <tr><td>Password</td><td>Sign up form</td><td>PBKDF2 hash with a random salt, never the plain password</td></tr>
+      <tr><td>Anthropic API key</td><td>Settings, optional</td><td>Encrypted at rest (Fernet), decrypted only in memory, only to make your own verification request</td></tr>
+      <tr><td>Verification history</td><td>Every run on the Dashboard</td><td>Protocol text and full result, plain text in the database, tied to your account</td></tr>
+      <tr><td>Session cookie</td><td>Signing in</td><td>A random token, httponly, matched against a sessions table</td></tr>
+    </tbody>
+  </table>
+
+  <h2>What's encrypted and never shown again</h2>
+  <p>Your Anthropic API key is encrypted before it is written to disk. Once saved, the application never displays it again in plain text, a masked version like <code>sk-ant**********XwAA</code> is shown instead. The key is decrypted only in server memory, for only as long as it takes to make your own verification request, and is never written to a log file.</p>
+
+  <h2>What is never done</h2>
+  <ul>
+    <li>Your API key is never logged, in application logs, error messages, or anywhere else.</li>
+    <li>Your API key is never shared with, or visible to, any other account.</li>
+    <li>Your API key is never used for anything except powering your own verification requests. It is not used for the marketing page's example mockups, which are precomputed separately and never call a signed-in user's key.</li>
+    <li>Your password is never stored or logged in plain text, only its PBKDF2 hash.</li>
+  </ul>
+
+  <h2>Third parties</h2>
+  <p>When you verify raw protocol text, that text is sent to Anthropic's API using your own stored key, to turn it into structured steps. That request is between your account and Anthropic, on your own key and your own usage, the same as if you called their API directly. No other third party receives your protocol text, your account data, or your API key.</p>
+
+  <h2>Analytics</h2>
+  <p>The public marketing page uses basic, privacy-respecting page-view analytics to understand traffic. It does not run on any signed-in page (Dashboard, Stored Protocols, Settings), so your verification activity is never part of that data.</p>
+
+  <h2>Deleting your account</h2>
+  <p>Settings has a delete account action. It permanently removes your account row, your encrypted API key, and every protocol you've verified. This happens immediately and cannot be undone.</p>
+  <div class="policy-callout"><strong>To delete your account:</strong> sign in, go to Settings, and use the delete account action at the bottom of the page.</div>
+
+  <h2>Questions</h2>
+  <p>This is an open source project. The full source, including exactly how each of the above is implemented, is public at <a href="https://github.com/wwpatel/verilab">github.com/wwpatel/verilab</a>.</p>
+</main>
+</body>
+</html>
