@@ -36,7 +36,7 @@ from dotenv import load_dotenv
 # has to already be set by the time that import runs.
 load_dotenv()
 
-from fastapi import FastAPI, Request
+from fastapi import Depends, FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
@@ -52,6 +52,12 @@ from labware_resolver import build_capacity_table
 from checker import check_protocol, check_ordering, resource_summary, CHECKS_AGAINST
 from generator import generate_protocol
 from tip_contamination import check_tip_contamination
+
+import auth
+import crypto
+import db
+
+db.init_db()
 
 BASE_DIR = Path(__file__).parent
 
@@ -111,6 +117,227 @@ def check_rate_limit(request: Request) -> JSONResponse | None:
         )
     log.append(now)
     return None
+
+
+# ---------------------------------------------------------------------------
+# Accounts: sign up, sign in, sign out. Sessions are an opaque token in an
+# httponly cookie, checked against the sessions table on every authenticated
+# request via auth.get_current_user. This is the only place a password is
+# ever handled; it's hashed immediately and the plaintext is never stored,
+# logged, or echoed back.
+# ---------------------------------------------------------------------------
+
+class SignupRequest(BaseModel):
+    email: str
+    password: str
+    display_name: str = ""
+
+
+class SigninRequest(BaseModel):
+    email: str
+    password: str
+
+
+def _set_session_cookie(response: Response, request: Request, token: str):
+    response.set_cookie(
+        auth.SESSION_COOKIE, token,
+        httponly=True, samesite="lax", secure=auth.is_https_request(request),
+        max_age=60 * 60 * 24 * 30, path="/",
+    )
+
+
+def _user_public(user) -> dict:
+    return {
+        "email": user["email"],
+        "display_name": user["display_name"],
+        "has_api_key": bool(user["encrypted_api_key"]),
+    }
+
+
+@app.post("/api/auth/signup")
+def signup(req: SignupRequest, request: Request, response: Response):
+    email = req.email.strip().lower()
+    if not email or "@" not in email:
+        return JSONResponse({"error": "Enter a valid email address."}, status_code=400)
+    if len(req.password) < 8:
+        return JSONResponse({"error": "Password must be at least 8 characters."}, status_code=400)
+    if db.get_user_by_email(email):
+        return JSONResponse({"error": "An account with that email already exists."}, status_code=409)
+
+    display_name = req.display_name.strip() or email.split("@")[0]
+    user_id = db.create_user(email, auth.hash_password(req.password), display_name, auth.now_iso())
+    token = auth.create_session_for_user(user_id)
+    _set_session_cookie(response, request, token)
+    return _user_public(db.get_user_by_id(user_id))
+
+
+@app.post("/api/auth/signin")
+def signin(req: SigninRequest, request: Request, response: Response):
+    email = req.email.strip().lower()
+    user = db.get_user_by_email(email)
+    if not user or not auth.verify_password(req.password, user["password_hash"]):
+        return JSONResponse({"error": "Incorrect email or password."}, status_code=401)
+    token = auth.create_session_for_user(user["id"])
+    _set_session_cookie(response, request, token)
+    return _user_public(user)
+
+
+@app.post("/api/auth/signout")
+def signout(request: Request, response: Response):
+    token = request.cookies.get(auth.SESSION_COOKIE)
+    if token:
+        db.delete_session(token)
+    response.delete_cookie(auth.SESSION_COOKIE, path="/")
+    return {"ok": True}
+
+
+@app.get("/api/auth/me")
+def me(user=Depends(auth.get_current_user)):
+    return _user_public(user)
+
+
+# ---------------------------------------------------------------------------
+# The authenticated product: a signed-in user's own dashboard, their stored
+# protocols, and their settings. Every route below requires a valid session.
+# The live verify endpoint here is the real product: it runs the same real
+# pipeline as /api/verify above, but decrypts and uses this user's own
+# stored Anthropic key instead of the server's, and saves every result.
+# ---------------------------------------------------------------------------
+
+class SettingsProfileRequest(BaseModel):
+    display_name: str
+
+
+class SettingsApiKeyRequest(BaseModel):
+    api_key: str
+
+
+@app.get("/api/app/stats")
+def app_stats(user=Depends(auth.get_current_user)):
+    return db.user_stats(user["id"])
+
+
+@app.get("/api/app/settings")
+def app_get_settings(user=Depends(auth.get_current_user)):
+    masked = None
+    if user["encrypted_api_key"]:
+        try:
+            masked = crypto.mask_api_key(crypto.decrypt_api_key(user["encrypted_api_key"]))
+        except Exception:
+            masked = "(stored key could not be read)"
+    return {"email": user["email"], "display_name": user["display_name"], "masked_api_key": masked}
+
+
+@app.put("/api/app/settings/profile")
+def app_update_profile(req: SettingsProfileRequest, user=Depends(auth.get_current_user)):
+    display_name = req.display_name.strip()
+    if not display_name:
+        return JSONResponse({"error": "Display name cannot be empty."}, status_code=400)
+    db.update_display_name(user["id"], display_name)
+    return {"ok": True, "display_name": display_name}
+
+
+@app.put("/api/app/settings/api-key")
+def app_set_api_key(req: SettingsApiKeyRequest, user=Depends(auth.get_current_user)):
+    key = req.api_key.strip()
+    if not key:
+        return JSONResponse({"error": "API key cannot be empty."}, status_code=400)
+    db.set_api_key(user["id"], crypto.encrypt_api_key(key))
+    return {"ok": True, "masked_api_key": crypto.mask_api_key(key)}
+
+
+@app.delete("/api/app/settings/api-key")
+def app_delete_api_key(user=Depends(auth.get_current_user)):
+    db.set_api_key(user["id"], None)
+    return {"ok": True}
+
+
+@app.delete("/api/app/account")
+def app_delete_account(request: Request, response: Response, user=Depends(auth.get_current_user)):
+    db.delete_user(user["id"])
+    token = request.cookies.get(auth.SESSION_COOKIE)
+    if token:
+        db.delete_session(token)
+    response.delete_cookie(auth.SESSION_COOKIE, path="/")
+    return {"ok": True}
+
+
+@app.get("/api/app/protocols")
+def app_list_protocols(user=Depends(auth.get_current_user)):
+    rows = db.list_protocols(user["id"])
+    out = []
+    for r in rows:
+        snippet = r["source_text"].strip().replace("\n", " ")
+        if len(snippet) > 140:
+            snippet = snippet[:140].rstrip() + "..."
+        out.append({
+            "id": r["id"],
+            "protocol_name": r["protocol_name"],
+            "snippet": snippet,
+            "status": r["status"],
+            "error_count": r["error_count"],
+            "warning_count": r["warning_count"],
+            "created_at": r["created_at"],
+        })
+    return out
+
+
+@app.get("/api/app/protocols/{protocol_id}")
+def app_get_protocol(protocol_id: int, user=Depends(auth.get_current_user)):
+    row = db.get_protocol(protocol_id, user["id"])
+    if not row:
+        return JSONResponse({"error": "Protocol not found."}, status_code=404)
+    return {
+        "id": row["id"],
+        "protocol_name": row["protocol_name"],
+        "source_text": row["source_text"],
+        "status": row["status"],
+        "created_at": row["created_at"],
+        "result": json.loads(row["result_json"]),
+    }
+
+
+@app.post("/api/app/verify/stream")
+def app_verify_stream(req: VerifyRequest, user=Depends(auth.get_current_user)):
+    encrypted = user["encrypted_api_key"]
+    input_kind = req.input_kind if req.input_kind != "auto" else detect_input_kind(req.protocol_text)
+    needs_key = input_kind == "text"
+
+    if needs_key and not encrypted:
+        def gen_no_key():
+            yield json.dumps({
+                "type": "error",
+                "error": "Add your Anthropic API key in Settings before verifying raw protocol text. "
+                         "Already-structured steps or already-generated code don't need a key.",
+            }) + "\n"
+        return StreamingResponse(gen_no_key(), media_type="application/x-ndjson")
+
+    api_key = crypto.decrypt_api_key(encrypted) if encrypted else None
+
+    def gen():
+        try:
+            final_result = None
+            for kind, payload in run_pipeline(req.protocol_text, req.protocol_name, req.input_kind, api_key=api_key):
+                if kind == "stage":
+                    yield json.dumps({"type": "stage", **payload}) + "\n"
+                else:
+                    final_result = payload
+                    yield json.dumps({"type": "final", "result": payload}) + "\n"
+            if final_result is not None:
+                db.save_protocol(
+                    user_id=user["id"],
+                    protocol_name=req.protocol_name,
+                    source_text=req.protocol_text,
+                    status=final_result["overall_status"],
+                    error_count=final_result["checks"]["error_count"],
+                    warning_count=final_result["checks"]["warning_count"],
+                    result=final_result,
+                    created_at=auth.now_iso(),
+                )
+        except Exception as e:
+            yield json.dumps({"type": "error", "error": str(e), "trace": traceback.format_exc()}) + "\n"
+
+    return StreamingResponse(gen(), media_type="application/x-ndjson")
 
 
 # ---------------------------------------------------------------------------
@@ -553,7 +780,7 @@ def capture_transfers_and_capacities(path: str):
 # each real stage starts, then ("final", stages_dict) once done.
 # ---------------------------------------------------------------------------
 
-def run_pipeline(protocol_text: str, protocol_name: str, input_kind: str = "auto"):
+def run_pipeline(protocol_text: str, protocol_name: str, input_kind: str = "auto", api_key: str | None = None):
     if input_kind == "auto":
         input_kind = detect_input_kind(protocol_text)
 
@@ -572,7 +799,7 @@ def run_pipeline(protocol_text: str, protocol_name: str, input_kind: str = "auto
     code_from_input = None
 
     if input_kind == "text":
-        result = extract_steps(protocol_text)
+        result = extract_steps(protocol_text, api_key=api_key)
         result["steps"] = expand_dest_wells(result["steps"])
         result, remap_notes = normalize_labware_refs(result)
         label_warnings = validate_labware_ids(result)
@@ -751,9 +978,9 @@ def run_pipeline(protocol_text: str, protocol_name: str, input_kind: str = "auto
     yield "final", stages
 
 
-def collect_result(protocol_text: str, protocol_name: str, input_kind: str = "auto") -> dict:
+def collect_result(protocol_text: str, protocol_name: str, input_kind: str = "auto", api_key: str | None = None) -> dict:
     result = None
-    for kind, payload in run_pipeline(protocol_text, protocol_name, input_kind):
+    for kind, payload in run_pipeline(protocol_text, protocol_name, input_kind, api_key=api_key):
         if kind == "final":
             result = payload
     return result
