@@ -23,12 +23,13 @@
     --green: #1F6D42;
     --green-bg: #E7F5EC;
   }
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; min-width: 0; }
   html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0; padding: 0 20px 64px; background: var(--bg); color: var(--charcoal);
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 16px; line-height: 1.5;
+    overflow-wrap: break-word; overflow-x: hidden;
   }
   .page { max-width: 980px; margin: 0 auto; }
   a { color: var(--teal); }
@@ -124,7 +125,7 @@
   .sev-badge { font-size: 11.5px; font-weight: 700; padding: 2px 9px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.3px; }
   .sev-badge.sev-error { background: var(--red-bg); color: var(--red); }
   .sev-badge.sev-warning { background: var(--gold-bg); color: var(--gold); }
-  .card-sentence { font-size: 15.5px; }
+  .card-sentence { font-size: 15.5px; overflow-wrap: anywhere; }
   .details-toggle {
     background: #fff; border: 1.5px solid var(--navy); color: var(--navy); font-weight: 600;
     font-size: 13.5px; padding: 8px 14px; border-radius: 7px; cursor: pointer; white-space: nowrap;
@@ -136,9 +137,13 @@
   .card-details[hidden] { display: none; }
   .detail-block { margin-top: 14px; }
   .detail-block .detail-label { font-weight: 700; font-size: 12.5px; color: var(--navy); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
-  .detail-block .detail-body { font-size: 14.5px; }
-  .loc-chip { display: inline-block; background: #EEF0F3; border-radius: 6px; padding: 3px 9px; margin: 2px 6px 2px 0; font-size: 13px; font-family: "SF Mono", monospace; }
-  .fix-box { background: #F3FBF6; border: 1px solid var(--green); border-radius: 7px; padding: 10px 14px; font-size: 14.5px; }
+  .detail-block .detail-body { font-size: 14.5px; overflow-wrap: anywhere; }
+  .loc-chip {
+    display: inline-block; max-width: 100%; background: #EEF0F3; border-radius: 6px;
+    padding: 3px 9px; margin: 2px 6px 2px 0; font-size: 13px; font-family: "SF Mono", monospace;
+    overflow-wrap: anywhere; word-break: break-word;
+  }
+  .fix-box { background: #F3FBF6; border: 1px solid var(--green); border-radius: 7px; padding: 10px 14px; font-size: 14.5px; overflow-wrap: anywhere; }
 
   .tech-toggle {
     margin-top: 14px; background: #fff; border: 1px dashed var(--gray); color: var(--gray);
@@ -162,15 +167,16 @@
   .error-box { background: var(--red-bg); border: 1.5px solid var(--red); border-radius: 8px; padding: 14px 18px; color: var(--red); font-weight: 600; }
 
   /* ---------- Evidence panel ---------- */
-  .evidence-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .evidence-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px; }
   .evidence-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
   .evidence-card h3 { margin: 0 0 8px; font-size: 15.5px; color: var(--navy); font-family: Georgia, serif; }
   .evidence-card .big-number { font-size: 30px; font-weight: 800; color: var(--navy); }
   .evidence-card p.desc { font-size: 13.5px; color: var(--gray); margin: 6px 0 10px; }
   .evidence-list { font-size: 13.5px; margin: 0; padding-left: 18px; }
   .evidence-list li { margin-bottom: 4px; }
-  .scoreboard-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 8px; }
-  .scoreboard-table th, .scoreboard-table td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--gray-light); }
+  .table-scroll { width: 100%; overflow-x: auto; margin-top: 8px; }
+  .scoreboard-table { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 13.5px; }
+  .scoreboard-table th, .scoreboard-table td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--gray-light); white-space: nowrap; }
   .scoreboard-table th { color: var(--navy); font-size: 12px; text-transform: uppercase; letter-spacing: 0.3px; }
   .status-pill { display: inline-block; padding: 2px 9px; border-radius: 10px; font-size: 11.5px; font-weight: 700; }
   .status-pill.clean { background: var(--green-bg); color: var(--green); }
@@ -184,6 +190,16 @@
   .sr-only {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
     clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  @media (max-width: 560px) {
+    body { padding: 0 14px 48px; }
+    .card-head { flex-wrap: wrap; }
+    .card-details { padding-left: 20px; }
+    .status-banner { flex-wrap: wrap; }
+    .status-banner .headline { font-size: 19px; }
+    .wordmark { font-size: 25px; }
+    .evidence-card .big-number { font-size: 25px; }
   }
 </style>
 </head>
@@ -621,7 +637,7 @@ function buildScoreboardTable(protocols) {
   ])));
   table.appendChild(thead);
   table.appendChild(tbody);
-  return table;
+  return el('div', { class: 'table-scroll' }, [table]);
 }
 
 document.getElementById('runBtn').addEventListener('click', runVerify);
