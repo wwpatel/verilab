@@ -24,7 +24,9 @@ import json
 import os
 import re
 import tempfile
+import time
 import traceback
+from collections import defaultdict, deque
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -34,7 +36,8 @@ from dotenv import load_dotenv
 # has to already be set by the time that import runs.
 load_dotenv()
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -54,11 +57,60 @@ BASE_DIR = Path(__file__).parent
 
 app = FastAPI()
 
+# The public site (site/index.html) is deployed on a different origin than
+# this API (static frontend host vs. persistent backend host), so the verify
+# and evidence endpoints need to be reachable cross-origin. There is no
+# session or cookie auth here to protect, and the Anthropic key never leaves
+# the server, so an open CORS policy on these read/verify-only endpoints
+# doesn't widen what a caller could otherwise already do by hand.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
+
 
 class VerifyRequest(BaseModel):
     protocol_text: str
     protocol_name: str = "Untitled Protocol"
     input_kind: str = "auto"  # "auto" | "text" | "structured" | "code"
+
+
+# ---------------------------------------------------------------------------
+# Per-IP rate limit on the verify endpoints. These are the only endpoints
+# that call the live Anthropic API and run subprocess-based simulation, so
+# they're the only ones worth protecting once this is reachable by anyone on
+# the internet. A fixed in-memory window is enough for a single small
+# persistent server; it does not need to survive a restart or be shared
+# across instances.
+# ---------------------------------------------------------------------------
+
+RATE_LIMIT_MAX_REQUESTS = 8
+RATE_LIMIT_WINDOW_SECONDS = 60
+_request_log: dict[str, deque] = defaultdict(deque)
+
+
+def client_ip(request: Request) -> str:
+    forwarded = request.headers.get("x-forwarded-for")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return request.client.host if request.client else "unknown"
+
+
+def check_rate_limit(request: Request) -> JSONResponse | None:
+    ip = client_ip(request)
+    now = time.monotonic()
+    log = _request_log[ip]
+    while log and now - log[0] > RATE_LIMIT_WINDOW_SECONDS:
+        log.popleft()
+    if len(log) >= RATE_LIMIT_MAX_REQUESTS:
+        return JSONResponse(
+            {"error": f"Rate limit exceeded: max {RATE_LIMIT_MAX_REQUESTS} verify requests per {RATE_LIMIT_WINDOW_SECONDS} seconds per IP. Try again shortly."},
+            status_code=429,
+        )
+    log.append(now)
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -708,7 +760,10 @@ def collect_result(protocol_text: str, protocol_name: str, input_kind: str = "au
 
 
 @app.post("/api/verify")
-def verify(req: VerifyRequest):
+def verify(req: VerifyRequest, request: Request):
+    limited = check_rate_limit(request)
+    if limited:
+        return limited
     try:
         result = collect_result(req.protocol_text, req.protocol_name, req.input_kind)
         return JSONResponse(result)
@@ -720,7 +775,11 @@ def verify(req: VerifyRequest):
 
 
 @app.post("/api/verify/stream")
-def verify_stream(req: VerifyRequest):
+def verify_stream(req: VerifyRequest, request: Request):
+    limited = check_rate_limit(request)
+    if limited:
+        return limited
+
     def gen():
         try:
             for kind, payload in run_pipeline(req.protocol_text, req.protocol_name, req.input_kind):
