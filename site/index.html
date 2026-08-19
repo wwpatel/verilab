@@ -26,6 +26,9 @@
   }
   * { box-sizing: border-box; min-width: 0; }
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
   body {
     margin: 0; background: var(--bg); color: var(--charcoal);
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -125,7 +128,7 @@
   .feature-icon.f-volume { background: #E4F1F1; color: var(--teal); }
   .feature-icon.f-order { background: #EBE7F3; color: var(--violet); }
   .feature-icon.f-tip { background: #E7EAF1; color: var(--navy); }
-  .feature-icon.f-gen { background: var(--green-bg); color: var(--green); }
+  .feature-icon.f-gen { background: #E7EAF1; color: var(--navy); }
   .feature-card h3 { font-family: Georgia, serif; color: var(--navy); font-size: 17.5px; margin: 0 0 8px; }
   .feature-card p { margin: 0; font-size: 14.5px; color: var(--charcoal); }
 
