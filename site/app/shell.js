@@ -81,6 +81,25 @@ window.VerilabShell = (function () {
     topbar.appendChild(account);
   }
 
+  // Breadcrumbs reinforce where a user is inside the three-tab structure.
+  // Default is just the current tab's own name; pages that go one level
+  // deeper (Stored Protocols, when a specific saved result is open) call
+  // setBreadcrumb() to append that.
+  function setBreadcrumb(items) {
+    const container = document.getElementById('appBreadcrumb');
+    if (!container) return;
+    container.innerHTML = '';
+    container.setAttribute('aria-label', 'Breadcrumb');
+    items.forEach((item, i) => {
+      if (i > 0) container.appendChild(el('span', { class: 'crumb-sep', 'aria-hidden': 'true' }, ['/']));
+      if (item.href) {
+        container.appendChild(el('a', { href: item.href }, [item.label]));
+      } else {
+        container.appendChild(el('span', { class: 'crumb-current', 'aria-current': 'page' }, [item.label]));
+      }
+    });
+  }
+
   async function init(activePage, pageTitle) {
     let user;
     try {
@@ -93,9 +112,11 @@ window.VerilabShell = (function () {
     }
     renderSidebar(activePage);
     renderTopbar(pageTitle, user);
+    const navItem = NAV_ITEMS.find(n => n.id === activePage);
+    setBreadcrumb([{ label: navItem ? navItem.label : pageTitle }]);
     document.title = pageTitle + ', Verilab';
     return user;
   }
 
-  return { init, signOut, el };
+  return { init, signOut, el, setBreadcrumb };
 })();

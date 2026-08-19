@@ -39,6 +39,7 @@
   <nav id="appSidebar" class="app-sidebar" aria-label="App"></nav>
   <div class="app-main">
     <div id="appTopbar" class="app-topbar"></div>
+    <nav id="appBreadcrumb" class="app-breadcrumb"></nav>
     <main id="main" class="app-content">
       <div class="card protocols-card" id="protocolsCard">
         <p class="loading-line" style="padding:24px;">Loading your stored protocols...</p>
@@ -157,10 +158,21 @@ async function viewProtocol(id) {
   body.innerHTML = '';
   VL.renderResult(body, data.result);
 
+  window.VerilabShell.setBreadcrumb([
+    { label: 'Stored Protocols', href: '/site/app/protocols.html' },
+    { label: data.protocol_name },
+  ]);
+
   const modal = document.getElementById('resultModal');
   modal.showModal();
 }
 
+// The dialog's own 'close' event covers every way it can close (the X
+// button, clicking the backdrop, or the Escape key), so the breadcrumb
+// reset lives in one place rather than being duplicated per close path.
+document.getElementById('resultModal').addEventListener('close', () => {
+  window.VerilabShell.setBreadcrumb([{ label: 'Stored Protocols' }]);
+});
 document.getElementById('modalClose').addEventListener('click', () => document.getElementById('resultModal').close());
 document.getElementById('resultModal').addEventListener('click', (e) => {
   if (e.target.id === 'resultModal') document.getElementById('resultModal').close();
