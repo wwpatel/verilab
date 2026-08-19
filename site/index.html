@@ -128,6 +128,128 @@
   .feature-icon.f-gen { background: var(--green-bg); color: var(--green); }
   .feature-card h3 { font-family: Georgia, serif; color: var(--navy); font-size: 17.5px; margin: 0 0 8px; }
   .feature-card p { margin: 0; font-size: 14.5px; color: var(--charcoal); }
+
+  /* ---------- Try it live ---------- */
+  #demo textarea {
+    width: 100%; min-height: 220px; padding: 14px; border: 1px solid var(--border);
+    border-radius: 8px; font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 13.5px;
+    resize: vertical; background: #fff;
+  }
+  #demo textarea:focus, #demo input[type=text]:focus {
+    outline: 3px solid var(--violet); outline-offset: 2px;
+  }
+  #demo input[type=text] {
+    width: 100%; max-width: 420px; padding: 11px 14px; border: 1px solid var(--border);
+    border-radius: 8px; font-size: 15px; margin-bottom: 12px; background: #fff; display: block;
+  }
+  .examples-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
+  .example-btn {
+    background: #fff; color: var(--navy); border: 1.5px solid var(--navy);
+    padding: 9px 16px; border-radius: 20px; font-size: 13.5px; font-weight: 600; cursor: pointer;
+  }
+  .example-btn:hover { background: var(--navy); color: #fff; }
+  .actions-row { display: flex; align-items: center; gap: 16px; margin-top: 14px; flex-wrap: wrap; }
+  button.primary {
+    background: var(--teal); color: #fff; border: none; padding: 13px 30px;
+    border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer;
+  }
+  button.primary:hover { background: var(--navy); }
+  button.primary:disabled { background: #A9B2B2; cursor: default; }
+
+  .stage-tracker { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: 13.5px; }
+  .stage-tracker .step {
+    padding: 7px 12px; border-radius: 16px; background: #EEF0F3; color: var(--gray);
+    border: 1px solid var(--border);
+  }
+  .stage-tracker .step.active { background: var(--navy); color: #fff; border-color: var(--navy); font-weight: 700; }
+  .stage-tracker .step.done { background: var(--gray-light); color: var(--navy); border-color: var(--navy-light); }
+
+  #results { margin-top: 30px; }
+  .status-banner {
+    display: flex; align-items: center; gap: 14px; padding: 18px 22px; border-radius: 10px;
+    margin-bottom: 10px; font-family: Georgia, serif;
+  }
+  .status-banner.cleared { background: var(--green-bg); border: 2px solid var(--green); }
+  .status-banner.blocked { background: var(--red-bg); border: 2px solid var(--red); }
+  .status-banner .status-icon { flex-shrink: 0; }
+  .status-banner .status-icon svg { width: 34px; height: 34px; }
+  .status-banner.cleared .status-icon svg { color: var(--green); }
+  .status-banner.blocked .status-icon svg { color: var(--red); }
+  .status-banner .status-text .headline { font-size: 21px; font-weight: 700; }
+  .status-banner.cleared .status-text .headline { color: var(--green); }
+  .status-banner.blocked .status-text .headline { color: var(--red); }
+  .status-banner .status-text .subline { font-size: 15px; color: var(--charcoal); margin-top: 3px; font-family: -apple-system, sans-serif; }
+
+  .checked-box {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px 20px; font-size: 14.5px; color: var(--charcoal); margin-bottom: 18px;
+  }
+  .checked-box ul { margin: 8px 0 0 20px; padding: 0; }
+
+  .violation-card {
+    background: var(--panel); border: 1px solid var(--border); border-left: 5px solid var(--gray);
+    border-radius: 8px; margin-bottom: 12px; overflow: hidden;
+  }
+  .violation-card.sev-error { border-left-color: var(--red); }
+  .violation-card.sev-warning { border-left-color: var(--gold); }
+  .card-head { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; }
+  .cat-icon { flex-shrink: 0; width: 30px; height: 30px; color: var(--navy); }
+  .cat-icon.cat-volume { color: var(--teal); }
+  .cat-icon.cat-order { color: var(--violet); }
+  .cat-icon.cat-tip { color: var(--navy); }
+  .cat-icon.cat-data { color: var(--gray); }
+  .card-main { flex: 1; min-width: 0; }
+  .card-tags { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+  .cat-label { font-weight: 700; font-size: 13px; color: var(--navy); text-transform: uppercase; letter-spacing: 0.4px; }
+  .sev-badge { font-size: 11.5px; font-weight: 700; padding: 2px 9px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .sev-badge.sev-error { background: var(--red-bg); color: var(--red); }
+  .sev-badge.sev-warning { background: var(--gold-bg); color: var(--gold); }
+  .card-sentence { font-size: 15.5px; overflow-wrap: anywhere; }
+  .details-toggle {
+    background: #fff; border: 1.5px solid var(--navy); color: var(--navy); font-weight: 600;
+    font-size: 13.5px; padding: 8px 14px; border-radius: 7px; cursor: pointer; white-space: nowrap;
+  }
+  .details-toggle:hover { background: var(--navy); color: #fff; }
+  .details-toggle[aria-expanded="true"] { background: var(--navy); color: #fff; }
+
+  .card-details { padding: 4px 20px 20px 62px; border-top: 1px solid var(--gray-light); }
+  .card-details[hidden] { display: none; }
+  .detail-block { margin-top: 14px; }
+  .detail-block .detail-label { font-weight: 700; font-size: 12.5px; color: var(--navy); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
+  .detail-block .detail-body { font-size: 14.5px; overflow-wrap: anywhere; }
+  .loc-chip {
+    display: inline-block; max-width: 100%; background: #EEF0F3; border-radius: 6px;
+    padding: 3px 9px; margin: 2px 6px 2px 0; font-size: 13px; font-family: "SF Mono", monospace;
+    overflow-wrap: anywhere; word-break: break-word;
+  }
+  .fix-box { background: #F3FBF6; border: 1px solid var(--green); border-radius: 7px; padding: 10px 14px; font-size: 14.5px; overflow-wrap: anywhere; }
+
+  .tech-toggle {
+    margin-top: 14px; background: #fff; border: 1px dashed var(--gray); color: var(--gray);
+    font-size: 12.5px; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600;
+  }
+  .tech-toggle:hover { border-color: var(--navy); color: var(--navy); }
+  pre.tech-block {
+    background: #14213D; color: #DCE4F0; padding: 14px 16px; border-radius: 8px; overflow-x: auto;
+    font-size: 12.5px; margin-top: 10px; line-height: 1.6;
+  }
+  pre.tech-block[hidden] { display: none; }
+
+  .resources-box, .code-box { margin-top: 22px; }
+  pre.code-readout {
+    background: #14213D; color: #DCE4F0; padding: 16px 18px; border-radius: 8px;
+    overflow-x: auto; font-size: 13px; line-height: 1.55;
+  }
+
+  .loading-line { color: var(--gray); font-style: italic; margin-top: 14px; }
+  .error-box { background: var(--red-bg); border: 1.5px solid var(--red); border-radius: 8px; padding: 14px 18px; color: var(--red); font-weight: 600; }
+
+  @media (max-width: 560px) {
+    .card-head { flex-wrap: wrap; }
+    .card-details { padding-left: 20px; }
+    .status-banner { flex-wrap: wrap; }
+    .status-banner .headline { font-size: 19px; }
+  }
 </style>
 </head>
 <body>
@@ -235,6 +357,355 @@ Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of C
   </div>
 </section>
 
+<section id="demo" aria-labelledby="demo-heading">
+  <div class="wrap">
+    <h2 class="section-title" id="demo-heading">Try it live</h2>
+    <p class="section-lede">
+      Paste a protocol, or load a real example below, then click Verify Protocol. Every submission
+      here, edited or not, calls the real backend: real extraction, real checks, real code generation.
+      Nothing on this page is precomputed.
+    </p>
+
+    <label for="protocolName" class="sr-only">Protocol name</label>
+    <input type="text" id="protocolName" placeholder="Protocol name (optional)">
+
+    <label for="protocolText" class="sr-only">Protocol text</label>
+    <textarea id="protocolText" placeholder="Paste a wet-lab protocol here, or load an example below."></textarea>
+
+    <div class="examples-row" id="examplesRow" aria-label="Load an example protocol">
+      <span class="sr-only">Load example:</span>
+      <span class="loading-line" id="examplesLoading">Loading examples...</span>
+    </div>
+
+    <div class="actions-row">
+      <button class="primary" id="runBtn">Verify Protocol</button>
+      <div class="stage-tracker" id="stageTracker" aria-live="polite"></div>
+    </div>
+
+    <div id="results"></div>
+  </div>
+</section>
+
 </main>
+
+<script src="config.js"></script>
+<script>
+const API_BASE = (window.VERILAB_API_BASE || '').replace(/\/$/, '');
+
+const ICONS = {
+  volume: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 4 6 8.5 6 12a6 6 0 0 1-12 0c0-3.5 3-8 6-12z"/></svg>',
+  order: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M8 7l8 4M8 17l8-4"/></svg>',
+  tip: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6l1 6-4 13-4-13 1-6z"/><path d="M9 8h6"/></svg>',
+  data: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.6-2.5 2-2.5 4"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>',
+  stop: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="8" x2="16" y2="16"/><line x1="16" y1="8" x2="8" y2="16"/></svg>',
+};
+
+const STAGE_ORDER = [
+  { stage: 'reading', label: 'Reading the protocol' },
+  { stage: 'identify', label: 'Identifying containers and reagents' },
+  { stage: 'checking', label: 'Checking volumes, order, and tip use' },
+  { stage: 'generating', label: 'Preparing robot code' },
+];
+
+function el(tag, attrs, children) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (k === 'html') node.innerHTML = v;
+    else if (k.startsWith('on')) node.addEventListener(k.slice(2), v);
+    else node.setAttribute(k, v);
+  }
+  for (const c of (children || [])) {
+    if (c == null) continue;
+    node.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+  }
+  return node;
+}
+
+function renderStageTracker(container, activeStage) {
+  container.innerHTML = '';
+  let reachedActive = false;
+  for (const s of STAGE_ORDER) {
+    const isActive = s.stage === activeStage;
+    const isDone = !reachedActive && !isActive;
+    if (isActive) reachedActive = true;
+    const cls = isActive ? 'step active' : (reachedActive ? 'step' : 'step done');
+    container.appendChild(el('span', { class: cls }, [s.label]));
+  }
+}
+
+// ---------------- Examples ----------------
+
+async function loadExamples() {
+  const row = document.getElementById('examplesRow');
+  const loading = document.getElementById('examplesLoading');
+  try {
+    const res = await fetch(API_BASE + '/api/examples');
+    const examples = await res.json();
+    loading.remove();
+    for (const ex of examples) {
+      const btn = el('button', {
+        type: 'button', class: 'example-btn',
+        onclick: () => loadExample(ex.id),
+      }, ['Load example: ' + ex.label]);
+      row.appendChild(btn);
+    }
+  } catch (e) {
+    loading.textContent = 'Could not load examples: ' + e.message;
+  }
+}
+
+async function loadExample(id) {
+  const res = await fetch(API_BASE + '/api/examples/' + id);
+  const data = await res.json();
+  if (data.error) { alert(data.error); return; }
+  document.getElementById('protocolText').value = data.content;
+  document.getElementById('protocolName').value = data.protocol_name;
+  document.getElementById('protocolText').focus();
+}
+
+// ---------------- Verify (streaming) ----------------
+
+async function runVerify() {
+  const btn = document.getElementById('runBtn');
+  const text = document.getElementById('protocolText').value;
+  const name = document.getElementById('protocolName').value || 'Untitled Protocol';
+  const results = document.getElementById('results');
+  const tracker = document.getElementById('stageTracker');
+
+  if (!text.trim()) { alert('Paste a protocol first, or load an example.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Verifying...';
+  results.innerHTML = '';
+  renderStageTracker(tracker, 'reading');
+
+  try {
+    const res = await fetch(API_BASE + '/api/verify/stream', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ protocol_text: text, protocol_name: name, input_kind: 'auto' }),
+    });
+
+    if (res.status === 429) {
+      const payload = await res.json();
+      tracker.innerHTML = '';
+      results.appendChild(el('div', { class: 'error-box' }, [payload.error || 'Rate limit exceeded. Try again shortly.']));
+      return;
+    }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let finalResult = null;
+    let errorPayload = null;
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      let lines = buffer.split('\n');
+      buffer = lines.pop();
+      for (const line of lines) {
+        if (!line.trim()) continue;
+        const evt = JSON.parse(line);
+        if (evt.type === 'stage') {
+          renderStageTracker(tracker, evt.stage);
+        } else if (evt.type === 'final') {
+          finalResult = evt.result;
+        } else if (evt.type === 'error') {
+          errorPayload = evt;
+        }
+      }
+    }
+
+    tracker.innerHTML = '';
+    if (errorPayload) {
+      results.innerHTML = '';
+      results.appendChild(el('div', { class: 'error-box' }, ['Error: ' + errorPayload.error]));
+    } else if (finalResult) {
+      renderResult(results, finalResult);
+    } else {
+      results.appendChild(el('div', { class: 'error-box' }, ['No result was returned.']));
+    }
+  } catch (e) {
+    results.innerHTML = '';
+    results.appendChild(el('div', { class: 'error-box' }, ['Request failed: ' + e.message]));
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Verify Protocol';
+  }
+}
+
+// ---------------- Rendering: Layer 1, 2, 3 ----------------
+
+let violationSeq = 0;
+
+function renderResult(container, data) {
+  container.innerHTML = '';
+
+  const cleared = data.overall_status === 'CLEARED';
+  const violations = data.checks.violations || [];
+  const errorCount = data.checks.error_count;
+  const warningCount = data.checks.warning_count;
+
+  const headline = cleared ? 'Cleared for the robot' : 'Do not run yet';
+  let subline;
+  if (violations.length === 0) {
+    subline = 'No problems found. Reviewed against volume limits, step order, and tip reuse.';
+  } else if (cleared) {
+    subline = warningCount + ' item' + (warningCount === 1 ? '' : 's') + ' worth a second look, nothing blocking.';
+  } else {
+    subline = errorCount + ' problem' + (errorCount === 1 ? '' : 's') + ' found before this protocol can run.';
+  }
+
+  const banner = el('div', { class: 'status-banner ' + (cleared ? 'cleared' : 'blocked') }, [
+    el('div', { class: 'status-icon', html: cleared ? ICONS.check : ICONS.stop }, []),
+    el('div', { class: 'status-text' }, [
+      el('div', { class: 'headline' }, [headline]),
+      el('div', { class: 'subline' }, [subline]),
+    ]),
+  ]);
+  container.appendChild(banner);
+
+  if (violations.length === 0) {
+    const box = el('div', { class: 'checked-box' }, [
+      el('strong', {}, ['Checked against:']),
+      el('ul', {}, (data.checks_run || []).map(c => el('li', {}, [c]))),
+      el('p', { style: 'margin-top:10px;color:var(--gray);font-size:13.5px;' }, [data.checks_against_text || '']),
+    ]);
+    container.appendChild(box);
+  } else {
+    for (const v of violations) {
+      container.appendChild(renderViolationCard(v));
+    }
+  }
+
+  if (data.resources && data.resources.summary_text) {
+    const box = el('div', { class: 'resources-box' }, [
+      el('h3', { style: 'color:var(--navy);font-family:Georgia,serif;font-size:16px;' }, ['Resources needed']),
+      el('pre', { class: 'code-readout' }, [data.resources.summary_text]),
+    ]);
+    container.appendChild(box);
+  }
+
+  if (data.generated_code) {
+    const gc = data.generated_code;
+    const box = el('div', { class: 'code-box' }, [
+      el('h3', { style: 'color:var(--navy);font-family:Georgia,serif;font-size:16px;' },
+        [cleared ? 'Code ready to send to the robot' : 'Robot code']),
+    ]);
+    if (gc.skipped) {
+      box.appendChild(el('p', {}, [gc.reason]));
+    } else if (gc.code) {
+      box.appendChild(el('pre', { class: 'code-readout' }, [gc.code]));
+    } else if (gc.error) {
+      box.appendChild(el('div', { class: 'error-box' }, ['Code generation failed: ' + gc.error]));
+    }
+    container.appendChild(box);
+  }
+}
+
+function renderViolationCard(v) {
+  violationSeq += 1;
+  const detailsId = 'vdetails-' + violationSeq;
+  const techId = 'vtech-' + violationSeq;
+
+  const catIcon = el('div', { class: 'cat-icon cat-' + v.category, html: ICONS[v.category] || ICONS.data, 'aria-hidden': 'true' }, []);
+
+  const toggleBtn = el('button', {
+    type: 'button', class: 'details-toggle', 'aria-expanded': 'false', 'aria-controls': detailsId,
+  }, ['View details']);
+
+  const head = el('div', { class: 'card-head' }, [
+    catIcon,
+    el('div', { class: 'card-main' }, [
+      el('div', { class: 'card-tags' }, [
+        el('span', { class: 'cat-label' }, [v.category_label]),
+        el('span', { class: 'sev-badge sev-' + v.severity }, [v.severity]),
+      ]),
+      el('div', { class: 'card-sentence' }, [v.layer1_summary]),
+    ]),
+    toggleBtn,
+  ]);
+
+  const loc = v.layer2.location || {};
+  const locChips = [];
+  if (loc.step != null) locChips.push(el('span', { class: 'loc-chip' }, ['Step ' + loc.step]));
+  if (loc.reagent) locChips.push(el('span', { class: 'loc-chip' }, [loc.reagent]));
+  if (loc.container_well) locChips.push(el('span', { class: 'loc-chip' }, ['Well ' + loc.container_well]));
+  if (loc.code_line) locChips.push(el('span', { class: 'loc-chip' }, ['Generated code, line ' + loc.code_line]));
+
+  const details = el('div', { id: detailsId, class: 'card-details', hidden: 'hidden' }, [
+    el('div', { class: 'detail-block' }, [
+      el('div', { class: 'detail-label' }, ['Exact location']),
+      el('div', { class: 'detail-body' }, locChips.length ? locChips : ['No structured location data was available for this item.']),
+    ]),
+    el('div', { class: 'detail-block' }, [
+      el('div', { class: 'detail-label' }, ["What's happening, in numbers"]),
+      el('div', { class: 'detail-body' }, [v.layer2.numbers || v.message]),
+    ]),
+    el('div', { class: 'detail-block' }, [
+      el('div', { class: 'detail-label' }, ['What could go wrong']),
+      el('div', { class: 'detail-body' }, [v.layer2.risk]),
+    ]),
+    el('div', { class: 'detail-block' }, [
+      el('div', { class: 'detail-label' }, ['Recommended corrected instruction']),
+      el('div', { class: 'fix-box' }, [v.layer2.recommended_fix]),
+    ]),
+  ]);
+
+  const techToggle = el('button', {
+    type: 'button', class: 'tech-toggle', 'aria-expanded': 'false', 'aria-controls': techId,
+  }, ['Show technical detail']);
+
+  const l3 = v.layer3 || {};
+  const techLines = [];
+  techLines.push('# extracted step (raw)');
+  techLines.push(l3.extracted_step ? JSON.stringify(l3.extracted_step, null, 2) : 'null  (no structured step data for this input)');
+  techLines.push('');
+  techLines.push('# resolved labware capacity (raw)');
+  techLines.push(l3.resolved_capacity ? JSON.stringify(l3.resolved_capacity, null, 2) : 'null  (not applicable to this finding)');
+  techLines.push('');
+  techLines.push('# generated code');
+  if (l3.generated_code_line) {
+    techLines.push('line ' + l3.generated_code_line + ': ' + (l3.generated_code_snippet || ''));
+  } else {
+    techLines.push('null  (no corresponding line found)');
+  }
+  techLines.push('');
+  techLines.push('# checker output (verbatim)');
+  techLines.push('code: ' + v.code);
+  techLines.push('message: ' + v.message);
+  techLines.push('suggested_fix: ' + (v.suggested_fix || 'null'));
+
+  const techBlock = el('pre', { id: techId, class: 'tech-block', hidden: 'hidden' }, [techLines.join('\n')]);
+
+  details.appendChild(techToggle);
+  details.appendChild(techBlock);
+
+  toggleBtn.addEventListener('click', () => {
+    const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+    toggleBtn.setAttribute('aria-expanded', String(!expanded));
+    if (expanded) { details.setAttribute('hidden', 'hidden'); }
+    else { details.removeAttribute('hidden'); }
+    toggleBtn.textContent = expanded ? 'View details' : 'Hide details';
+  });
+
+  techToggle.addEventListener('click', () => {
+    const expanded = techToggle.getAttribute('aria-expanded') === 'true';
+    techToggle.setAttribute('aria-expanded', String(!expanded));
+    if (expanded) { techBlock.setAttribute('hidden', 'hidden'); }
+    else { techBlock.removeAttribute('hidden'); }
+    techToggle.textContent = expanded ? 'Show technical detail' : 'Hide technical detail';
+  });
+
+  const sevClass = v.severity === 'error' ? 'sev-error' : 'sev-warning';
+  return el('div', { class: 'violation-card ' + sevClass }, [head, details]);
+}
+
+document.getElementById('runBtn').addEventListener('click', runVerify);
+loadExamples();
+</script>
 </body>
 </html>

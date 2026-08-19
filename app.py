@@ -797,6 +797,16 @@ STATIC_DIR = BASE_DIR / "static"
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
+# The public marketing/demo site (site/index.html). Its primary deployment
+# target is a separate static host (Vercel, Netlify) pointed at this backend
+# via site/config.js, but mounting it here too means it can be previewed
+# locally at /site without any separate deploy, same-origin, no CORS needed.
+# This does not change what "/" serves -- the existing local Verification
+# Console keeps working exactly as it does today.
+SITE_DIR = BASE_DIR / "site"
+if SITE_DIR.exists():
+    app.mount("/site", StaticFiles(directory=str(SITE_DIR), html=True), name="site")
+
 
 @app.get("/", response_class=HTMLResponse)
 def index():
