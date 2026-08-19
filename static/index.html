@@ -586,7 +586,7 @@ function renderEvidence(panel, data) {
   ]);
 
   const faCard = el('div', { class: 'evidence-card', style: 'grid-column: 1 / -1;' }, [
-    el('h3', {}, ['Does it cry wolf: false-alarm cases']),
+    el('h3', {}, ['False Alarm Cases']),
     ...data.false_alarms.map(fa => el('div', { class: 'false-alarm-case' }, [
       el('div', { class: 'fa-title' }, [fa.case]),
       el('div', { style: 'font-size:13.5px;' }, [fa.description]),
