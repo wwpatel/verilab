@@ -116,8 +116,15 @@ def expand_dest_wells(steps: list[dict]) -> list[dict]:
     return expanded
 
 
-def extract_steps(protocol_text: str, model: str = "claude-sonnet-4-6") -> dict:
-    response = client.messages.create(
+def extract_steps(protocol_text: str, model: str = "claude-sonnet-4-6", api_key: str | None = None) -> dict:
+    # api_key is set for the authenticated product's dashboard, where each
+    # signed-in user's own stored key powers their own extraction calls; a
+    # fresh per-call client is used instead of the module-level one so one
+    # request never touches another user's or the server's own key. Falls
+    # back to the module-level client (server's own key) when omitted, which
+    # is what the local console and public site still use.
+    active_client = Anthropic(api_key=api_key) if api_key else client
+    response = active_client.messages.create(
         model=model,
         max_tokens=12000,
         temperature=0,  # near-deterministic sampling -- extraction should be

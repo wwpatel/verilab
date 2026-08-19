@@ -2,3 +2,5 @@
 __pycache__/
 *.pyc
 .env
+verilab.db
+verilab.db-journal
