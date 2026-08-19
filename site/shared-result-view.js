@@ -69,7 +69,7 @@ window.VerilabResultView = (function () {
     }
 
     const banner = el('div', { class: 'vl-status-banner ' + (cleared ? 'cleared' : 'blocked') }, [
-      el('div', { class: 'status-icon', html: cleared ? ICONS.check : ICONS.stop }, []),
+      el('div', { class: 'status-icon', html: cleared ? ICONS.check : ICONS.stop, 'aria-hidden': 'true' }, []),
       el('div', { class: 'status-text' }, [
         el('div', { class: 'headline' }, [headline]),
         el('div', { class: 'subline' }, [subline]),

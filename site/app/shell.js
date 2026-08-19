@@ -54,7 +54,7 @@ window.VerilabShell = (function () {
     for (const item of NAV_ITEMS) {
       const link = el('a', {
         href: item.href, class: 'sidebar-link',
-        html: item.icon + '<span class="label-text">' + item.label + '</span>',
+        html: '<span aria-hidden="true">' + item.icon + '</span><span class="label-text">' + item.label + '</span>',
       }, []);
       if (item.id === activePage) link.setAttribute('aria-current', 'page');
       nav.appendChild(link);

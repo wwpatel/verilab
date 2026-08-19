@@ -124,7 +124,10 @@ function renderTable() {
       ]),
       VL.el('td', {}, [dateStr]),
       VL.el('td', {}, [
-        VL.el('span', { class: 'status-pill ' + statusPillClass(p.status), html: VL.ICONS[p.status === 'CLEARED' ? 'check' : 'stop'] }, [' ' + statusLabel(p.status, p.warning_count)]),
+        VL.el('span', { class: 'status-pill ' + statusPillClass(p.status) }, [
+          VL.el('span', { 'aria-hidden': 'true', html: VL.ICONS[p.status === 'CLEARED' ? 'check' : 'stop'] }, []),
+          statusLabel(p.status, p.warning_count),
+        ]),
       ]),
       VL.el('td', {}, [
         VL.el('button', { type: 'button', class: 'btn btn-secondary', onclick: () => viewProtocol(p.id) }, ['View']),
