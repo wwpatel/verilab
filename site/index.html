@@ -309,6 +309,29 @@
     .pipeline-arrow { transform: rotate(90deg); align-self: center; }
     .pipeline-stage { flex: 1 1 auto; }
   }
+
+  /* ---------- Run it yourself ---------- */
+  .quickstart-steps { counter-reset: qs; margin: 0; padding: 0; list-style: none; max-width: 680px; }
+  .quickstart-steps li { counter-increment: qs; margin-bottom: 20px; }
+  .quickstart-steps .qs-label { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--navy); margin-bottom: 6px; font-size: 14.5px; }
+  .quickstart-steps .qs-label::before {
+    content: counter(qs); flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+    background: var(--navy); color: #fff; font-size: 12.5px; display: flex; align-items: center; justify-content: center;
+  }
+  .quickstart-steps pre {
+    background: #14213D; color: #DCE4F0; padding: 12px 16px; border-radius: 8px;
+    overflow-x: auto; font-size: 13px; font-family: "SF Mono", Consolas, Menlo, monospace; margin: 0 0 0 34px;
+  }
+  .quickstart-steps p { margin: 0 0 0 34px; font-size: 14px; color: var(--charcoal); }
+  .run-yourself-links { margin-top: 26px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+  /* ---------- Footer ---------- */
+  footer.site-footer { border-top: 1px solid var(--border); background: var(--panel); padding: 32px 0; }
+  .footer-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+  .footer-links { display: flex; gap: 22px; flex-wrap: wrap; font-size: 14px; }
+  .footer-links a { color: var(--navy); text-decoration: none; font-weight: 600; }
+  .footer-links a:hover { color: var(--teal); }
+  .footer-credit { font-size: 13.5px; color: var(--gray); }
 </style>
 </head>
 <body>
@@ -522,7 +545,52 @@ Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of C
   </div>
 </section>
 
+<section id="run-it-yourself" aria-labelledby="run-heading">
+  <div class="wrap">
+    <h2 class="section-title" id="run-heading">Run it yourself</h2>
+    <p class="section-lede">Prefer to self-host rather than use the hosted demo above? The same pipeline runs locally with your own Anthropic API key.</p>
+
+    <ol class="quickstart-steps">
+      <li>
+        <div class="qs-label">Clone the repo</div>
+        <pre>git clone https://github.com/wwpatel/verilab.git
+cd verilab</pre>
+      </li>
+      <li>
+        <div class="qs-label">Install dependencies</div>
+        <pre>pip install -r requirements.txt</pre>
+        <p>Requires Python 3.10 or newer.</p>
+      </li>
+      <li>
+        <div class="qs-label">Set your Anthropic API key</div>
+        <pre>echo "ANTHROPIC_API_KEY=sk-ant-..." &gt; .env</pre>
+        <p>.env is already covered by .gitignore, it will not be committed.</p>
+      </li>
+      <li>
+        <div class="qs-label">Run the local Verification Console</div>
+        <pre>uvicorn app:app --reload</pre>
+        <p>Then open http://127.0.0.1:8000. This is the same local console this public site's live demo calls, just running on your own machine and your own key.</p>
+      </li>
+    </ol>
+
+    <div class="run-yourself-links">
+      <a href="https://github.com/wwpatel/verilab" class="btn btn-secondary">View on GitHub</a>
+      <a href="https://github.com/wwpatel/verilab#readme" class="btn btn-secondary">Read the full README</a>
+    </div>
+  </div>
+</section>
+
 </main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <div class="footer-links">
+      <a href="https://github.com/wwpatel/verilab">GitHub</a>
+      <a href="https://github.com/wwpatel/verilab/blob/main/LICENSE">MIT License</a>
+    </div>
+    <div class="footer-credit">Built by <a href="https://github.com/wwpatel">wwpatel</a>.</div>
+  </div>
+</footer>
 
 <script src="config.js"></script>
 <script>
