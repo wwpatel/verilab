@@ -3,264 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Verilab: catches what the Opentrons simulator misses</title>
-<meta name="description" content="Verilab is a deterministic check between AI-generated lab robot protocols and a real Opentrons Flex. Try it live on real protocols.">
+<title>Verilab: the check that catches what the simulator misses</title>
+<meta name="description" content="Verilab is a deterministic check between AI-generated lab robot protocols and a real Opentrons Flex. Sign up, add your own API key, verify a real protocol.">
+<link rel="stylesheet" href="shared.css">
 <style>
-  :root {
-    --navy: #1B2A4A;
-    --navy-light: #2C4270;
-    --teal: #2A7F7E;
-    --violet: #5B4B8A;
-    --charcoal: #2A2A2A;
-    --gray: #5A5F6A;
-    --gray-light: #E5E7EB;
-    --bg: #FAFAFA;
-    --panel: #FFFFFF;
-    --border: #D9DCE1;
-    --gold: #92650A;
-    --gold-bg: #FBF0D9;
-    --red: #A02334;
-    --red-bg: #FBE9EC;
-    --green: #1F6D42;
-    --green-bg: #E7F5EC;
-  }
-  * { box-sizing: border-box; min-width: 0; }
-  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-  }
-  body {
-    margin: 0; background: var(--bg); color: var(--charcoal);
-    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    font-size: 16px; line-height: 1.55;
-    overflow-wrap: break-word; overflow-x: hidden;
-  }
-  a { color: var(--teal); }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-  section { padding: 64px 0; }
-  h2.section-title {
-    font-family: Georgia, serif; color: var(--navy); font-size: 28px; margin: 0 0 12px;
-  }
-  p.section-lede { color: var(--gray); font-size: 16.5px; max-width: 640px; margin: 0 0 32px; }
-
-  .sr-only {
-    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
-    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
-  }
-  a.skip-link {
-    position: absolute; left: -999px; top: 0; background: var(--navy); color: #fff;
-    padding: 10px 16px; border-radius: 0 0 8px 0; z-index: 100;
-  }
-  a.skip-link:focus { left: 0; }
-
-  :focus-visible { outline: 3px solid var(--violet); outline-offset: 2px; }
-
   /* ---------- Nav ---------- */
   header.site-nav {
-    position: sticky; top: 0; z-index: 10; background: rgba(250,250,250,0.94);
-    backdrop-filter: saturate(1.1) blur(6px);
-    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 20; background: rgba(250,250,250,0.94);
+    backdrop-filter: saturate(1.1) blur(6px); border-bottom: 1px solid var(--border);
   }
-  .nav-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
-  .wordmark { font-family: Georgia, serif; font-weight: bold; font-size: 22px; color: var(--navy); letter-spacing: 0.5px; text-decoration: none; }
-  .nav-links { display: flex; gap: 22px; align-items: center; font-size: 14.5px; font-weight: 600; }
-  .nav-links a { color: var(--navy); text-decoration: none; }
-  .nav-links a:hover { color: var(--teal); }
-  .nav-links a.cta {
-    background: var(--teal); color: #fff; padding: 8px 16px; border-radius: 7px;
-  }
-  .nav-links a.cta:hover { background: var(--navy); color: #fff; }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 16px; }
+  .wordmark { font-family: Georgia, serif; font-weight: bold; font-size: 21px; color: var(--navy); letter-spacing: 0.5px; text-decoration: none; }
+  .nav-center { display: flex; gap: 26px; align-items: center; font-size: 14px; font-weight: 600; }
+  .nav-center a { color: var(--navy); text-decoration: none; }
+  .nav-center a:hover { color: var(--teal); }
+  .nav-actions { display: flex; gap: 10px; align-items: center; }
+  @media (max-width: 720px) { .nav-center { display: none; } }
 
   /* ---------- Hero ---------- */
-  .hero { padding: 56px 0 40px; }
+  .hero { padding: 56px 0 60px; }
+  .hero-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
   .hero-headline {
-    font-family: Georgia, serif; color: var(--navy); font-size: clamp(28px, 4.4vw, 44px);
-    line-height: 1.2; margin: 0 0 18px; max-width: 880px;
+    font-family: Georgia, serif; color: var(--navy); font-size: clamp(28px, 4.2vw, 42px);
+    line-height: 1.2; margin: 0 0 16px; max-width: 760px;
   }
   .hero-headline .not-fine { color: var(--red); }
-  .hero-subhead { font-size: 18px; color: var(--charcoal); max-width: 640px; margin: 0 0 28px; }
-  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
-  .btn {
-    display: inline-block; font-size: 16px; font-weight: 700; padding: 13px 26px;
-    border-radius: 8px; text-decoration: none; cursor: pointer; border: 2px solid transparent;
-  }
-  .btn-primary { background: var(--teal); color: #fff; }
-  .btn-primary:hover { background: var(--navy); }
-  .btn-secondary { background: #fff; color: var(--navy); border-color: var(--navy); }
-  .btn-secondary:hover { background: var(--navy); color: #fff; }
+  .hero-subhead { font-size: 17.5px; color: var(--gray); max-width: 600px; margin: 0 0 26px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
 
-  .hero-compare-label { font-size: 13.5px; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 10px; }
-  .hero-compare {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  .hero-mock {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
+    box-shadow: var(--shadow-lg); overflow: hidden; max-width: 720px;
   }
-  .compare-panel {
-    background: #14213D; border-radius: 10px; overflow: hidden; border: 2px solid var(--border);
+  .hero-mock-bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; background: #EEF0F3; border-bottom: 1px solid var(--border); }
+  .hero-mock-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border); }
+  .hero-mock-title { margin-left: 8px; font-size: 12.5px; font-weight: 700; color: var(--gray); }
+  .hero-mock-body { padding: 20px 22px; min-height: 260px; }
+  .hero-mock-protocol {
+    background: #14213D; color: #DCE4F0; border-radius: 8px; padding: 12px 14px; font-size: 12px;
+    font-family: "SF Mono", Consolas, Menlo, monospace; line-height: 1.6; white-space: pre-wrap;
+    opacity: 0; transform: translateY(8px); transition: opacity 0.5s ease, transform 0.5s ease;
+    max-height: 120px; overflow: hidden;
   }
-  .compare-panel.flag { border-color: var(--red); }
-  .compare-head {
-    display: flex; align-items: center; gap: 10px; padding: 12px 16px; font-weight: 700; font-size: 14px;
-    font-family: Georgia, serif;
+  .hero-mock-protocol.show { opacity: 1; transform: translateY(0); }
+  .hero-trace-stages { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+  .hero-trace-stage {
+    display: flex; align-items: center; gap: 9px; font-size: 13.5px; color: var(--gray);
+    opacity: 0; transform: translateX(-6px); transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s ease;
   }
-  .compare-panel:not(.flag) .compare-head { background: #EEF0F3; color: var(--gray); }
-  .compare-panel.flag .compare-head { background: var(--red-bg); color: var(--red); }
-  .compare-head svg { width: 18px; height: 18px; flex-shrink: 0; }
-  .compare-body {
-    margin: 0; padding: 14px 16px 18px; color: #DCE4F0; font-family: "SF Mono", Consolas, Menlo, monospace;
-    font-size: 12.5px; line-height: 1.6; overflow-x: auto; white-space: pre-wrap; word-break: break-word;
+  .hero-trace-stage.show { opacity: 1; transform: translateX(0); }
+  .hero-trace-stage.active { color: var(--navy); font-weight: 700; }
+  .hero-trace-stage .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gray-light); flex-shrink: 0; }
+  .hero-trace-stage.active .dot { background: var(--teal); }
+  .hero-trace-stage.spin .dot { animation: pulse-dot 1s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+  .hero-trace-violation {
+    margin-top: 16px; opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease;
   }
-  .hero-compare-caption { margin-top: 12px; font-size: 14px; color: var(--gray); max-width: 700px; }
-  .hero-compare-caption strong { color: var(--charcoal); }
-
-  @media (max-width: 720px) {
-    .hero-compare { grid-template-columns: 1fr; }
-    .nav-links span.nav-text { display: none; }
-  }
-
-  /* ---------- Feature grid ---------- */
-  .features { background: var(--panel); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 20px; }
-  .feature-card { border: 1px solid var(--border); border-radius: 12px; padding: 22px 20px; background: var(--bg); }
-  .feature-icon {
-    width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
-    margin-bottom: 14px;
-  }
-  .feature-icon svg { width: 22px; height: 22px; }
-  .feature-icon.f-volume { background: #E4F1F1; color: var(--teal); }
-  .feature-icon.f-order { background: #EBE7F3; color: var(--violet); }
-  .feature-icon.f-tip { background: #E7EAF1; color: var(--navy); }
-  .feature-icon.f-gen { background: #E7EAF1; color: var(--navy); }
-  .feature-card h3 { font-family: Georgia, serif; color: var(--navy); font-size: 17.5px; margin: 0 0 8px; }
-  .feature-card p { margin: 0; font-size: 14.5px; color: var(--charcoal); }
-
-  /* ---------- Try it live ---------- */
-  #demo textarea {
-    width: 100%; min-height: 220px; padding: 14px; border: 1px solid var(--border);
-    border-radius: 8px; font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 13.5px;
-    resize: vertical; background: #fff;
-  }
-  #demo textarea:focus, #demo input[type=text]:focus {
-    outline: 3px solid var(--violet); outline-offset: 2px;
-  }
-  #demo input[type=text] {
-    width: 100%; max-width: 420px; padding: 11px 14px; border: 1px solid var(--border);
-    border-radius: 8px; font-size: 15px; margin-bottom: 12px; background: #fff; display: block;
-  }
-  .examples-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
-  .example-btn {
-    background: #fff; color: var(--navy); border: 1.5px solid var(--navy);
-    padding: 9px 16px; border-radius: 20px; font-size: 13.5px; font-weight: 600; cursor: pointer;
-  }
-  .example-btn:hover { background: var(--navy); color: #fff; }
-  .actions-row { display: flex; align-items: center; gap: 16px; margin-top: 14px; flex-wrap: wrap; }
-  button.primary {
-    background: var(--teal); color: #fff; border: none; padding: 13px 30px;
-    border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer;
-  }
-  button.primary:hover { background: var(--navy); }
-  button.primary:disabled { background: #A9B2B2; cursor: default; }
-
-  .stage-tracker { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: 13.5px; }
-  .stage-tracker .step {
-    padding: 7px 12px; border-radius: 16px; background: #EEF0F3; color: var(--gray);
-    border: 1px solid var(--border);
-  }
-  .stage-tracker .step.active { background: var(--navy); color: #fff; border-color: var(--navy); font-weight: 700; }
-  .stage-tracker .step.done { background: var(--gray-light); color: var(--navy); border-color: var(--navy-light); }
-
-  #results { margin-top: 30px; }
-  .status-banner {
-    display: flex; align-items: center; gap: 14px; padding: 18px 22px; border-radius: 10px;
-    margin-bottom: 10px; font-family: Georgia, serif;
-  }
-  .status-banner.cleared { background: var(--green-bg); border: 2px solid var(--green); }
-  .status-banner.blocked { background: var(--red-bg); border: 2px solid var(--red); }
-  .status-banner .status-icon { flex-shrink: 0; }
-  .status-banner .status-icon svg { width: 34px; height: 34px; }
-  .status-banner.cleared .status-icon svg { color: var(--green); }
-  .status-banner.blocked .status-icon svg { color: var(--red); }
-  .status-banner .status-text .headline { font-size: 21px; font-weight: 700; }
-  .status-banner.cleared .status-text .headline { color: var(--green); }
-  .status-banner.blocked .status-text .headline { color: var(--red); }
-  .status-banner .status-text .subline { font-size: 15px; color: var(--charcoal); margin-top: 3px; font-family: -apple-system, sans-serif; }
-
-  .checked-box {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
-    padding: 16px 20px; font-size: 14.5px; color: var(--charcoal); margin-bottom: 18px;
-  }
-  .checked-box ul { margin: 8px 0 0 20px; padding: 0; }
-
-  .violation-card {
-    background: var(--panel); border: 1px solid var(--border); border-left: 5px solid var(--gray);
-    border-radius: 8px; margin-bottom: 12px; overflow: hidden;
-  }
-  .violation-card.sev-error { border-left-color: var(--red); }
-  .violation-card.sev-warning { border-left-color: var(--gold); }
-  .card-head { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; }
-  .cat-icon { flex-shrink: 0; width: 30px; height: 30px; color: var(--navy); }
-  .cat-icon.cat-volume { color: var(--teal); }
-  .cat-icon.cat-order { color: var(--violet); }
-  .cat-icon.cat-tip { color: var(--navy); }
-  .cat-icon.cat-data { color: var(--gray); }
-  .card-main { flex: 1; min-width: 0; }
-  .card-tags { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
-  .cat-label { font-weight: 700; font-size: 13px; color: var(--navy); text-transform: uppercase; letter-spacing: 0.4px; }
-  .sev-badge { font-size: 11.5px; font-weight: 700; padding: 2px 9px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.3px; }
-  .sev-badge.sev-error { background: var(--red-bg); color: var(--red); }
-  .sev-badge.sev-warning { background: var(--gold-bg); color: var(--gold); }
-  .card-sentence { font-size: 15.5px; overflow-wrap: anywhere; }
-  .details-toggle {
-    background: #fff; border: 1.5px solid var(--navy); color: var(--navy); font-weight: 600;
-    font-size: 13.5px; padding: 8px 14px; border-radius: 7px; cursor: pointer; white-space: nowrap;
-  }
-  .details-toggle:hover { background: var(--navy); color: #fff; }
-  .details-toggle[aria-expanded="true"] { background: var(--navy); color: #fff; }
-
-  .card-details { padding: 4px 20px 20px 62px; border-top: 1px solid var(--gray-light); }
-  .card-details[hidden] { display: none; }
-  .detail-block { margin-top: 14px; }
-  .detail-block .detail-label { font-weight: 700; font-size: 12.5px; color: var(--navy); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
-  .detail-block .detail-body { font-size: 14.5px; overflow-wrap: anywhere; }
-  .loc-chip {
-    display: inline-block; max-width: 100%; background: #EEF0F3; border-radius: 6px;
-    padding: 3px 9px; margin: 2px 6px 2px 0; font-size: 13px; font-family: "SF Mono", monospace;
-    overflow-wrap: anywhere; word-break: break-word;
-  }
-  .fix-box { background: #F3FBF6; border: 1px solid var(--green); border-radius: 7px; padding: 10px 14px; font-size: 14.5px; overflow-wrap: anywhere; }
-
-  .tech-toggle {
-    margin-top: 14px; background: #fff; border: 1px dashed var(--gray); color: var(--gray);
-    font-size: 12.5px; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600;
-  }
-  .tech-toggle:hover { border-color: var(--navy); color: var(--navy); }
-  pre.tech-block {
-    background: #14213D; color: #DCE4F0; padding: 14px 16px; border-radius: 8px; overflow-x: auto;
-    font-size: 12.5px; margin-top: 10px; line-height: 1.6;
-  }
-  pre.tech-block[hidden] { display: none; }
-
-  .resources-box, .code-box { margin-top: 22px; }
-  pre.code-readout {
-    background: #14213D; color: #DCE4F0; padding: 16px 18px; border-radius: 8px;
-    overflow-x: auto; font-size: 13px; line-height: 1.55;
+  .hero-trace-violation.show { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-mock-protocol, .hero-trace-stage, .hero-trace-violation { transition: none; }
   }
 
-  .loading-line { color: var(--gray); font-style: italic; margin-top: 14px; }
-  .error-box { background: var(--red-bg); border: 1.5px solid var(--red); border-radius: 8px; padding: 14px 18px; color: var(--red); font-weight: 600; }
-
-  @media (max-width: 560px) {
-    .card-head { flex-wrap: wrap; }
-    .card-details { padding-left: 20px; }
-    .status-banner { flex-wrap: wrap; }
-    .status-banner .headline { font-size: 19px; }
+  /* ---------- Anchor tab strip ---------- */
+  .tab-strip-wrap { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--panel); position: sticky; top: 61px; z-index: 15; }
+  .tab-strip { display: flex; gap: 4px; overflow-x: auto; padding: 4px 0; }
+  .tab-strip::-webkit-scrollbar { height: 0; }
+  .tab-btn {
+    flex-shrink: 0; background: transparent; border: none; padding: 14px 18px; font-size: 14px; font-weight: 600;
+    color: var(--gray); cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; font-family: inherit;
+    transition: color 0.15s ease, border-color 0.15s ease;
   }
+  .tab-btn:hover { color: var(--navy); }
+  .tab-btn.active { color: var(--navy); border-bottom-color: var(--teal); }
+
+  /* ---------- Feature sections ---------- */
+  .feature-section { padding: 68px 0; border-bottom: 1px solid var(--border); }
+  .feature-section:nth-child(odd) { background: var(--panel); }
+  .feature-head { max-width: 660px; margin-bottom: 30px; }
+  .micro-callout {
+    display: flex; gap: 10px; align-items: flex-start; background: #F4F6FA; border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px; margin-top: 18px; max-width: 600px;
+  }
+  .micro-callout svg { width: 18px; height: 18px; color: var(--teal); flex-shrink: 0; margin-top: 2px; }
+  .micro-callout .claim { font-weight: 700; color: var(--navy); }
+  .micro-callout .support { color: var(--charcoal); font-size: 14.5px; }
+  .feature-mock-frame { max-width: 800px; margin-top: 4px; }
 
   /* ---------- Evidence ---------- */
-  .evidence { background: var(--panel); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .evidence-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 18px; }
-  .evidence-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 22px 24px; }
+  .evidence { background: var(--panel); }
+  .evidence-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 18px; margin-top: 10px; }
+  .evidence-card { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 24px 26px; }
   .evidence-card.wide { grid-column: 1 / -1; }
-  .evidence-card h3 { margin: 0 0 8px; font-size: 16.5px; color: var(--navy); font-family: Georgia, serif; }
-  .evidence-card .big-number { font-size: 34px; font-weight: 800; color: var(--navy); line-height: 1.1; }
+  .evidence-card h3 { margin: 0 0 8px; font-size: 16px; color: var(--navy); font-family: Georgia, serif; }
+  .evidence-card .big-number { font-size: 40px; font-weight: 800; color: var(--navy); line-height: 1.1; }
   .evidence-card .big-number.stat-bad { color: var(--red); }
   .evidence-card .big-number.stat-good { color: var(--green); }
   .evidence-card p.desc { font-size: 14px; color: var(--gray); margin: 6px 0 12px; }
@@ -270,10 +106,6 @@
   .scoreboard-table { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 13.5px; }
   .scoreboard-table th, .scoreboard-table td { text-align: left; padding: 8px 8px; border-bottom: 1px solid var(--gray-light); white-space: nowrap; }
   .scoreboard-table th { color: var(--navy); font-size: 12px; text-transform: uppercase; letter-spacing: 0.3px; }
-  .status-pill { display: inline-block; padding: 2px 9px; border-radius: 10px; font-size: 11.5px; font-weight: 700; }
-  .status-pill.clean { background: var(--green-bg); color: var(--green); }
-  .status-pill.clean_with_warnings { background: var(--gold-bg); color: var(--gold); }
-  .status-pill.findings { background: var(--red-bg); color: var(--red); }
   .false-alarm-case { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-top: 12px; background: #fff; }
   .false-alarm-case .fa-title { font-weight: 700; color: var(--navy); font-size: 14.5px; margin-bottom: 4px; }
   .false-alarm-case .fa-result { display: flex; align-items: center; gap: 6px; color: var(--green); font-weight: 700; font-size: 13.5px; margin-top: 8px; }
@@ -281,60 +113,53 @@
   .scope-line { margin-top: 18px; font-size: 14px; background: #FFF8EA; border: 1px solid var(--gold); border-radius: 8px; padding: 14px 18px; color: var(--charcoal); }
 
   /* ---------- How it works ---------- */
-  .pipeline-diagram {
-    display: flex; align-items: stretch; gap: 0; overflow-x: auto; padding: 8px 2px 18px;
-  }
-  .pipeline-stage { flex: 1 0 190px; display: flex; flex-direction: column; align-items: stretch; }
-  .stage-box {
-    border: 2px solid var(--border); border-radius: 12px; padding: 18px 16px; background: var(--panel);
-    display: flex; flex-direction: column; gap: 10px; height: 100%;
-  }
+  .pipeline-diagram { display: flex; align-items: stretch; gap: 0; overflow-x: auto; padding: 8px 2px 18px; }
+  .pipeline-stage { flex: 1 0 190px; display: flex; flex-direction: column; }
+  .stage-box { border: 2px solid var(--border); border-radius: 12px; padding: 18px 16px; background: var(--panel); display: flex; flex-direction: column; gap: 10px; height: 100%; }
   .stage-box.llm { border-color: var(--violet); }
   .stage-box.deterministic { border-color: var(--teal); }
   .stage-num { font-size: 12px; font-weight: 700; color: var(--gray); letter-spacing: 0.4px; }
-  .stage-icon { width: 30px; height: 30px; }
+  .stage-icon { width: 28px; height: 28px; }
   .stage-box.llm .stage-icon { color: var(--violet); }
   .stage-box.deterministic .stage-icon { color: var(--teal); }
-  .stage-name { font-family: Georgia, serif; font-size: 16px; color: var(--navy); font-weight: bold; }
-  .stage-caption { font-size: 13px; color: var(--charcoal); flex: 1; }
-  .stage-tag {
-    align-self: flex-start; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;
-    padding: 3px 9px; border-radius: 10px;
-  }
+  .stage-name { font-family: Georgia, serif; font-size: 15.5px; color: var(--navy); font-weight: bold; }
+  .stage-caption { font-size: 12.5px; color: var(--charcoal); flex: 1; }
+  .stage-tag { align-self: flex-start; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; padding: 3px 9px; border-radius: 10px; }
   .stage-tag.llm { background: #EBE7F3; color: var(--violet); }
   .stage-tag.deterministic { background: #E4F1F1; color: var(--teal); }
-  .pipeline-arrow {
-    flex: 0 0 34px; display: flex; align-items: center; justify-content: center; color: var(--gray);
-  }
-  .pipeline-arrow svg { width: 22px; height: 22px; }
+  .pipeline-arrow { flex: 0 0 30px; display: flex; align-items: center; justify-content: center; color: var(--gray); }
+  .pipeline-arrow svg { width: 20px; height: 20px; }
   @media (max-width: 720px) {
     .pipeline-diagram { flex-direction: column; }
     .pipeline-arrow { transform: rotate(90deg); align-self: center; }
-    .pipeline-stage { flex: 1 1 auto; }
   }
 
-  /* ---------- Run it yourself ---------- */
-  .quickstart-steps { counter-reset: qs; margin: 0; padding: 0; list-style: none; max-width: 680px; }
-  .quickstart-steps li { counter-increment: qs; margin-bottom: 20px; }
-  .quickstart-steps .qs-label { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--navy); margin-bottom: 6px; font-size: 14.5px; }
-  .quickstart-steps .qs-label::before {
-    content: counter(qs); flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
-    background: var(--navy); color: #fff; font-size: 12.5px; display: flex; align-items: center; justify-content: center;
+  /* ---------- Recently verified ---------- */
+  .changelog-strip { display: flex; flex-direction: column; gap: 10px; max-width: 720px; margin-top: 8px; }
+  .changelog-item {
+    display: flex; gap: 16px; align-items: baseline; padding: 12px 16px; background: var(--bg);
+    border: 1px solid var(--border); border-radius: 10px;
   }
-  .quickstart-steps pre {
-    background: #14213D; color: #DCE4F0; padding: 12px 16px; border-radius: 8px;
-    overflow-x: auto; font-size: 13px; font-family: "SF Mono", Consolas, Menlo, monospace; margin: 0 0 0 34px;
+  .changelog-date { font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 12.5px; color: var(--gray); flex-shrink: 0; width: 88px; }
+  .changelog-subject { font-size: 14.5px; color: var(--charcoal); }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta {
+    background: var(--navy); color: #fff; padding: 64px 0; text-align: center;
   }
-  .quickstart-steps p { margin: 0 0 0 34px; font-size: 14px; color: var(--charcoal); }
-  .run-yourself-links { margin-top: 26px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .final-cta h2 { font-family: Georgia, serif; font-size: 30px; margin: 0 0 12px; }
+  .final-cta p { color: #C7D0E3; font-size: 16px; margin: 0 0 28px; }
+  .final-cta .hero-actions { justify-content: center; margin-bottom: 0; }
+  .final-cta .btn-secondary { background: transparent; color: #fff; border-color: #fff; }
+  .final-cta .btn-secondary:hover { background: #fff; color: var(--navy); }
 
   /* ---------- Footer ---------- */
-  footer.site-footer { border-top: 1px solid var(--border); background: var(--panel); padding: 32px 0; }
-  .footer-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
-  .footer-links { display: flex; gap: 22px; flex-wrap: wrap; font-size: 14px; }
-  .footer-links a { color: var(--navy); text-decoration: none; font-weight: 600; }
-  .footer-links a:hover { color: var(--teal); }
-  .footer-credit { font-size: 13.5px; color: var(--gray); }
+  footer.site-footer { background: var(--panel); border-top: 1px solid var(--border); padding: 48px 0 28px; }
+  .footer-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 28px; margin-bottom: 36px; }
+  .footer-col h4 { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--gray); margin: 0 0 12px; }
+  .footer-col a { display: block; color: var(--navy); text-decoration: none; font-size: 14.5px; margin-bottom: 9px; }
+  .footer-col a:hover { color: var(--teal); }
+  .footer-bottom { border-top: 1px solid var(--border); padding-top: 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 13.5px; color: var(--gray); }
 </style>
 </head>
 <body>
@@ -343,139 +168,128 @@
 <header class="site-nav">
   <div class="wrap nav-row">
     <a href="#main" class="wordmark">VERILAB</a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#demo">Try it live</a>
-      <a href="#evidence">Evidence</a>
+    <nav class="nav-center" aria-label="Primary">
       <a href="#how-it-works">How it works</a>
-      <a href="https://github.com/wwpatel/verilab" class="cta">View on GitHub</a>
+      <a href="#evidence">Evidence</a>
     </nav>
+    <div class="nav-actions">
+      <a href="/site/signin.html" class="btn btn-plain">Sign in</a>
+      <a href="/site/signup.html" class="btn btn-primary">Get started</a>
+    </div>
   </div>
 </header>
 
 <main id="main">
 
 <section class="hero wrap" aria-labelledby="hero-heading">
-  <h1 class="hero-headline" id="hero-heading">
-    The Opentrons simulator says this protocol is fine. <span class="not-fine">It would overflow a well by 140 microliters.</span> Verilab catches that before the robot moves.
-  </h1>
-  <p class="hero-subhead">
-    For anyone using AI to write lab robot protocols: Verilab is a deterministic check between the AI's plan and a real Opentrons Flex, checking volumes, step order, and tip reuse before any code reaches the robot.
-  </p>
-  <div class="hero-actions">
-    <a href="#demo" class="btn btn-primary">Try it live</a>
-    <a href="https://github.com/wwpatel/verilab" class="btn btn-secondary">View on GitHub</a>
-  </div>
-
-  <div class="hero-compare-label">Same real protocol, two real checkers, real captured output</div>
-  <div class="hero-compare">
-    <div class="compare-panel" aria-labelledby="sim-label">
-      <div class="compare-head" id="sim-label">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>
-        Official Opentrons simulator
+  <div class="hero-grid">
+    <div>
+      <h1 class="hero-headline" id="hero-heading">
+        The Opentrons simulator says this protocol is fine. <span class="not-fine">It would overflow a well by 140 microliters.</span> Verilab catches that before the robot moves.
+      </h1>
+      <p class="hero-subhead">
+        For anyone using AI to write lab robot protocols: sign up, add your own Anthropic key, and get a deterministic check on volumes, step order, and tip reuse before any code reaches the robot.
+      </p>
+      <div class="hero-actions">
+        <a href="/site/signup.html" class="btn btn-primary">Get started</a>
+        <a href="https://github.com/wwpatel/verilab" class="btn btn-secondary">View on GitHub</a>
       </div>
-      <pre class="compare-body">Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of Corning 96 Well Plate 360 µL Flat on slot C1
-	Picking up tip from A1 of Opentrons Flex 96 Tip Rack 1000 µL on slot C3
-	Aspirating 250.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot C2 at 716.0 uL/sec
-	Dispensing 250.0 uL into A1 of Corning 96 Well Plate 360 µL Flat on slot C1 at 716.0 uL/sec
-	Dropping tip into Trash Bin on slot A3
-Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of Corning 96 Well Plate 360 µL Flat on slot C1
-	Picking up tip from B1 of Opentrons Flex 96 Tip Rack 1000 µL on slot C3
-	Aspirating 250.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot C2 at 716.0 uL/sec
-	Dispensing 250.0 uL into A1 of Corning 96 Well Plate 360 µL Flat on slot C1 at 716.0 uL/sec
-	Dropping tip into Trash Bin on slot A3
-(exit code 0, no error raised)</pre>
     </div>
-    <div class="compare-panel flag" aria-labelledby="verilab-label">
-      <div class="compare-head" id="verilab-label">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12" y2="16.01"/></svg>
-        Verilab
-      </div>
-      <pre class="compare-body">FAIL: 1 violation(s) found:
-  [ERROR] step 1 (WELL_OVERFLOW): Step 1: corning_96_wellplate_360ul_flat:A1
-  now holds 500.0 uL cumulative, exceeds 360.0 uL capacity
-      suggested fix: Reduce this transfer by at least 140.0 uL, split the
-      250.0 uL across two wells, or move this reagent to a larger
-      container before step 1.</pre>
-    </div>
-  </div>
-  <p class="hero-compare-caption">
-    Both panels are the real, unedited output of running <code>demo/overflow_demo.py</code> through each tool.
-    The simulator only checks that the code runs, not that the liquid handling makes sense.
-    <strong>Two 250 microliter transfers into a 360 microliter well, 500 total: the simulator exits clean, Verilab flags it with the exact numbers.</strong>
-  </p>
-</section>
 
-<section class="features" aria-labelledby="features-heading">
-  <div class="wrap">
-    <h2 class="section-title" id="features-heading">What it checks</h2>
-    <p class="section-lede">Four checks, each deterministic, each with a real reason it exists.</p>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon f-volume" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 4 6 8.5 6 12a6 6 0 0 1-12 0c0-3.5 3-8 6-12z"/></svg>
-        </div>
-        <h3>Volume overflow</h3>
-        <p>Checks cumulative liquid added to a well, across every step, against that well's real container capacity.</p>
+    <div class="hero-mock" role="img" aria-label="A verification trace: protocol code appears, Verilab reads it, checks volumes, order, and tip use, then flags a real well overflow with the exact numbers.">
+      <div class="hero-mock-bar">
+        <span class="hero-mock-dot"></span><span class="hero-mock-dot"></span><span class="hero-mock-dot"></span>
+        <span class="hero-mock-title">Verifying: Overflow Demo</span>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon f-order" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M8 7l8 4M8 17l8-4"/></svg>
-        </div>
-        <h3>Step ordering</h3>
-        <p>Checks that nothing is drawn from, incubated, or measured before an earlier step has actually filled it.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon f-tip" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6l1 6-4 13-4-13 1-6z"/><path d="M9 8h6"/></svg>
-        </div>
-        <h3>Tip contamination</h3>
-        <p>Runs the generated code for real, with aspirate and drop_tip instrumented, and flags a tip that touches two reagents before being replaced.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon f-gen" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3.5v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9v-5L12 3z"/><path d="M9 12.5l2 2 4-4.5"/></svg>
-        </div>
-        <h3>Verified code generation</h3>
-        <p>Only generates real Opentrons Python for a plan that has already passed every check above, nothing is generated first and checked after.</p>
+      <div class="hero-mock-body">
+        <pre class="hero-mock-protocol" id="heroProtocol">Loading a real protocol...</pre>
+        <div class="hero-trace-stages" id="heroStages"></div>
+        <div class="hero-trace-violation" id="heroViolation"></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="demo" aria-labelledby="demo-heading">
+<div class="tab-strip-wrap">
   <div class="wrap">
-    <h2 class="section-title" id="demo-heading">Try it live</h2>
-    <p class="section-lede">
-      Paste a protocol, or load a real example below, then click Verify Protocol. Every submission
-      here, edited or not, calls the real backend: real extraction, real checks, real code generation.
-      Nothing on this page is precomputed.
-    </p>
-
-    <label for="protocolName" class="sr-only">Protocol name</label>
-    <input type="text" id="protocolName" placeholder="Protocol name (optional)">
-
-    <label for="protocolText" class="sr-only">Protocol text</label>
-    <textarea id="protocolText" placeholder="Paste a wet-lab protocol here, or load an example below."></textarea>
-
-    <div class="examples-row" id="examplesRow" aria-label="Load an example protocol">
-      <span class="sr-only">Load example:</span>
-      <span class="loading-line" id="examplesLoading">Loading examples...</span>
+    <div class="tab-strip" role="tablist" aria-label="Jump to a section">
+      <button class="tab-btn" type="button" data-target="feature-overflow">Catch overflows</button>
+      <button class="tab-btn" type="button" data-target="feature-ordering">Catch ordering errors</button>
+      <button class="tab-btn" type="button" data-target="feature-tip">Catch tip contamination</button>
+      <button class="tab-btn" type="button" data-target="feature-codegen">Generate verified code</button>
+      <button class="tab-btn" type="button" data-target="evidence">See the evidence</button>
     </div>
+  </div>
+</div>
 
-    <div class="actions-row">
-      <button class="primary" id="runBtn">Verify Protocol</button>
-      <div class="stage-tracker" id="stageTracker" aria-live="polite"></div>
+<section id="feature-overflow" class="feature-section" aria-labelledby="feat-overflow-heading">
+  <div class="wrap">
+    <div class="feature-head reveal">
+      <span class="kicker">Volume overflow</span>
+      <h2 class="section-title" id="feat-overflow-heading">Catch overflows before they happen</h2>
+      <p class="section-lede">Verilab checks cumulative liquid added to a well, across every step, against that well's real container capacity, pulled from the real Opentrons catalog.</p>
+      <div class="micro-callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2c3 4 6 8.5 6 12a6 6 0 0 1-12 0c0-3.5 3-8 6-12z"/></svg>
+        <div><span class="claim">The simulator would have run this exact code without complaint.</span> <span class="support">Two 250 microliter transfers into a 360 microliter well simulate cleanly; Verilab is the layer that actually does the arithmetic.</span></div>
+      </div>
     </div>
+    <div class="feature-mock-frame reveal" id="mockOverflow"><p class="loading-line">Loading real result...</p></div>
+  </div>
+</section>
 
-    <div id="results"></div>
+<section id="feature-ordering" class="feature-section" aria-labelledby="feat-ordering-heading">
+  <div class="wrap">
+    <div class="feature-head reveal">
+      <span class="kicker">Step ordering</span>
+      <h2 class="section-title" id="feat-ordering-heading">Catch ordering errors</h2>
+      <p class="section-lede">Nothing can be drawn from, incubated, or measured before an earlier step has actually filled it. Verilab checks the physical sequence, not just the syntax.</p>
+      <div class="micro-callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M8 7l8 4M8 17l8-4"/></svg>
+        <div><span class="claim">A well referenced before it's ever filled is a silent no-op on a real robot.</span> <span class="support">The pipette draws air, and the mistake is invisible until someone checks the physical plate afterward.</span></div>
+      </div>
+    </div>
+    <div class="feature-mock-frame reveal" id="mockOrdering"><p class="loading-line">Loading real result...</p></div>
+  </div>
+</section>
+
+<section id="feature-tip" class="feature-section" aria-labelledby="feat-tip-heading">
+  <div class="wrap">
+    <div class="feature-head reveal">
+      <span class="kicker">Tip contamination</span>
+      <h2 class="section-title" id="feat-tip-heading">Catch tip contamination</h2>
+      <p class="section-lede">Verilab runs the generated code for real, with aspirate and drop_tip instrumented, and flags a tip that touches two reagents before being replaced.</p>
+      <div class="micro-callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2h6l1 6-4 13-4-13 1-6z"/><path d="M9 8h6"/></svg>
+        <div><span class="claim">This check does not read the code, it runs it.</span> <span class="support">Aspirate and drop_tip calls are instrumented during a real execution, so the finding is based on what the tip actually touched, not a guess from the source.</span></div>
+      </div>
+    </div>
+    <div class="feature-mock-frame reveal" id="mockTip"><p class="loading-line">Loading real result...</p></div>
+  </div>
+</section>
+
+<section id="feature-codegen" class="feature-section" aria-labelledby="feat-codegen-heading">
+  <div class="wrap">
+    <div class="feature-head reveal">
+      <span class="kicker">Verified code generation</span>
+      <h2 class="section-title" id="feat-codegen-heading">Generate verified code</h2>
+      <p class="section-lede">Real Opentrons Python is only ever generated for a plan that has already passed every check above. Nothing is generated first and checked after.</p>
+      <div class="micro-callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3.5v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9v-5L12 3z"/><path d="M9 12.5l2 2 4-4.5"/></svg>
+        <div><span class="claim">This is a real published protocol, extracted, checked, and generated end to end.</span> <span class="support">Every step it shows, including "3 checks passed," is real pipeline output, not a placeholder for a clean run.</span></div>
+      </div>
+    </div>
+    <div class="feature-mock-frame reveal" id="mockCodegen"><p class="loading-line">Loading real result...</p></div>
   </div>
 </section>
 
 <section id="evidence" class="evidence" aria-labelledby="evidence-heading">
   <div class="wrap">
-    <h2 class="section-title" id="evidence-heading">Evidence</h2>
-    <p class="section-lede">Real numbers, not a testimonial. Pulled directly from evidence_results.json, produced by build_evidence.py against real fixtures already in this repo.</p>
-    <div id="evidencePanel">
+    <div class="reveal">
+      <span class="kicker">Evidence</span>
+      <h2 class="section-title" id="evidence-heading">Real numbers, not a testimonial</h2>
+      <p class="section-lede">Pulled directly from evidence_results.json, produced by build_evidence.py against real fixtures already in this repo.</p>
+    </div>
+    <div id="evidencePanel" class="reveal">
       <p class="loading-line">Loading evidence data...</p>
     </div>
   </div>
@@ -483,10 +297,13 @@ Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of C
 
 <section id="how-it-works" aria-labelledby="how-heading">
   <div class="wrap">
-    <h2 class="section-title" id="how-heading">How it works</h2>
-    <p class="section-lede">Five stages. Only one of them touches an LLM; the rest are plain deterministic code, the same code this page just called.</p>
+    <div class="reveal">
+      <span class="kicker">How it works</span>
+      <h2 class="section-title" id="how-heading">Five stages, one of them an LLM</h2>
+      <p class="section-lede">The rest is plain deterministic code, the same code the sections above just showed you the real output of.</p>
+    </div>
 
-    <div class="pipeline-diagram" role="img" aria-label="Pipeline: protocol text goes to extractor (LLM), then labware resolver, checker, and tip contamination check (all deterministic), then generator (deterministic), producing verified robot code.">
+    <div class="pipeline-diagram reveal" role="img" aria-label="Pipeline: protocol text goes to extractor (LLM), then labware resolver, checker, and tip contamination check (all deterministic), then generator (deterministic), producing verified robot code.">
       <div class="pipeline-stage">
         <div class="stage-box llm">
           <div class="stage-num">Stage 1</div>
@@ -496,9 +313,7 @@ Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of C
           <span class="stage-tag llm">LLM</span>
         </div>
       </div>
-      <div class="pipeline-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </div>
+      <div class="pipeline-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       <div class="pipeline-stage">
         <div class="stage-box deterministic">
           <div class="stage-num">Stage 2</div>
@@ -508,9 +323,7 @@ Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of C
           <span class="stage-tag deterministic">Deterministic</span>
         </div>
       </div>
-      <div class="pipeline-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </div>
+      <div class="pipeline-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       <div class="pipeline-stage">
         <div class="stage-box deterministic">
           <div class="stage-num">Stage 3</div>
@@ -520,9 +333,7 @@ Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of C
           <span class="stage-tag deterministic">Deterministic</span>
         </div>
       </div>
-      <div class="pipeline-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </div>
+      <div class="pipeline-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       <div class="pipeline-stage">
         <div class="stage-box deterministic">
           <div class="stage-num">Stage 4</div>
@@ -532,9 +343,7 @@ Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of C
           <span class="stage-tag deterministic">Deterministic</span>
         </div>
       </div>
-      <div class="pipeline-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </div>
+      <div class="pipeline-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       <div class="pipeline-stage">
         <div class="stage-box deterministic">
           <div class="stage-num">Stage 5</div>
@@ -548,389 +357,187 @@ Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of C
   </div>
 </section>
 
-<section id="run-it-yourself" aria-labelledby="run-heading">
+<section id="recently-verified" aria-labelledby="recent-heading">
   <div class="wrap">
-    <h2 class="section-title" id="run-heading">Run it yourself</h2>
-    <p class="section-lede">Prefer to self-host rather than use the hosted demo above? The same pipeline runs locally with your own Anthropic API key.</p>
-
-    <ol class="quickstart-steps">
-      <li>
-        <div class="qs-label">Clone the repo</div>
-        <pre>git clone https://github.com/wwpatel/verilab.git
-cd verilab</pre>
-      </li>
-      <li>
-        <div class="qs-label">Install dependencies</div>
-        <pre>pip install -r requirements.txt</pre>
-        <p>Requires Python 3.10 or newer.</p>
-      </li>
-      <li>
-        <div class="qs-label">Set your Anthropic API key</div>
-        <pre>echo "ANTHROPIC_API_KEY=sk-ant-..." &gt; .env</pre>
-        <p>.env is already covered by .gitignore, it will not be committed.</p>
-      </li>
-      <li>
-        <div class="qs-label">Run the local Verification Console</div>
-        <pre>uvicorn app:app --reload</pre>
-        <p>Then open http://127.0.0.1:8000. This is the same local console this public site's live demo calls, just running on your own machine and your own key.</p>
-      </li>
-    </ol>
-
-    <div class="run-yourself-links">
-      <a href="https://github.com/wwpatel/verilab" class="btn btn-secondary">View on GitHub</a>
-      <a href="https://github.com/wwpatel/verilab#readme" class="btn btn-secondary">Read the full README</a>
+    <div class="reveal">
+      <span class="kicker">Recently verified</span>
+      <h2 class="section-title" id="recent-heading">Active, dated work</h2>
+      <p class="section-lede">Real commits from this project's own history, not placeholder entries.</p>
+    </div>
+    <div class="changelog-strip reveal" id="changelogStrip">
+      <p class="loading-line">Loading recent activity...</p>
     </div>
   </div>
 </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="wrap footer-row">
-    <div class="footer-links">
-      <a href="https://github.com/wwpatel/verilab">GitHub</a>
-      <a href="https://github.com/wwpatel/verilab/blob/main/LICENSE">MIT License</a>
+<section class="final-cta" aria-labelledby="cta-heading">
+  <div class="wrap">
+    <h2 id="cta-heading">See it catch something real</h2>
+    <p>Sign up, add your own Anthropic key, and verify a real protocol in under a minute.</p>
+    <div class="hero-actions">
+      <a href="/site/signup.html" class="btn btn-primary">Get started</a>
+      <a href="https://github.com/wwpatel/verilab" class="btn btn-secondary">View on GitHub</a>
     </div>
-    <div class="footer-credit">Built by <a href="https://github.com/wwpatel">wwpatel</a>.</div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#how-it-works">How it works</a>
+        <a href="#evidence">Evidence</a>
+        <a href="/site/signup.html">Get started</a>
+        <a href="/site/signin.html">Sign in</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="https://github.com/wwpatel/verilab">GitHub repo</a>
+        <a href="https://github.com/wwpatel/verilab#readme">README and quickstart</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="https://github.com/wwpatel/verilab/blob/main/LICENSE">MIT License</a>
+        <a href="https://github.com/wwpatel">wwpatel on GitHub</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Built by <a href="https://github.com/wwpatel">wwpatel</a>. Validated on the Opentrons Flex only.</span>
+      <span>&copy; 2026 Verilab</span>
+    </div>
   </div>
 </footer>
 
-<script src="config.js"></script>
+<script src="shared-result-view.js"></script>
 <script>
-const API_BASE = (window.VERILAB_API_BASE || '').replace(/\/$/, '');
+const VL = window.VerilabResultView;
 
-const ICONS = {
-  volume: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 4 6 8.5 6 12a6 6 0 0 1-12 0c0-3.5 3-8 6-12z"/></svg>',
-  order: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M8 7l8 4M8 17l8-4"/></svg>',
-  tip: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6l1 6-4 13-4-13 1-6z"/><path d="M9 8h6"/></svg>',
-  data: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.6-2.5 2-2.5 4"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg>',
-  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>',
-  stop: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="8" x2="16" y2="16"/><line x1="16" y1="8" x2="8" y2="16"/></svg>',
-};
+// ---------------- Tab strip: smooth scroll + active state ----------------
 
-const STAGE_ORDER = [
-  { stage: 'reading', label: 'Reading the protocol' },
-  { stage: 'identify', label: 'Identifying containers and reagents' },
-  { stage: 'checking', label: 'Checking volumes, order, and tip use' },
-  { stage: 'generating', label: 'Preparing robot code' },
-];
+const tabButtons = Array.from(document.querySelectorAll('.tab-btn'));
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = document.getElementById(btn.dataset.target);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
 
-function el(tag, attrs, children) {
-  const node = document.createElement(tag);
-  for (const [k, v] of Object.entries(attrs || {})) {
-    if (k === 'html') node.innerHTML = v;
-    else if (k.startsWith('on')) node.addEventListener(k.slice(2), v);
-    else node.setAttribute(k, v);
-  }
-  for (const c of (children || [])) {
-    if (c == null) continue;
-    node.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
-  }
-  return node;
-}
-
-function renderStageTracker(container, activeStage) {
-  container.innerHTML = '';
-  let reachedActive = false;
-  for (const s of STAGE_ORDER) {
-    const isActive = s.stage === activeStage;
-    const isDone = !reachedActive && !isActive;
-    if (isActive) reachedActive = true;
-    const cls = isActive ? 'step active' : (reachedActive ? 'step' : 'step done');
-    container.appendChild(el('span', { class: cls }, [s.label]));
-  }
-}
-
-// ---------------- Examples ----------------
-
-async function loadExamples() {
-  const row = document.getElementById('examplesRow');
-  const loading = document.getElementById('examplesLoading');
-  try {
-    const res = await fetch(API_BASE + '/api/examples');
-    const examples = await res.json();
-    loading.remove();
-    for (const ex of examples) {
-      const btn = el('button', {
-        type: 'button', class: 'example-btn',
-        onclick: () => loadExample(ex.id),
-      }, ['Load example: ' + ex.label]);
-      row.appendChild(btn);
-    }
-  } catch (e) {
-    loading.textContent = 'Could not load examples: ' + e.message;
-  }
-}
-
-async function loadExample(id) {
-  const res = await fetch(API_BASE + '/api/examples/' + id);
-  const data = await res.json();
-  if (data.error) { alert(data.error); return; }
-  document.getElementById('protocolText').value = data.content;
-  document.getElementById('protocolName').value = data.protocol_name;
-  document.getElementById('protocolText').focus();
-}
-
-// ---------------- Verify (streaming) ----------------
-
-async function runVerify() {
-  const btn = document.getElementById('runBtn');
-  const text = document.getElementById('protocolText').value;
-  const name = document.getElementById('protocolName').value || 'Untitled Protocol';
-  const results = document.getElementById('results');
-  const tracker = document.getElementById('stageTracker');
-
-  if (!text.trim()) { alert('Paste a protocol first, or load an example.'); return; }
-
-  btn.disabled = true;
-  btn.textContent = 'Verifying...';
-  results.innerHTML = '';
-  renderStageTracker(tracker, 'reading');
-
-  try {
-    const res = await fetch(API_BASE + '/api/verify/stream', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ protocol_text: text, protocol_name: name, input_kind: 'auto' }),
-    });
-
-    if (res.status === 429) {
-      const payload = await res.json();
-      tracker.innerHTML = '';
-      results.appendChild(el('div', { class: 'error-box' }, [payload.error || 'Rate limit exceeded. Try again shortly.']));
-      return;
-    }
-
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = '';
-    let finalResult = null;
-    let errorPayload = null;
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buffer += decoder.decode(value, { stream: true });
-      let lines = buffer.split('\n');
-      buffer = lines.pop();
-      for (const line of lines) {
-        if (!line.trim()) continue;
-        const evt = JSON.parse(line);
-        if (evt.type === 'stage') {
-          renderStageTracker(tracker, evt.stage);
-        } else if (evt.type === 'final') {
-          finalResult = evt.result;
-        } else if (evt.type === 'error') {
-          errorPayload = evt;
-        }
+if ('IntersectionObserver' in window) {
+  const sectionIds = tabButtons.map(b => b.dataset.target);
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+  const tabObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        tabButtons.forEach(b => b.classList.toggle('active', b.dataset.target === entry.target.id));
       }
     }
-
-    tracker.innerHTML = '';
-    if (errorPayload) {
-      results.innerHTML = '';
-      results.appendChild(el('div', { class: 'error-box' }, ['Error: ' + errorPayload.error]));
-    } else if (finalResult) {
-      renderResult(results, finalResult);
-    } else {
-      results.appendChild(el('div', { class: 'error-box' }, ['No result was returned.']));
-    }
-  } catch (e) {
-    results.innerHTML = '';
-    results.appendChild(el('div', { class: 'error-box' }, ['Request failed: ' + e.message]));
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Verify Protocol';
-  }
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  sections.forEach(s => tabObserver.observe(s));
 }
 
-// ---------------- Rendering: Layer 1, 2, 3 ----------------
+// ---------------- Scroll reveal ----------------
 
-let violationSeq = 0;
-
-function renderResult(container, data) {
-  container.innerHTML = '';
-
-  const cleared = data.overall_status === 'CLEARED';
-  const violations = data.checks.violations || [];
-  const errorCount = data.checks.error_count;
-  const warningCount = data.checks.warning_count;
-
-  const headline = cleared ? 'Cleared for the robot' : 'Do not run yet';
-  let subline;
-  if (violations.length === 0) {
-    subline = 'No problems found. Reviewed against volume limits, step order, and tip reuse.';
-  } else if (cleared) {
-    subline = warningCount + ' item' + (warningCount === 1 ? '' : 's') + ' worth a second look, nothing blocking.';
-  } else {
-    subline = errorCount + ' problem' + (errorCount === 1 ? '' : 's') + ' found before this protocol can run.';
-  }
-
-  const banner = el('div', { class: 'status-banner ' + (cleared ? 'cleared' : 'blocked') }, [
-    el('div', { class: 'status-icon', html: cleared ? ICONS.check : ICONS.stop }, []),
-    el('div', { class: 'status-text' }, [
-      el('div', { class: 'headline' }, [headline]),
-      el('div', { class: 'subline' }, [subline]),
-    ]),
-  ]);
-  container.appendChild(banner);
-
-  if (violations.length === 0) {
-    const box = el('div', { class: 'checked-box' }, [
-      el('strong', {}, ['Checked against:']),
-      el('ul', {}, (data.checks_run || []).map(c => el('li', {}, [c]))),
-      el('p', { style: 'margin-top:10px;color:var(--gray);font-size:13.5px;' }, [data.checks_against_text || '']),
-    ]);
-    container.appendChild(box);
-  } else {
-    for (const v of violations) {
-      container.appendChild(renderViolationCard(v));
+if ('IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
     }
-  }
-
-  if (data.resources && data.resources.summary_text) {
-    const box = el('div', { class: 'resources-box' }, [
-      el('h3', { style: 'color:var(--navy);font-family:Georgia,serif;font-size:16px;' }, ['Resources needed']),
-      el('pre', { class: 'code-readout' }, [data.resources.summary_text]),
-    ]);
-    container.appendChild(box);
-  }
-
-  if (data.generated_code) {
-    const gc = data.generated_code;
-    const box = el('div', { class: 'code-box' }, [
-      el('h3', { style: 'color:var(--navy);font-family:Georgia,serif;font-size:16px;' },
-        [cleared ? 'Code ready to send to the robot' : 'Robot code']),
-    ]);
-    if (gc.skipped) {
-      box.appendChild(el('p', {}, [gc.reason]));
-    } else if (gc.code) {
-      box.appendChild(el('pre', { class: 'code-readout' }, [gc.code]));
-    } else if (gc.error) {
-      box.appendChild(el('div', { class: 'error-box' }, ['Code generation failed: ' + gc.error]));
-    }
-    container.appendChild(box);
-  }
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+} else {
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
 }
 
-function renderViolationCard(v) {
-  violationSeq += 1;
-  const detailsId = 'vdetails-' + violationSeq;
-  const techId = 'vtech-' + violationSeq;
+// ---------------- Precomputed marketing examples ----------------
 
-  const catIcon = el('div', { class: 'cat-icon cat-' + v.category, html: ICONS[v.category] || ICONS.data, 'aria-hidden': 'true' }, []);
+async function loadMarketingExamples() {
+  const res = await fetch('data/marketing_examples.json');
+  const data = await res.json();
+  const ex = data.examples;
 
-  const toggleBtn = el('button', {
-    type: 'button', class: 'details-toggle', 'aria-expanded': 'false', 'aria-controls': detailsId,
-  }, ['View details']);
+  VL.renderResult(document.getElementById('mockOverflow'), ex.overflow.result);
+  VL.renderResult(document.getElementById('mockOrdering'), ex.ordering.result);
+  VL.renderResult(document.getElementById('mockTip'), ex.tip_contamination.result);
+  VL.renderResult(document.getElementById('mockCodegen'), ex.clean.result);
 
-  const head = el('div', { class: 'card-head' }, [
-    catIcon,
-    el('div', { class: 'card-main' }, [
-      el('div', { class: 'card-tags' }, [
-        el('span', { class: 'cat-label' }, [v.category_label]),
-        el('span', { class: 'sev-badge sev-' + v.severity }, [v.severity]),
-      ]),
-      el('div', { class: 'card-sentence' }, [v.layer1_summary]),
-    ]),
-    toggleBtn,
-  ]);
+  runHeroTrace(ex.overflow);
+}
 
-  const loc = v.layer2.location || {};
-  const locChips = [];
-  if (loc.step != null) locChips.push(el('span', { class: 'loc-chip' }, ['Step ' + loc.step]));
-  if (loc.reagent) locChips.push(el('span', { class: 'loc-chip' }, [loc.reagent]));
-  if (loc.container_well) locChips.push(el('span', { class: 'loc-chip' }, ['Well ' + loc.container_well]));
-  if (loc.code_line) locChips.push(el('span', { class: 'loc-chip' }, ['Generated code, line ' + loc.code_line]));
+function runHeroTrace(overflowExample) {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const protocolEl = document.getElementById('heroProtocol');
+  const stagesEl = document.getElementById('heroStages');
+  const violationEl = document.getElementById('heroViolation');
 
-  const details = el('div', { id: detailsId, class: 'card-details', hidden: 'hidden' }, [
-    el('div', { class: 'detail-block' }, [
-      el('div', { class: 'detail-label' }, ['Exact location']),
-      el('div', { class: 'detail-body' }, locChips.length ? locChips : ['No structured location data was available for this item.']),
-    ]),
-    el('div', { class: 'detail-block' }, [
-      el('div', { class: 'detail-label' }, ["What's happening, in numbers"]),
-      el('div', { class: 'detail-body' }, [v.layer2.numbers || v.message]),
-    ]),
-    el('div', { class: 'detail-block' }, [
-      el('div', { class: 'detail-label' }, ['What could go wrong']),
-      el('div', { class: 'detail-body' }, [v.layer2.risk]),
-    ]),
-    el('div', { class: 'detail-block' }, [
-      el('div', { class: 'detail-label' }, ['Recommended corrected instruction']),
-      el('div', { class: 'fix-box' }, [v.layer2.recommended_fix]),
-    ]),
-  ]);
+  const snippetLines = overflowExample.source_text.split('\n').slice(0, 8);
+  protocolEl.textContent = snippetLines.join('\n');
 
-  const techToggle = el('button', {
-    type: 'button', class: 'tech-toggle', 'aria-expanded': 'false', 'aria-controls': techId,
-  }, ['Show technical detail']);
-
-  const l3 = v.layer3 || {};
-  const techLines = [];
-  techLines.push('# extracted step (raw)');
-  techLines.push(l3.extracted_step ? JSON.stringify(l3.extracted_step, null, 2) : 'null  (no structured step data for this input)');
-  techLines.push('');
-  techLines.push('# resolved labware capacity (raw)');
-  techLines.push(l3.resolved_capacity ? JSON.stringify(l3.resolved_capacity, null, 2) : 'null  (not applicable to this finding)');
-  techLines.push('');
-  techLines.push('# generated code');
-  if (l3.generated_code_line) {
-    techLines.push('line ' + l3.generated_code_line + ': ' + (l3.generated_code_snippet || ''));
-  } else {
-    techLines.push('null  (no corresponding line found)');
-  }
-  techLines.push('');
-  techLines.push('# checker output (verbatim)');
-  techLines.push('code: ' + v.code);
-  techLines.push('message: ' + v.message);
-  techLines.push('suggested_fix: ' + (v.suggested_fix || 'null'));
-
-  const techBlock = el('pre', { id: techId, class: 'tech-block', hidden: 'hidden' }, [techLines.join('\n')]);
-
-  details.appendChild(techToggle);
-  details.appendChild(techBlock);
-
-  toggleBtn.addEventListener('click', () => {
-    const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-    toggleBtn.setAttribute('aria-expanded', String(!expanded));
-    if (expanded) { details.setAttribute('hidden', 'hidden'); }
-    else { details.removeAttribute('hidden'); }
-    toggleBtn.textContent = expanded ? 'View details' : 'Hide details';
+  const stages = [
+    { label: 'Reading the protocol' },
+    { label: 'Checking volumes, order, and tip use' },
+  ];
+  stagesEl.innerHTML = '';
+  const stageNodes = stages.map(s => {
+    const node = VL.el('div', { class: 'hero-trace-stage' }, [
+      VL.el('span', { class: 'dot' }, []),
+      s.label,
+    ]);
+    stagesEl.appendChild(node);
+    return node;
   });
 
-  techToggle.addEventListener('click', () => {
-    const expanded = techToggle.getAttribute('aria-expanded') === 'true';
-    techToggle.setAttribute('aria-expanded', String(!expanded));
-    if (expanded) { techBlock.setAttribute('hidden', 'hidden'); }
-    else { techBlock.removeAttribute('hidden'); }
-    techToggle.textContent = expanded ? 'Show technical detail' : 'Hide technical detail';
-  });
+  const violation = overflowExample.result.checks.violations[0];
 
-  const sevClass = v.severity === 'error' ? 'sev-error' : 'sev-warning';
-  return el('div', { class: 'violation-card ' + sevClass }, [head, details]);
+  function showViolation() {
+    violationEl.innerHTML = '';
+    violationEl.appendChild(VL.renderViolationCard(violation));
+    violationEl.classList.add('show');
+  }
+
+  if (reduceMotion) {
+    protocolEl.classList.add('show');
+    stageNodes.forEach(n => n.classList.add('show', 'active'));
+    showViolation();
+    return;
+  }
+
+  setTimeout(() => protocolEl.classList.add('show'), 200);
+  setTimeout(() => { stageNodes[0].classList.add('show', 'spin'); }, 800);
+  setTimeout(() => { stageNodes[0].classList.remove('spin'); stageNodes[0].classList.add('active'); }, 1600);
+  setTimeout(() => { stageNodes[1].classList.add('show', 'spin'); }, 1800);
+  setTimeout(() => { stageNodes[1].classList.remove('spin'); stageNodes[1].classList.add('active'); }, 2700);
+  setTimeout(showViolation, 2900);
 }
+
+loadMarketingExamples();
 
 // ---------------- Evidence panel ----------------
 
 async function loadEvidence() {
   const panel = document.getElementById('evidencePanel');
   try {
-    const res = await fetch(API_BASE + '/api/evidence');
+    const res = await fetch('/api/evidence');
     const data = await res.json();
     if (data.error) {
       panel.innerHTML = '';
-      panel.appendChild(el('div', { class: 'error-box' }, [data.error]));
+      panel.appendChild(VL.el('div', { class: 'error-box' }, [data.error]));
       return;
     }
     renderEvidence(panel, data);
   } catch (e) {
     panel.innerHTML = '';
-    panel.appendChild(el('div', { class: 'error-box' }, ['Could not load evidence: ' + e.message]));
+    panel.appendChild(VL.el('div', { class: 'error-box' }, ['Could not load evidence: ' + e.message]));
   }
 }
 
 function renderEvidence(panel, data) {
+  const el = VL.el;
   panel.innerHTML = '';
   const grid = el('div', { class: 'evidence-grid' }, []);
 
@@ -973,7 +580,7 @@ function renderEvidence(panel, data) {
       el('div', { style: 'font-size:13.5px;' }, [fa.description]),
       el('div', { style: 'font-size:12px;color:var(--gray);margin-top:4px;' }, ['Source: ' + fa.source_file]),
       el('div', { class: 'fa-result' }, [
-        el('span', { html: ICONS.check, 'aria-hidden': 'true' }, []),
+        el('span', { html: VL.ICONS.check, 'aria-hidden': 'true' }, []),
         fa.result,
       ]),
     ])),
@@ -988,18 +595,14 @@ function renderEvidence(panel, data) {
 }
 
 function buildScoreboardTable(protocols) {
+  const el = VL.el;
   const table = el('table', { class: 'scoreboard-table' }, []);
   const thead = el('thead', {}, [el('tr', {}, [
-    el('th', {}, ['Protocol']),
-    el('th', {}, ['Steps']),
-    el('th', {}, ['Errors']),
-    el('th', {}, ['Warnings']),
-    el('th', {}, ['Result']),
+    el('th', {}, ['Protocol']), el('th', {}, ['Steps']), el('th', {}, ['Errors']),
+    el('th', {}, ['Warnings']), el('th', {}, ['Result']),
   ])]);
   const tbody = el('tbody', {}, protocols.map(p => el('tr', {}, [
-    el('td', {}, [p.name]),
-    el('td', {}, [String(p.step_count)]),
-    el('td', {}, [String(p.error_count)]),
+    el('td', {}, [p.name]), el('td', {}, [String(p.step_count)]), el('td', {}, [String(p.error_count)]),
     el('td', {}, [String(p.warning_count)]),
     el('td', {}, [el('span', { class: 'status-pill ' + p.status }, [p.status.replace(/_/g, ' ')])]),
   ])));
@@ -1008,9 +611,29 @@ function buildScoreboardTable(protocols) {
   return el('div', { class: 'table-scroll' }, [table]);
 }
 
-document.getElementById('runBtn').addEventListener('click', runVerify);
-loadExamples();
 loadEvidence();
+
+// ---------------- Recently verified (real git history) ----------------
+
+async function loadChangelog() {
+  const strip = document.getElementById('changelogStrip');
+  try {
+    const res = await fetch('data/changelog.json');
+    const data = await res.json();
+    strip.innerHTML = '';
+    for (const entry of data.entries) {
+      strip.appendChild(VL.el('div', { class: 'changelog-item' }, [
+        VL.el('span', { class: 'changelog-date' }, [entry.date]),
+        VL.el('span', { class: 'changelog-subject' }, [entry.subject]),
+      ]));
+    }
+  } catch (e) {
+    strip.innerHTML = '';
+    strip.appendChild(VL.el('div', { class: 'error-box' }, ['Could not load recent activity: ' + e.message]));
+  }
+}
+
+loadChangelog();
 </script>
 </body>
 </html>
