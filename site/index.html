@@ -276,6 +276,39 @@
   .false-alarm-case .fa-result { display: flex; align-items: center; gap: 6px; color: var(--green); font-weight: 700; font-size: 13.5px; margin-top: 8px; }
   .false-alarm-case .fa-result svg { width: 16px; height: 16px; flex-shrink: 0; }
   .scope-line { margin-top: 18px; font-size: 14px; background: #FFF8EA; border: 1px solid var(--gold); border-radius: 8px; padding: 14px 18px; color: var(--charcoal); }
+
+  /* ---------- How it works ---------- */
+  .pipeline-diagram {
+    display: flex; align-items: stretch; gap: 0; overflow-x: auto; padding: 8px 2px 18px;
+  }
+  .pipeline-stage { flex: 1 0 190px; display: flex; flex-direction: column; align-items: stretch; }
+  .stage-box {
+    border: 2px solid var(--border); border-radius: 12px; padding: 18px 16px; background: var(--panel);
+    display: flex; flex-direction: column; gap: 10px; height: 100%;
+  }
+  .stage-box.llm { border-color: var(--violet); }
+  .stage-box.deterministic { border-color: var(--teal); }
+  .stage-num { font-size: 12px; font-weight: 700; color: var(--gray); letter-spacing: 0.4px; }
+  .stage-icon { width: 30px; height: 30px; }
+  .stage-box.llm .stage-icon { color: var(--violet); }
+  .stage-box.deterministic .stage-icon { color: var(--teal); }
+  .stage-name { font-family: Georgia, serif; font-size: 16px; color: var(--navy); font-weight: bold; }
+  .stage-caption { font-size: 13px; color: var(--charcoal); flex: 1; }
+  .stage-tag {
+    align-self: flex-start; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;
+    padding: 3px 9px; border-radius: 10px;
+  }
+  .stage-tag.llm { background: #EBE7F3; color: var(--violet); }
+  .stage-tag.deterministic { background: #E4F1F1; color: var(--teal); }
+  .pipeline-arrow {
+    flex: 0 0 34px; display: flex; align-items: center; justify-content: center; color: var(--gray);
+  }
+  .pipeline-arrow svg { width: 22px; height: 22px; }
+  @media (max-width: 720px) {
+    .pipeline-diagram { flex-direction: column; }
+    .pipeline-arrow { transform: rotate(90deg); align-self: center; }
+    .pipeline-stage { flex: 1 1 auto; }
+  }
 </style>
 </head>
 <body>
@@ -418,6 +451,73 @@ Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of C
     <p class="section-lede">Real numbers, not a testimonial. Pulled directly from evidence_results.json, produced by build_evidence.py against real fixtures already in this repo.</p>
     <div id="evidencePanel">
       <p class="loading-line">Loading evidence data...</p>
+    </div>
+  </div>
+</section>
+
+<section id="how-it-works" aria-labelledby="how-heading">
+  <div class="wrap">
+    <h2 class="section-title" id="how-heading">How it works</h2>
+    <p class="section-lede">Five stages. Only one of them touches an LLM; the rest are plain deterministic code, the same code this page just called.</p>
+
+    <div class="pipeline-diagram" role="img" aria-label="Pipeline: protocol text goes to extractor (LLM), then labware resolver, checker, and tip contamination check (all deterministic), then generator (deterministic), producing verified robot code.">
+      <div class="pipeline-stage">
+        <div class="stage-box llm">
+          <div class="stage-num">Stage 1</div>
+          <svg class="stage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v12H8l-4 4V4z"/></svg>
+          <div class="stage-name">Extractor</div>
+          <div class="stage-caption">Reads English protocol text and turns it into structured steps: actions, volumes, sources, destinations.</div>
+          <span class="stage-tag llm">LLM</span>
+        </div>
+      </div>
+      <div class="pipeline-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
+      <div class="pipeline-stage">
+        <div class="stage-box deterministic">
+          <div class="stage-num">Stage 2</div>
+          <svg class="stage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg>
+          <div class="stage-name">Labware resolver</div>
+          <div class="stage-caption">Matches each container to a real entry in the Opentrons catalog and reads its actual well capacities.</div>
+          <span class="stage-tag deterministic">Deterministic</span>
+        </div>
+      </div>
+      <div class="pipeline-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
+      <div class="pipeline-stage">
+        <div class="stage-box deterministic">
+          <div class="stage-num">Stage 3</div>
+          <svg class="stage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2c3 4 6 8.5 6 12a6 6 0 0 1-12 0c0-3.5 3-8 6-12z"/></svg>
+          <div class="stage-name">Checker</div>
+          <div class="stage-caption">Checks cumulative volume against real capacity, source depletion, and physical step ordering.</div>
+          <span class="stage-tag deterministic">Deterministic</span>
+        </div>
+      </div>
+      <div class="pipeline-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
+      <div class="pipeline-stage">
+        <div class="stage-box deterministic">
+          <div class="stage-num">Stage 4</div>
+          <svg class="stage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2h6l1 6-4 13-4-13 1-6z"/><path d="M9 8h6"/></svg>
+          <div class="stage-name">Tip contamination check</div>
+          <div class="stage-caption">Runs the generated code for real, with aspirate and drop_tip instrumented, to catch unsafe tip reuse.</div>
+          <span class="stage-tag deterministic">Deterministic</span>
+        </div>
+      </div>
+      <div class="pipeline-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
+      <div class="pipeline-stage">
+        <div class="stage-box deterministic">
+          <div class="stage-num">Stage 5</div>
+          <svg class="stage-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3.5v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9v-5L12 3z"/><path d="M9 12.5l2 2 4-4.5"/></svg>
+          <div class="stage-name">Generator</div>
+          <div class="stage-caption">Only runs on a plan that already passed every check above, and turns it into real Opentrons Flex Python.</div>
+          <span class="stage-tag deterministic">Deterministic</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
