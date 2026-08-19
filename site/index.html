@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verilab: catches what the Opentrons simulator misses</title>
+<meta name="description" content="Verilab is a deterministic check between AI-generated lab robot protocols and a real Opentrons Flex. Try it live on real protocols.">
+<style>
+  :root {
+    --navy: #1B2A4A;
+    --navy-light: #2C4270;
+    --teal: #2A7F7E;
+    --violet: #5B4B8A;
+    --charcoal: #2A2A2A;
+    --gray: #5A5F6A;
+    --gray-light: #E5E7EB;
+    --bg: #FAFAFA;
+    --panel: #FFFFFF;
+    --border: #D9DCE1;
+    --gold: #92650A;
+    --gold-bg: #FBF0D9;
+    --red: #A02334;
+    --red-bg: #FBE9EC;
+    --green: #1F6D42;
+    --green-bg: #E7F5EC;
+  }
+  * { box-sizing: border-box; min-width: 0; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--charcoal);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 16px; line-height: 1.55;
+    overflow-wrap: break-word; overflow-x: hidden;
+  }
+  a { color: var(--teal); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 64px 0; }
+  h2.section-title {
+    font-family: Georgia, serif; color: var(--navy); font-size: 28px; margin: 0 0 12px;
+  }
+  p.section-lede { color: var(--gray); font-size: 16.5px; max-width: 640px; margin: 0 0 32px; }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  a.skip-link {
+    position: absolute; left: -999px; top: 0; background: var(--navy); color: #fff;
+    padding: 10px 16px; border-radius: 0 0 8px 0; z-index: 100;
+  }
+  a.skip-link:focus { left: 0; }
+
+  :focus-visible { outline: 3px solid var(--violet); outline-offset: 2px; }
+
+  /* ---------- Nav ---------- */
+  header.site-nav {
+    position: sticky; top: 0; z-index: 10; background: rgba(250,250,250,0.94);
+    backdrop-filter: saturate(1.1) blur(6px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+  .wordmark { font-family: Georgia, serif; font-weight: bold; font-size: 22px; color: var(--navy); letter-spacing: 0.5px; text-decoration: none; }
+  .nav-links { display: flex; gap: 22px; align-items: center; font-size: 14.5px; font-weight: 600; }
+  .nav-links a { color: var(--navy); text-decoration: none; }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-links a.cta {
+    background: var(--teal); color: #fff; padding: 8px 16px; border-radius: 7px;
+  }
+  .nav-links a.cta:hover { background: var(--navy); color: #fff; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 56px 0 40px; }
+  .hero-headline {
+    font-family: Georgia, serif; color: var(--navy); font-size: clamp(28px, 4.4vw, 44px);
+    line-height: 1.2; margin: 0 0 18px; max-width: 880px;
+  }
+  .hero-headline .not-fine { color: var(--red); }
+  .hero-subhead { font-size: 18px; color: var(--charcoal); max-width: 640px; margin: 0 0 28px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+  .btn {
+    display: inline-block; font-size: 16px; font-weight: 700; padding: 13px 26px;
+    border-radius: 8px; text-decoration: none; cursor: pointer; border: 2px solid transparent;
+  }
+  .btn-primary { background: var(--teal); color: #fff; }
+  .btn-primary:hover { background: var(--navy); }
+  .btn-secondary { background: #fff; color: var(--navy); border-color: var(--navy); }
+  .btn-secondary:hover { background: var(--navy); color: #fff; }
+
+  .hero-compare-label { font-size: 13.5px; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 10px; }
+  .hero-compare {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  }
+  .compare-panel {
+    background: #14213D; border-radius: 10px; overflow: hidden; border: 2px solid var(--border);
+  }
+  .compare-panel.flag { border-color: var(--red); }
+  .compare-head {
+    display: flex; align-items: center; gap: 10px; padding: 12px 16px; font-weight: 700; font-size: 14px;
+    font-family: Georgia, serif;
+  }
+  .compare-panel:not(.flag) .compare-head { background: #EEF0F3; color: var(--gray); }
+  .compare-panel.flag .compare-head { background: var(--red-bg); color: var(--red); }
+  .compare-head svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .compare-body {
+    margin: 0; padding: 14px 16px 18px; color: #DCE4F0; font-family: "SF Mono", Consolas, Menlo, monospace;
+    font-size: 12.5px; line-height: 1.6; overflow-x: auto; white-space: pre-wrap; word-break: break-word;
+  }
+  .hero-compare-caption { margin-top: 12px; font-size: 14px; color: var(--gray); max-width: 700px; }
+  .hero-compare-caption strong { color: var(--charcoal); }
+
+  @media (max-width: 720px) {
+    .hero-compare { grid-template-columns: 1fr; }
+    .nav-links span.nav-text { display: none; }
+  }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-nav">
+  <div class="wrap nav-row">
+    <a href="#main" class="wordmark">VERILAB</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#demo">Try it live</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="https://github.com/wwpatel/verilab" class="cta">View on GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero wrap" aria-labelledby="hero-heading">
+  <h1 class="hero-headline" id="hero-heading">
+    The Opentrons simulator says this protocol is fine. <span class="not-fine">It would overflow a well by 140 microliters.</span> Verilab catches that before the robot moves.
+  </h1>
+  <p class="hero-subhead">
+    For anyone using AI to write lab robot protocols: Verilab is a deterministic check between the AI's plan and a real Opentrons Flex, checking volumes, step order, and tip reuse before any code reaches the robot.
+  </p>
+  <div class="hero-actions">
+    <a href="#demo" class="btn btn-primary">Try it live</a>
+    <a href="https://github.com/wwpatel/verilab" class="btn btn-secondary">View on GitHub</a>
+  </div>
+
+  <div class="hero-compare-label">Same real protocol, two real checkers, real captured output</div>
+  <div class="hero-compare">
+    <div class="compare-panel" aria-labelledby="sim-label">
+      <div class="compare-head" id="sim-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>
+        Official Opentrons simulator
+      </div>
+      <pre class="compare-body">Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of Corning 96 Well Plate 360 µL Flat on slot C1
+	Picking up tip from A1 of Opentrons Flex 96 Tip Rack 1000 µL on slot C3
+	Aspirating 250.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot C2 at 716.0 uL/sec
+	Dispensing 250.0 uL into A1 of Corning 96 Well Plate 360 µL Flat on slot C1 at 716.0 uL/sec
+	Dropping tip into Trash Bin on slot A3
+Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of Corning 96 Well Plate 360 µL Flat on slot C1
+	Picking up tip from B1 of Opentrons Flex 96 Tip Rack 1000 µL on slot C3
+	Aspirating 250.0 uL from A1 of NEST 12 Well Reservoir 15 mL on slot C2 at 716.0 uL/sec
+	Dispensing 250.0 uL into A1 of Corning 96 Well Plate 360 µL Flat on slot C1 at 716.0 uL/sec
+	Dropping tip into Trash Bin on slot A3
+(exit code 0, no error raised)</pre>
+    </div>
+    <div class="compare-panel flag" aria-labelledby="verilab-label">
+      <div class="compare-head" id="verilab-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12" y2="16.01"/></svg>
+        Verilab
+      </div>
+      <pre class="compare-body">FAIL: 1 violation(s) found:
+  [ERROR] step 1 (WELL_OVERFLOW): Step 1: corning_96_wellplate_360ul_flat:A1
+  now holds 500.0 uL cumulative, exceeds 360.0 uL capacity
+      suggested fix: Reduce this transfer by at least 140.0 uL, split the
+      250.0 uL across two wells, or move this reagent to a larger
+      container before step 1.</pre>
+    </div>
+  </div>
+  <p class="hero-compare-caption">
+    Both panels are the real, unedited output of running <code>demo/overflow_demo.py</code> through each tool.
+    The simulator only checks that the code runs, not that the liquid handling makes sense.
+    <strong>Two 250 microliter transfers into a 360 microliter well, 500 total: the simulator exits clean, Verilab flags it with the exact numbers.</strong>
+  </p>
+</section>
+
+</main>
+</body>
+</html>
