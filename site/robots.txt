@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /site/index.html
+Allow: /site/signin.html
+Allow: /site/signup.html
+Allow: /site/privacy.html
+Allow: /site/shared.css
+Allow: /site/shared-result-view.js
+Allow: /site/data/
+Disallow: /site/app/
+Disallow: /site/welcome.html
+Disallow: /api/
+
+Sitemap: /site/sitemap.xml

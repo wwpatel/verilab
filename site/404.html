@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found, Verilab</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .notfound-wrap { min-height: 100vh; display: flex; flex-direction: column; }
+  .notfound-nav { padding: 20px 0; }
+  .notfound-nav .wordmark { font-family: Georgia, serif; font-weight: bold; font-size: 21px; color: var(--navy); text-decoration: none; }
+  .notfound-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center; }
+  .notfound-code { font-family: Georgia, serif; font-size: 72px; color: var(--teal); font-weight: bold; margin: 0; line-height: 1; }
+  .notfound-title { font-family: Georgia, serif; font-size: 24px; color: var(--navy); margin: 10px 0 12px; }
+  .notfound-sub { color: var(--gray); font-size: 15px; margin: 0 0 28px; }
+  .notfound-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<div class="notfound-wrap">
+  <div class="wrap notfound-nav">
+    <a href="/site/index.html" class="wordmark">VERILAB</a>
+  </div>
+  <main id="main" class="notfound-main">
+    <div>
+      <p class="notfound-code">404</p>
+      <h1 class="notfound-title">This page does not exist</h1>
+      <p class="notfound-sub">The link may be old, or the address may have a typo.</p>
+      <div class="notfound-actions">
+        <a href="/site/index.html" class="btn btn-primary">Back to homepage</a>
+        <a href="/site/app/dashboard.html" class="btn btn-secondary" id="dashboardLink" hidden>Go to Dashboard</a>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+fetch('/api/auth/me', { credentials: 'include' }).then(res => {
+  if (res.ok) document.getElementById('dashboardLink').hidden = false;
+}).catch(() => {});
+</script>
+</body>
+</html>

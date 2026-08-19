@@ -37,8 +37,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from fastapi import Depends, FastAPI, Request, Response
+from fastapi.exceptions import HTTPException as StarletteHTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse
+from fastapi.responses import HTMLResponse, JSONResponse, PlainTextResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -1024,12 +1025,11 @@ STATIC_DIR = BASE_DIR / "static"
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
-# The public marketing/demo site (site/index.html). Its primary deployment
-# target is a separate static host (Vercel, Netlify) pointed at this backend
-# via site/config.js, but mounting it here too means it can be previewed
-# locally at /site without any separate deploy, same-origin, no CORS needed.
-# This does not change what "/" serves -- the existing local Verification
-# Console keeps working exactly as it does today.
+# The public product: marketing page, sign up/in, and the authenticated app
+# shell (site/). Real session cookies mean this has to be served same-origin
+# with the API, which is exactly what mounting it here at /site does. This
+# does not change what "/" serves -- the existing local Verification Console
+# keeps working exactly as it does today.
 SITE_DIR = BASE_DIR / "site"
 if SITE_DIR.exists():
     app.mount("/site", StaticFiles(directory=str(SITE_DIR), html=True), name="site")
@@ -1039,3 +1039,24 @@ if SITE_DIR.exists():
 def index():
     index_path = STATIC_DIR / "index.html"
     return HTMLResponse(index_path.read_text())
+
+
+@app.get("/robots.txt", response_class=PlainTextResponse)
+def robots_txt():
+    robots_path = SITE_DIR / "robots.txt"
+    return PlainTextResponse(robots_path.read_text())
+
+
+# ---------------------------------------------------------------------------
+# Custom 404: only for a real page navigation that missed (not an /api/*
+# route, whose handlers already return their own JSON error bodies rather
+# than raising, so they never reach this handler at all).
+# ---------------------------------------------------------------------------
+
+@app.exception_handler(StarletteHTTPException)
+async def custom_404_handler(request: Request, exc: StarletteHTTPException):
+    if exc.status_code == 404 and not request.url.path.startswith("/api"):
+        not_found_path = SITE_DIR / "404.html"
+        if not_found_path.exists():
+            return HTMLResponse(not_found_path.read_text(), status_code=404)
+    return JSONResponse({"detail": exc.detail}, status_code=exc.status_code)
