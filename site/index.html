@@ -126,6 +126,9 @@
   .micro-callout .claim { font-weight: 700; color: var(--navy); }
   .micro-callout .support { color: var(--charcoal); font-size: 14.5px; }
   .feature-mock-frame { max-width: 800px; margin-top: 4px; }
+  .feature-evidence-link { max-width: 800px; margin-top: 12px; font-size: 14px; }
+  .feature-evidence-link a { color: var(--teal); font-weight: 600; text-decoration: none; }
+  .feature-evidence-link a:hover { text-decoration: underline; }
 
   /* ---------- Evidence ---------- */
   .evidence { background: var(--panel); }
@@ -331,6 +334,7 @@
       </div>
     </div>
     <div class="feature-mock-frame reveal" id="mockOverflow"><p class="loading-line">Loading real result...</p></div>
+    <p class="feature-evidence-link reveal"><a href="#evidence">See how often this check finds something real, in the Evidence section &darr;</a></p>
   </div>
 </section>
 
@@ -346,6 +350,7 @@
       </div>
     </div>
     <div class="feature-mock-frame reveal" id="mockOrdering"><p class="loading-line">Loading real result...</p></div>
+    <p class="feature-evidence-link reveal"><a href="#evidence">See how often this check finds something real, in the Evidence section &darr;</a></p>
   </div>
 </section>
 
@@ -361,6 +366,7 @@
       </div>
     </div>
     <div class="feature-mock-frame reveal" id="mockTip"><p class="loading-line">Loading real result...</p></div>
+    <p class="feature-evidence-link reveal"><a href="#evidence">See how often this check finds something real, in the Evidence section &darr;</a></p>
   </div>
 </section>
 
@@ -376,6 +382,7 @@
       </div>
     </div>
     <div class="feature-mock-frame reveal" id="mockCodegen"><p class="loading-line">Loading real result...</p></div>
+    <p class="feature-evidence-link reveal"><a href="#evidence">See the full protocol scoreboard, in the Evidence section &darr;</a></p>
   </div>
 </section>
 
@@ -575,15 +582,20 @@
       <div class="footer-col">
         <h4>Company</h4>
         <a href="https://github.com/wwpatel/verilab/blob/main/LICENSE">MIT License</a>
-        <a href="https://github.com/wwpatel">wwpatel on GitHub</a>
+        <a href="/site/privacy.html">Privacy policy</a>
+        <a href="https://github.com/wwpatel">Amelia Patel on GitHub</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>Built by <a href="https://github.com/wwpatel">wwpatel</a>. Validated on the Opentrons Flex only.</span>
+      <span>Built by <a href="https://github.com/wwpatel">Amelia Patel</a>. Validated on the Opentrons Flex only.</span>
       <span>&copy; 2026 Verilab</span>
     </div>
   </div>
 </footer>
+
+<div class="sticky-mobile-cta" id="stickyMobileCta">
+  <a href="/site/signup.html" class="btn btn-primary">Get started</a>
+</div>
 
 <script src="shared-result-view.js"></script>
 <script>
@@ -627,6 +639,30 @@ if ('IntersectionObserver' in window) {
 } else {
   document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
 }
+
+// ---------------- Sticky mobile CTA ----------------
+// Small screens only, appears once the hero (which already has its own
+// always-visible "Get started" button) has scrolled out of view, so a
+// mobile visitor is never more than one tap from signing up further down
+// the page without duplicating the hero's own CTA above the fold.
+
+(function stickyMobileCta() {
+  const cta = document.getElementById('stickyMobileCta');
+  const hero = document.querySelector('.hero');
+  if (!cta || !hero) return;
+
+  function isMobile() { return window.matchMedia('(max-width: 720px)').matches; }
+
+  function update() {
+    const show = isMobile() && hero.getBoundingClientRect().bottom < 0;
+    cta.classList.toggle('show', show);
+    document.body.classList.toggle('has-sticky-cta', show);
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
 
 // ---------------- Precomputed marketing examples ----------------
 
