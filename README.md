@@ -8,13 +8,20 @@ physical step ordering, and tip contamination risk, deterministically, with
 no AI involved in the checking itself. Only a protocol that passes is
 allowed to generate real Opentrons Python.
 
-The **Verification Console** is the web interface on top of that pipeline.
-It exists to make every check's reasoning fully visible to a human
-reviewer before anything is approved: what was checked, exactly what is
-wrong (in plain English, not implementation jargon), the real numbers
-involved, what could physically go wrong, a concrete corrected
-instruction, and, for anyone who wants to verify the tool isn't
-hand-waving, the raw data underneath.
+The **Verification Console** (`static/index.html`, served at `/`) is the
+local, single-user web interface on top of that pipeline, meant to be run
+and demoed on your own machine and your own key. It exists to make every
+check's reasoning fully visible to a human reviewer before anything is
+approved: what was checked, exactly what is wrong (in plain English, not
+implementation jargon), the real numbers involved, what could physically go
+wrong, a concrete corrected instruction, and, for anyone who wants to
+verify the tool isn't hand-waving, the raw data underneath.
+
+`site/` (served at `/site`) is the separate public product: a marketing
+page built from real precomputed pipeline output, plus real accounts. A
+signed-in user pastes a protocol on the Dashboard, it runs live on their
+own stored Anthropic API key, and every result is saved to Stored
+Protocols. See [Public deployment](#public-deployment) below.
 
 ## Pipeline
 
@@ -61,6 +68,9 @@ ANTHROPIC_API_KEY=sk-ant-...
 ```
 
 `.env` is already covered by `.gitignore`, it will not be committed.
+`VERILAB_ENCRYPTION_KEY` (used to encrypt each signed-up user's own stored
+API key at `/site`) is generated automatically on first run and appended to
+this same file, no manual step needed for local use.
 
 Run the app:
 
@@ -122,6 +132,23 @@ side, since the demo fixtures aren't all the same shape:
   skipped, the given code is executed for real (with aspirate/dispense
   instrumented) and checked exactly as if it had just been produced.
 
+## Using the public product
+
+Open `http://127.0.0.1:8000/site/` for the marketing page. "Get started"
+creates a real account (email and password, hashed, never stored or
+logged in plain text). A new account lands on the Dashboard.
+
+Before verifying raw protocol text there, add an Anthropic API key in
+Settings (`/site/app/settings.html`); it's encrypted at rest and only ever
+used to power that account's own verification requests. Already-structured
+step JSON or already-generated Opentrons Python don't need a key, since
+neither calls the extractor.
+
+Every verification run on the Dashboard is real (real extraction if
+needed, real checks, real code generation on a clean pass) and is saved;
+it reappears under Stored Protocols with its exact original three-layer
+result, viewable any time.
+
 ## Evidence data
 
 The evidence panel is backed by `evidence_results.json`, which is real
@@ -147,30 +174,45 @@ python3 build_evidence.py
 
 ## Public deployment
 
-`site/` is a separate, public-facing marketing and live-demo page (hero,
-feature grid, "Try it live", evidence, pipeline diagram, quickstart). It is
-additive: it does not replace or change `static/index.html`, the local
-Verification Console described above, which keeps working exactly as it
-does today.
+`site/` is the public-facing product: a marketing page (hero, feature
+sections, evidence, pipeline diagram, recent activity), real sign up and
+sign in, and an authenticated app (Dashboard, Stored Protocols, Settings)
+where a signed-in user verifies real protocols on their own stored
+Anthropic API key. It is additive: it does not replace or change
+`static/index.html`, the local Verification Console described above, which
+keeps working exactly as it does today.
 
-Deploying the public site takes two pieces:
+Unlike the read-only marketing mockups, the authenticated product uses real
+httponly session cookies, so `site/` has to be served from the same origin
+as the API, one persistent server (`app.py`), not split across a separate
+static frontend host and a separate backend host. `app.py` already mounts
+`site/` at `/site` for exactly this reason.
 
-- **Backend** (this repo's `app.py`): deploy on a small persistent server,
-  for example [Render](https://render.com) (`render.yaml` is included),
-  Railway, or Fly.io. Not a serverless function: the tip contamination
-  check and the real Opentrons simulator both run subprocess calls and
-  execute generated code, which is not compatible with a typical stateless
-  serverless platform. Set `ANTHROPIC_API_KEY` on the host; it is never
-  sent to or exposed in the frontend. The verify endpoints are rate
-  limited per IP (8 requests / 60s) since they are the only ones that call
-  the live LLM and run subprocess-based simulation.
-- **Frontend** (`site/`): a static build with no build step, deployable on
-  Vercel or Netlify (`site/vercel.json` and `site/netlify.toml` are
-  included). Before deploying, edit `site/config.js` to point
-  `VERILAB_API_BASE` at the deployed backend's URL. If left blank, the
-  page assumes it is served from the same origin as the backend (this is
-  also how `app.py` mounts it locally at `/site` for preview, same-origin,
-  no CORS needed).
+Deploy `app.py` on a small persistent server, for example
+[Render](https://render.com) (`render.yaml` is included), Railway, or
+Fly.io. Not a serverless function: the tip contamination check and the real
+Opentrons simulator both run subprocess calls and execute generated code,
+which a typical stateless serverless platform doesn't support well.
+
+On first run, two secrets are needed:
+
+- `ANTHROPIC_API_KEY`: only used by the local console's own examples and
+  the public marketing page's read-only `/api/evidence`. It is never used
+  to power a signed-in user's own verification requests; that always runs
+  on their own key, entered in Settings and decrypted per request.
+- `VERILAB_ENCRYPTION_KEY`: encrypts every user's stored API key at rest.
+  If unset, one is generated on first startup and appended to `.env`
+  automatically. Set this explicitly and keep it stable across restarts on
+  a real deployment; losing it makes every already-stored user API key
+  unrecoverable.
+
+User accounts and stored protocols live in `verilab.db` (SQLite, gitignored,
+a real file on disk, not in-memory). Back it up like any other production
+database if this is deployed for real.
+
+The verify endpoints are rate limited per IP (8 requests / 60s on the
+unauthenticated `/api/verify*` routes used by the local console) since
+those are the only ones that call the live LLM on the server's own key.
 
 ## Project layout
 
@@ -180,13 +222,21 @@ labware_resolver.py     real Opentrons catalog lookups (deterministic)
 checker.py              capacity + ordering checks (deterministic)
 tip_contamination.py    tip reuse check (deterministic)
 generator.py            Opentrons Python code generation (deterministic)
-app.py                  FastAPI app: pipeline orchestration + API
+app.py                  FastAPI app: pipeline orchestration + auth + product API
+db.py                   SQLite schema and queries: users, sessions, protocols
+auth.py                 password hashing, session cookies
+crypto.py               encrypts stored API keys at rest (Fernet)
 static/index.html       the Verification Console (single page, no build step)
-site/                   the public marketing/demo site (separate deploy target)
+site/                   the public product: marketing page, auth, app shell
+site/shared.css         brand tokens + components shared across site/
+site/shared-result-view.js   the three-layer disclosure renderer, shared across site/
+site/app/               Dashboard, Stored Protocols, Settings (signed-in only)
 render.yaml             Render blueprint for the backend
 build_evidence.py       computes evidence_results.json from real fixtures
 evidence_results.json   the evidence panel's data
 build_hero_capture.py   computes site/data/hero_capture.json from a real run
+build_marketing_examples.py  computes site/data/marketing_examples.json from a real run
+build_changelog.py      computes site/data/changelog.json from real git history
 demo/                   hand-built violation fixtures + false-alarm fixtures
 test_protocols/         real published protocols, extracted/generated/baseline output
 ground_truth/           hand-labeled expected extractions
