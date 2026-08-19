@@ -250,6 +250,32 @@
     .status-banner { flex-wrap: wrap; }
     .status-banner .headline { font-size: 19px; }
   }
+
+  /* ---------- Evidence ---------- */
+  .evidence { background: var(--panel); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .evidence-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 18px; }
+  .evidence-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 22px 24px; }
+  .evidence-card.wide { grid-column: 1 / -1; }
+  .evidence-card h3 { margin: 0 0 8px; font-size: 16.5px; color: var(--navy); font-family: Georgia, serif; }
+  .evidence-card .big-number { font-size: 34px; font-weight: 800; color: var(--navy); line-height: 1.1; }
+  .evidence-card .big-number.stat-bad { color: var(--red); }
+  .evidence-card .big-number.stat-good { color: var(--green); }
+  .evidence-card p.desc { font-size: 14px; color: var(--gray); margin: 6px 0 12px; }
+  .evidence-list { font-size: 13.5px; margin: 0; padding-left: 18px; }
+  .evidence-list li { margin-bottom: 4px; }
+  .table-scroll { width: 100%; overflow-x: auto; margin-top: 10px; }
+  .scoreboard-table { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 13.5px; }
+  .scoreboard-table th, .scoreboard-table td { text-align: left; padding: 8px 8px; border-bottom: 1px solid var(--gray-light); white-space: nowrap; }
+  .scoreboard-table th { color: var(--navy); font-size: 12px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .status-pill { display: inline-block; padding: 2px 9px; border-radius: 10px; font-size: 11.5px; font-weight: 700; }
+  .status-pill.clean { background: var(--green-bg); color: var(--green); }
+  .status-pill.clean_with_warnings { background: var(--gold-bg); color: var(--gold); }
+  .status-pill.findings { background: var(--red-bg); color: var(--red); }
+  .false-alarm-case { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-top: 12px; background: #fff; }
+  .false-alarm-case .fa-title { font-weight: 700; color: var(--navy); font-size: 14.5px; margin-bottom: 4px; }
+  .false-alarm-case .fa-result { display: flex; align-items: center; gap: 6px; color: var(--green); font-weight: 700; font-size: 13.5px; margin-top: 8px; }
+  .false-alarm-case .fa-result svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .scope-line { margin-top: 18px; font-size: 14px; background: #FFF8EA; border: 1px solid var(--gold); border-radius: 8px; padding: 14px 18px; color: var(--charcoal); }
 </style>
 </head>
 <body>
@@ -383,6 +409,16 @@ Transferring 250.0 from A1 of NEST 12 Well Reservoir 15 mL on slot C2 to A1 of C
     </div>
 
     <div id="results"></div>
+  </div>
+</section>
+
+<section id="evidence" class="evidence" aria-labelledby="evidence-heading">
+  <div class="wrap">
+    <h2 class="section-title" id="evidence-heading">Evidence</h2>
+    <p class="section-lede">Real numbers, not a testimonial. Pulled directly from evidence_results.json, produced by build_evidence.py against real fixtures already in this repo.</p>
+    <div id="evidencePanel">
+      <p class="loading-line">Loading evidence data...</p>
+    </div>
   </div>
 </section>
 
@@ -704,8 +740,106 @@ function renderViolationCard(v) {
   return el('div', { class: 'violation-card ' + sevClass }, [head, details]);
 }
 
+// ---------------- Evidence panel ----------------
+
+async function loadEvidence() {
+  const panel = document.getElementById('evidencePanel');
+  try {
+    const res = await fetch(API_BASE + '/api/evidence');
+    const data = await res.json();
+    if (data.error) {
+      panel.innerHTML = '';
+      panel.appendChild(el('div', { class: 'error-box' }, [data.error]));
+      return;
+    }
+    renderEvidence(panel, data);
+  } catch (e) {
+    panel.innerHTML = '';
+    panel.appendChild(el('div', { class: 'error-box' }, ['Could not load evidence: ' + e.message]));
+  }
+}
+
+function renderEvidence(panel, data) {
+  panel.innerHTML = '';
+  const grid = el('div', { class: 'evidence-grid' }, []);
+
+  const bc = data.baseline_comparison;
+  const baselineCard = el('div', { class: 'evidence-card' }, [
+    el('h3', {}, ['Naive single-prompt baseline']),
+    el('div', { class: 'big-number stat-bad' }, [bc.naive_simulated_successfully + ' / ' + bc.protocols_tested]),
+    el('p', { class: 'desc' }, ['naive single-prompt protocols simulated successfully.']),
+    el('ul', { class: 'evidence-list' }, bc.naive_failures.map(f =>
+      el('li', {}, [el('strong', {}, [f.protocol + ': ']), f.reason])
+    )),
+  ]);
+
+  const pipelineCard = el('div', { class: 'evidence-card' }, [
+    el('h3', {}, ['Same protocols, through Verilab']),
+    el('div', { class: 'big-number stat-good' }, [bc.pipeline_cleared_count + ' / ' + bc.protocols_tested]),
+    el('p', { class: 'desc' }, ['cleared with no blocking issues; the rest were correctly blocked with specific, real findings before reaching a robot.']),
+    el('ul', { class: 'evidence-list' }, bc.pipeline_blocked_protocols.map(p =>
+      el('li', {}, [p.protocol + ': ' + p.finding_count + ' finding(s), blocked before code generation'])
+    )),
+  ]);
+
+  const ts = data.test_suite;
+  const scoreboardCard = el('div', { class: 'evidence-card wide' }, [
+    el('h3', {}, ['Protocol test-suite scoreboard']),
+    el('p', { class: 'desc' }, [ts.description]),
+    el('p', {}, [
+      el('strong', {}, [String(ts.total_protocols)]), ' real published protocols run through the full deterministic checker: ',
+      el('strong', { style: 'color:var(--green)' }, [ts.clean_count + ' clean']), ', ',
+      el('strong', { style: 'color:var(--gold)' }, [ts.clean_with_warnings_count + ' clean with warnings']), ', ',
+      el('strong', { style: 'color:var(--red)' }, [ts.findings_count + ' with real findings']), '.',
+    ]),
+    buildScoreboardTable(ts.protocols),
+  ]);
+
+  const faCard = el('div', { class: 'evidence-card wide' }, [
+    el('h3', {}, ['Does it cry wolf? Confirmed false-alarm cases']),
+    ...data.false_alarms.map(fa => el('div', { class: 'false-alarm-case' }, [
+      el('div', { class: 'fa-title' }, [fa.case]),
+      el('div', { style: 'font-size:13.5px;' }, [fa.description]),
+      el('div', { style: 'font-size:12px;color:var(--gray);margin-top:4px;' }, ['Source: ' + fa.source_file]),
+      el('div', { class: 'fa-result' }, [
+        el('span', { html: ICONS.check, 'aria-hidden': 'true' }, []),
+        fa.result,
+      ]),
+    ])),
+  ]);
+
+  grid.appendChild(baselineCard);
+  grid.appendChild(pipelineCard);
+  grid.appendChild(scoreboardCard);
+  grid.appendChild(faCard);
+  panel.appendChild(grid);
+  panel.appendChild(el('div', { class: 'scope-line' }, [data.scope_note]));
+}
+
+function buildScoreboardTable(protocols) {
+  const table = el('table', { class: 'scoreboard-table' }, []);
+  const thead = el('thead', {}, [el('tr', {}, [
+    el('th', {}, ['Protocol']),
+    el('th', {}, ['Steps']),
+    el('th', {}, ['Errors']),
+    el('th', {}, ['Warnings']),
+    el('th', {}, ['Result']),
+  ])]);
+  const tbody = el('tbody', {}, protocols.map(p => el('tr', {}, [
+    el('td', {}, [p.name]),
+    el('td', {}, [String(p.step_count)]),
+    el('td', {}, [String(p.error_count)]),
+    el('td', {}, [String(p.warning_count)]),
+    el('td', {}, [el('span', { class: 'status-pill ' + p.status }, [p.status.replace(/_/g, ' ')])]),
+  ])));
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  return el('div', { class: 'table-scroll' }, [table]);
+}
+
 document.getElementById('runBtn').addEventListener('click', runVerify);
 loadExamples();
+loadEvidence();
 </script>
 </body>
 </html>
