@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stored Protocols, Verilab</title>
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="shell.css">
+<style>
+  .protocols-card { padding: 0; overflow: hidden; }
+  .table-scroll { width: 100%; overflow-x: auto; }
+  table.protocols-table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 14px; }
+  table.protocols-table th, table.protocols-table td { text-align: left; padding: 13px 18px; border-bottom: 1px solid var(--gray-light); vertical-align: middle; }
+  table.protocols-table th { background: var(--bg); font-size: 12px; text-transform: uppercase; letter-spacing: 0.3px; color: var(--gray); }
+  table.protocols-table tbody tr:hover { background: #FAFBFD; }
+  .sort-btn { background: none; border: none; font: inherit; color: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; padding: 0; text-transform: uppercase; letter-spacing: 0.3px; font-size: 12px; font-weight: 700; }
+  .sort-btn:hover { color: var(--navy); }
+  .sort-btn svg { width: 12px; height: 12px; }
+  .protocol-name-cell { font-weight: 600; color: var(--navy); }
+  .protocol-snippet { color: var(--gray); font-size: 12.5px; margin-top: 2px; font-family: "SF Mono", Consolas, Menlo, monospace; max-width: 360px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .empty-state { padding: 48px 24px; text-align: center; color: var(--gray); }
+
+  dialog#resultModal {
+    border: none; border-radius: 14px; padding: 0; width: min(760px, 92vw); max-height: 86vh;
+    box-shadow: var(--shadow-lg);
+  }
+  dialog#resultModal::backdrop { background: rgba(27,42,74,0.45); }
+  .modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 20px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--panel); }
+  .modal-head h2 { font-family: Georgia, serif; color: var(--navy); font-size: 18px; margin: 0 0 4px; }
+  .modal-head .meta { font-size: 12.5px; color: var(--gray); }
+  .modal-close { background: none; border: none; font-size: 22px; line-height: 1; color: var(--gray); cursor: pointer; padding: 4px; }
+  .modal-close:hover { color: var(--navy); }
+  .modal-body { padding: 20px 24px 26px; overflow-y: auto; max-height: calc(86vh - 80px); }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<div class="app-shell">
+  <nav id="appSidebar" class="app-sidebar" aria-label="App"></nav>
+  <div class="app-main">
+    <div id="appTopbar" class="app-topbar"></div>
+    <main id="main" class="app-content">
+      <div class="card protocols-card" id="protocolsCard">
+        <p class="loading-line" style="padding:24px;">Loading your stored protocols...</p>
+      </div>
+    </main>
+  </div>
+</div>
+
+<dialog id="resultModal">
+  <div class="modal-head">
+    <div>
+      <h2 id="modalTitle">Protocol</h2>
+      <div class="meta" id="modalMeta"></div>
+    </div>
+    <button type="button" class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+  </div>
+  <div class="modal-body" id="modalBody"></div>
+</dialog>
+
+<script src="../shared-result-view.js"></script>
+<script src="shell.js"></script>
+<script>
+const VL = window.VerilabResultView;
+let protocols = [];
+let sortKey = 'created_at';
+let sortDir = 'desc';
+
+function statusPillClass(status) {
+  if (status === 'CLEARED') return 'cleared';
+  return 'blocked';
+}
+function statusLabel(status, warningCount) {
+  if (status === 'CLEARED' && warningCount > 0) return 'Passed with warnings';
+  if (status === 'CLEARED') return 'Cleared';
+  return 'Blocked';
+}
+
+function sortProtocols() {
+  const mult = sortDir === 'asc' ? 1 : -1;
+  protocols.sort((a, b) => {
+    let av = a[sortKey], bv = b[sortKey];
+    if (typeof av === 'string') av = av.toLowerCase();
+    if (typeof bv === 'string') bv = bv.toLowerCase();
+    if (av < bv) return -1 * mult;
+    if (av > bv) return 1 * mult;
+    return 0;
+  });
+}
+
+function renderTable() {
+  const card = document.getElementById('protocolsCard');
+  card.innerHTML = '';
+
+  if (protocols.length === 0) {
+    card.appendChild(VL.el('div', { class: 'empty-state' }, [
+      'No protocols verified yet. Head to the ',
+      VL.el('a', { href: '/site/app/dashboard.html' }, ['Dashboard']),
+      ' to verify your first one.',
+    ]));
+    return;
+  }
+
+  const sortBtn = (key, label) => VL.el('button', {
+    type: 'button', class: 'sort-btn',
+    onclick: () => { sortDir = (sortKey === key && sortDir === 'asc') ? 'desc' : 'asc'; sortKey = key; sortProtocols(); renderTable(); },
+  }, [label, VL.el('span', { 'aria-hidden': 'true' }, [sortKey === key ? (sortDir === 'asc' ? '↑' : '↓') : ''])]);
+
+  const thead = VL.el('thead', {}, [VL.el('tr', {}, [
+    VL.el('th', {}, [sortBtn('protocol_name', 'Protocol')]),
+    VL.el('th', {}, [sortBtn('created_at', 'Date verified')]),
+    VL.el('th', {}, [sortBtn('status', 'Status')]),
+    VL.el('th', {}, ['Action']),
+  ])]);
+
+  const tbody = VL.el('tbody', {}, protocols.map(p => {
+    const date = new Date(p.created_at);
+    const dateStr = isNaN(date) ? p.created_at : date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    return VL.el('tr', {}, [
+      VL.el('td', {}, [
+        VL.el('div', { class: 'protocol-name-cell' }, [p.protocol_name]),
+        VL.el('div', { class: 'protocol-snippet' }, [p.snippet]),
+      ]),
+      VL.el('td', {}, [dateStr]),
+      VL.el('td', {}, [
+        VL.el('span', { class: 'status-pill ' + statusPillClass(p.status), html: VL.ICONS[p.status === 'CLEARED' ? 'check' : 'stop'] }, [' ' + statusLabel(p.status, p.warning_count)]),
+      ]),
+      VL.el('td', {}, [
+        VL.el('button', { type: 'button', class: 'btn btn-secondary', onclick: () => viewProtocol(p.id) }, ['View']),
+      ]),
+    ]);
+  }));
+
+  const table = VL.el('table', { class: 'protocols-table' }, []);
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  card.appendChild(VL.el('div', { class: 'table-scroll' }, [table]));
+}
+
+async function loadProtocols() {
+  const res = await fetch('/api/app/protocols', { credentials: 'include' });
+  protocols = await res.json();
+  sortProtocols();
+  renderTable();
+}
+
+async function viewProtocol(id) {
+  const res = await fetch('/api/app/protocols/' + id, { credentials: 'include' });
+  if (!res.ok) { alert('Could not load this protocol.'); return; }
+  const data = await res.json();
+
+  document.getElementById('modalTitle').textContent = data.protocol_name;
+  const date = new Date(data.created_at);
+  document.getElementById('modalMeta').textContent = 'Verified ' + (isNaN(date) ? data.created_at : date.toLocaleString());
+
+  const body = document.getElementById('modalBody');
+  body.innerHTML = '';
+  VL.renderResult(body, data.result);
+
+  const modal = document.getElementById('resultModal');
+  modal.showModal();
+}
+
+document.getElementById('modalClose').addEventListener('click', () => document.getElementById('resultModal').close());
+document.getElementById('resultModal').addEventListener('click', (e) => {
+  if (e.target.id === 'resultModal') document.getElementById('resultModal').close();
+});
+
+async function main() {
+  const user = await window.VerilabShell.init('protocols', 'Stored Protocols');
+  if (!user) return;
+  loadProtocols();
+}
+
+main();
+</script>
+</body>
+</html>
