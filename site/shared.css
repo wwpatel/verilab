@@ -1,0 +1,219 @@
+/* Shared brand tokens and reusable components across the marketing page,
+   auth pages, and the authenticated app shell. Extends the existing
+   Verilab palette (navy primary, teal and violet secondaries, gold/red/
+   green reserved strictly for status), not a new one. */
+
+:root {
+  --navy: #1B2A4A;
+  --navy-light: #2C4270;
+  --teal: #2A7F7E;
+  --violet: #5B4B8A;
+  --charcoal: #2A2A2A;
+  --gray: #5A5F6A;
+  --gray-light: #E5E7EB;
+  --bg: #FAFAFA;
+  --panel: #FFFFFF;
+  --border: #D9DCE1;
+  --gold: #92650A;
+  --gold-bg: #FBF0D9;
+  --red: #A02334;
+  --red-bg: #FBE9EC;
+  --green: #1F6D42;
+  --green-bg: #E7F5EC;
+  --shadow-sm: 0 1px 2px rgba(27, 42, 74, 0.06), 0 1px 1px rgba(27, 42, 74, 0.04);
+  --shadow-md: 0 4px 14px rgba(27, 42, 74, 0.08), 0 2px 4px rgba(27, 42, 74, 0.05);
+  --shadow-lg: 0 12px 32px rgba(27, 42, 74, 0.14), 0 4px 10px rgba(27, 42, 74, 0.06);
+}
+
+* { box-sizing: border-box; min-width: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+body {
+  margin: 0; background: var(--bg); color: var(--charcoal);
+  font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16px; line-height: 1.55;
+  overflow-wrap: break-word; overflow-x: hidden;
+}
+a { color: var(--teal); }
+:focus-visible { outline: 3px solid var(--violet); outline-offset: 2px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+a.skip-link {
+  position: absolute; left: -999px; top: 0; background: var(--navy); color: #fff;
+  padding: 10px 16px; border-radius: 0 0 8px 0; z-index: 200;
+}
+a.skip-link:focus { left: 0; }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 15px; font-weight: 700; padding: 12px 24px;
+  border-radius: 8px; text-decoration: none; cursor: pointer; border: 2px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  font-family: inherit;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--teal); color: #fff; }
+.btn-primary:hover { background: var(--navy); }
+.btn-secondary { background: #fff; color: var(--navy); border-color: var(--navy); }
+.btn-secondary:hover { background: var(--navy); color: #fff; }
+.btn-plain { background: transparent; color: var(--navy); border-color: transparent; padding: 12px 14px; }
+.btn-plain:hover { color: var(--teal); }
+.btn-danger { background: #fff; color: var(--red); border-color: var(--red); }
+.btn-danger:hover { background: var(--red); color: #fff; }
+.btn-block { width: 100%; }
+.btn:disabled { background: #A9B2B2; border-color: #A9B2B2; color: #fff; cursor: default; }
+
+/* ---------- Status pills, category chips ---------- */
+.status-pill {
+  display: inline-flex; align-items: center; gap: 5px; padding: 3px 11px; border-radius: 10px;
+  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;
+}
+.status-pill svg { width: 13px; height: 13px; }
+.status-pill.cleared, .status-pill.clean { background: var(--green-bg); color: var(--green); }
+.status-pill.blocked, .status-pill.findings { background: var(--red-bg); color: var(--red); }
+.status-pill.warnings, .status-pill.clean_with_warnings { background: var(--gold-bg); color: var(--gold); }
+
+.avatar {
+  width: 32px; height: 32px; border-radius: 50%; background: var(--navy); color: #fff;
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+  box-shadow: var(--shadow-sm); transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.card.hoverable:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+/* ---------- Kicker / section header ---------- */
+.kicker {
+  display: inline-block; font-size: 12.5px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.6px; color: var(--teal); margin-bottom: 10px;
+}
+h2.section-title {
+  font-family: Georgia, serif; color: var(--navy); font-size: 30px; margin: 0 0 12px; line-height: 1.2;
+}
+p.section-lede { color: var(--gray); font-size: 16.5px; max-width: 620px; margin: 0 0 8px; }
+
+/* ---------- Scroll reveal ---------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Form fields ---------- */
+.field { margin-bottom: 18px; }
+.field label { display: block; font-size: 13.5px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.field input[type=text], .field input[type=email], .field input[type=password], .field textarea {
+  width: 100%; padding: 11px 14px; border: 1px solid var(--border); border-radius: 8px;
+  font-size: 15px; background: #fff; font-family: inherit; color: var(--charcoal);
+}
+.field input:focus, .field textarea:focus { outline: 3px solid var(--violet); outline-offset: 1px; border-color: var(--violet); }
+.field .hint { font-size: 12.5px; color: var(--gray); margin-top: 5px; }
+
+.error-box { background: var(--red-bg); border: 1.5px solid var(--red); border-radius: 8px; padding: 14px 18px; color: var(--red); font-weight: 600; font-size: 14.5px; }
+.success-box { background: var(--green-bg); border: 1.5px solid var(--green); border-radius: 8px; padding: 14px 18px; color: var(--green); font-weight: 600; font-size: 14.5px; }
+.loading-line { color: var(--gray); font-style: italic; }
+
+/* ---------- Three-layer disclosure result view ---------- */
+.vl-stage-tracker { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: 13.5px; }
+.vl-stage-tracker .step {
+  padding: 7px 12px; border-radius: 16px; background: #EEF0F3; color: var(--gray);
+  border: 1px solid var(--border); transition: background-color 0.2s ease, color 0.2s ease;
+}
+.vl-stage-tracker .step.active { background: var(--navy); color: #fff; border-color: var(--navy); font-weight: 700; }
+.vl-stage-tracker .step.done { background: var(--gray-light); color: var(--navy); border-color: var(--navy-light); }
+
+.vl-status-banner {
+  display: flex; align-items: center; gap: 14px; padding: 18px 22px; border-radius: 12px;
+  margin-bottom: 14px; font-family: Georgia, serif;
+}
+.vl-status-banner.cleared { background: var(--green-bg); border: 2px solid var(--green); }
+.vl-status-banner.blocked { background: var(--red-bg); border: 2px solid var(--red); }
+.vl-status-banner .status-icon { flex-shrink: 0; }
+.vl-status-banner .status-icon svg { width: 32px; height: 32px; }
+.vl-status-banner.cleared .status-icon svg { color: var(--green); }
+.vl-status-banner.blocked .status-icon svg { color: var(--red); }
+.vl-status-banner .status-text .headline { font-size: 20px; font-weight: 700; }
+.vl-status-banner.cleared .status-text .headline { color: var(--green); }
+.vl-status-banner.blocked .status-text .headline { color: var(--red); }
+.vl-status-banner .status-text .subline { font-size: 14.5px; color: var(--charcoal); margin-top: 3px; font-family: -apple-system, sans-serif; }
+
+.vl-checked-box {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+  padding: 16px 20px; font-size: 14px; color: var(--charcoal); margin-bottom: 14px;
+}
+.vl-checked-box ul { margin: 8px 0 0 20px; padding: 0; }
+
+.vl-card {
+  background: var(--panel); border: 1px solid var(--border); border-left: 5px solid var(--gray);
+  border-radius: 10px; margin-bottom: 12px; overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.vl-card.sev-error { border-left-color: var(--red); }
+.vl-card.sev-warning { border-left-color: var(--gold); }
+.vl-card-head { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; }
+.vl-cat-icon { flex-shrink: 0; width: 30px; height: 30px; color: var(--navy); }
+.vl-cat-icon.cat-volume { color: var(--teal); }
+.vl-cat-icon.cat-order { color: var(--violet); }
+.vl-cat-icon.cat-tip { color: var(--navy); }
+.vl-cat-icon.cat-data { color: var(--gray); }
+.vl-card-main { flex: 1; min-width: 0; }
+.vl-card-tags { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+.vl-cat-label { font-weight: 700; font-size: 12.5px; color: var(--navy); text-transform: uppercase; letter-spacing: 0.4px; }
+.vl-sev-badge { font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.3px; }
+.vl-sev-badge.sev-error { background: var(--red-bg); color: var(--red); }
+.vl-sev-badge.sev-warning { background: var(--gold-bg); color: var(--gold); }
+.vl-card-sentence { font-size: 15px; overflow-wrap: anywhere; }
+.vl-details-toggle {
+  background: #fff; border: 1.5px solid var(--navy); color: var(--navy); font-weight: 600;
+  font-size: 13px; padding: 8px 14px; border-radius: 7px; cursor: pointer; white-space: nowrap;
+}
+.vl-details-toggle:hover { background: var(--navy); color: #fff; }
+.vl-details-toggle[aria-expanded="true"] { background: var(--navy); color: #fff; }
+
+.vl-card-details { padding: 4px 20px 20px 62px; border-top: 1px solid var(--gray-light); }
+.vl-card-details[hidden] { display: none; }
+.vl-detail-block { margin-top: 14px; }
+.vl-detail-block .vl-detail-label { font-weight: 700; font-size: 12px; color: var(--navy); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
+.vl-detail-block .vl-detail-body { font-size: 14px; overflow-wrap: anywhere; }
+.vl-loc-chip {
+  display: inline-block; max-width: 100%; background: #EEF0F3; border-radius: 6px;
+  padding: 3px 9px; margin: 2px 6px 2px 0; font-size: 12.5px; font-family: "SF Mono", Consolas, Menlo, monospace;
+  overflow-wrap: anywhere; word-break: break-word;
+}
+.vl-fix-box { background: #F3FBF6; border: 1px solid var(--green); border-radius: 7px; padding: 10px 14px; font-size: 14px; overflow-wrap: anywhere; }
+
+.vl-tech-toggle {
+  margin-top: 14px; background: #fff; border: 1px dashed var(--gray); color: var(--gray);
+  font-size: 12px; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600;
+}
+.vl-tech-toggle:hover { border-color: var(--navy); color: var(--navy); }
+pre.vl-tech-block {
+  background: #14213D; color: #DCE4F0; padding: 14px 16px; border-radius: 8px; overflow-x: auto;
+  font-size: 12px; margin-top: 10px; line-height: 1.6;
+}
+pre.vl-tech-block[hidden] { display: none; }
+
+.vl-resources-box, .vl-code-box { margin-top: 20px; }
+pre.vl-code-readout {
+  background: #14213D; color: #DCE4F0; padding: 16px 18px; border-radius: 8px;
+  overflow-x: auto; font-size: 12.5px; line-height: 1.55;
+}
+
+@media (max-width: 560px) {
+  .vl-card-head { flex-wrap: wrap; }
+  .vl-card-details { padding-left: 20px; }
+  .vl-status-banner { flex-wrap: wrap; }
+  .vl-status-banner .headline { font-size: 18px; }
+}
