@@ -871,9 +871,14 @@ function renderEvidence(panel, data) {
     el('h3', {}, ['Same protocols, through Verilab']),
     el('div', { class: 'big-number stat-good' }, [bc.pipeline_cleared_count + ' / ' + bc.protocols_tested]),
     el('p', { class: 'desc' }, ['cleared with no blocking issues; the rest were correctly blocked with specific, real findings before reaching a robot.']),
-    el('ul', { class: 'evidence-list' }, bc.pipeline_blocked_protocols.map(p =>
-      el('li', {}, [p.protocol + ': ' + p.finding_count + ' finding(s), blocked before code generation'])
-    )),
+    el('ul', { class: 'evidence-list' }, [
+      ...bc.pipeline_cleared_protocols.map(name =>
+        el('li', {}, [el('strong', {}, [name + ': ']), 'cleared, no blocking issues found'])
+      ),
+      ...bc.pipeline_blocked_protocols.map(p =>
+        el('li', {}, [p.protocol + ': ' + p.finding_count + ' finding(s), blocked before code generation'])
+      ),
+    ]),
   ]);
 
   const ts = data.test_suite;
