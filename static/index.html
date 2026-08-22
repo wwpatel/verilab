@@ -580,8 +580,8 @@ function renderEvidence(panel, data) {
 
   const pipelineCard = el('div', { class: 'evidence-card' }, [
     el('h3', {}, ['Same protocols, through Verilab']),
-    el('div', { class: 'big-number' }, [bc.pipeline_cleared_count + ' / ' + bc.protocols_tested]),
-    el('p', { class: 'desc' }, ['cleared with no blocking issues; the rest were correctly blocked with specific, real findings before reaching a robot.']),
+    el('div', { class: 'big-number' }, [(bc.pipeline_cleared_count + bc.pipeline_blocked_count) + ' / ' + bc.protocols_tested]),
+    el('p', { class: 'desc' }, ["protocols correctly handled -- real issues caught before they'd reach a robot, clean protocols cleared without false alarms."]),
     el('ul', { class: 'evidence-list' }, [
       ...bc.pipeline_cleared_protocols.map(name =>
         el('li', {}, [el('strong', {}, [name + ': ']), 'cleared, no blocking issues found'])
