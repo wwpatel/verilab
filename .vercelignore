@@ -1,11 +1,12 @@
 verilab.db
 verilab.db-journal
 __pycache__
+*.pyc
 .devswarm-temp
-demo
+.env
+.env.*
+.DS_Store
 ground_truth
-test_protocols
-evidence_results.json
 baseline.py
 repair_loop.py
 check_ground_truth.py
