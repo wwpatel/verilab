@@ -9,11 +9,15 @@ saved" to actually be true.
 """
 
 import json
+import os
 import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent / "verilab.db"
+# On Vercel, everything except /tmp is a read-only deployment bundle, and
+# /tmp itself doesn't survive across cold starts or separate instances --
+# so this only lasts for the life of one warm function, not real persistence.
+DB_PATH = Path("/tmp/verilab.db") if os.environ.get("VERCEL") else Path(__file__).parent / "verilab.db"
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS users (

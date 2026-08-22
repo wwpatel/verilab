@@ -1,0 +1,15 @@
+{
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": {
+        "includeFiles": ["demo/**", "test_protocols/**", "evidence_results.json"],
+        "excludeFiles": "{.devswarm-temp/**,.git/**,__pycache__/**,**/__pycache__/**,*.pyc,verilab.db,verilab.db-journal,.env,.env.*,.DS_Store,ground_truth/**,README.md,LICENSE,render.yaml,baseline.py,repair_loop.py,check_ground_truth.py,build_changelog.py,build_evidence.py,build_hero_capture.py,build_marketing_examples.py,build_og_image.py,run_pipeline.py}"
+      }
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "api/index.py" }
+  ]
+}
