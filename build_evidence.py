@@ -197,10 +197,6 @@ def main():
         "baseline_comparison": build_baseline_comparison(),
         "test_suite": build_test_suite(),
         "false_alarms": build_false_alarms(),
-        "scope_note": (
-            "Currently validated on the Opentrons Flex only. Support for other robot "
-            "platforms is a planned next step, not a current claim."
-        ),
     }
     with open("evidence_results.json", "w") as f:
         json.dump(evidence, f, indent=2)

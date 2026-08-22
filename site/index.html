@@ -150,7 +150,6 @@
   .false-alarm-case .fa-title { font-weight: 700; color: var(--navy); font-size: 14.5px; margin-bottom: 4px; }
   .false-alarm-case .fa-result { display: flex; align-items: center; gap: 6px; color: var(--green); font-weight: 700; font-size: 13.5px; margin-top: 8px; }
   .false-alarm-case .fa-result svg { width: 16px; height: 16px; flex-shrink: 0; }
-  .scope-line { margin-top: 18px; font-size: 14px; background: #FFF8EA; border: 1px solid var(--gold); border-radius: 8px; padding: 14px 18px; color: var(--charcoal); }
 
   /* ---------- How it works ---------- */
   .pipeline-diagram { display: flex; align-items: stretch; gap: 0; overflow-x: auto; padding: 8px 2px 18px; }
@@ -908,7 +907,6 @@ function renderEvidence(panel, data) {
   grid.appendChild(scoreboardCard);
   grid.appendChild(faCard);
   panel.appendChild(grid);
-  panel.appendChild(el('div', { class: 'scope-line' }, [data.scope_note]));
 }
 
 function buildScoreboardTable(protocols) {

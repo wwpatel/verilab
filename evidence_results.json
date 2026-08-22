@@ -140,6 +140,5 @@
       "violations_found": 0,
       "result": "PASS: no tip contamination risk found."
     }
-  ],
-  "scope_note": "Currently validated on the Opentrons Flex only. Support for other robot platforms is a planned next step, not a current claim."
+  ]
 }
